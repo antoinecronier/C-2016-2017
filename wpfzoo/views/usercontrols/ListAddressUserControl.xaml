@@ -7,6 +7,47 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <ListView
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label x:Name="label" Grid.Column="0" Grid.Row="0" />
+                        <TextBox x:Name="textBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
+
+                        <Label x:Name="label1" Grid.Column="0" Grid.Row="1" />
+                        <TextBox x:Name="textBox1" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
+
+                        <Label x:Name="label2" Grid.Column="0" Grid.Row="2" />
+                        <TextBox x:Name="textBox2" TextWrapping="Wrap" Grid.Column="1" Grid.Row="2"/>
+
+                        <Label x:Name="label3" Grid.Column="0" Grid.Row="3" />
+                        <TextBox x:Name="textBox3" TextWrapping="Wrap" Grid.Column="1" Grid.Row="3"/>
+
+                        <Label x:Name="label4" Grid.Column="0" Grid.Row="4" />
+                        <TextBox x:Name="textBox4" TextWrapping="Wrap" Grid.Column="1" Grid.Row="4"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>
