@@ -33,6 +33,7 @@ namespace wpfzoo.views.usercontrols
             structure.AssignEmployees = new List<Employee>();
             structure.Schedule = new Schedule();
 
+
             this.label0.Content = "Name";
             this.textBox0.Text = structure.Name;
 
