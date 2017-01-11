@@ -63,11 +63,6 @@
     <Compile Include="views\usercontrols\AnimalUserControl.xaml.cs">
       <DependentUpon>AnimalUserControl.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
-    <Compile Include="views\usercontrols\ZooUserControl.xaml.cs">
-      <DependentUpon>ZooUserControl.xaml</DependentUpon>
-    </Compile>
-=======
     <Compile Include="views\usercontrols\ListAddressUserControl.xaml.cs">
       <DependentUpon>ListAddressUserControl.xaml</DependentUpon>
     </Compile>
@@ -98,7 +93,6 @@
     <Compile Include="views\usercontrols\StreetNumberUserControl.xaml.cs">
       <DependentUpon>StreetNumberUserControl.xaml</DependentUpon>
     </Compile>
->>>>>>> master
     <Page Include="Application.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,8 +113,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-<<<<<<< HEAD
-=======
     <Page Include="views\usercontrols\ListAddressUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -137,13 +129,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
->>>>>>> master
-    <Page Include="views\usercontrols\ZooUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-<<<<<<< HEAD
-=======
     <Page Include="views\usercontrols\ListJobUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,7 +149,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
->>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Compile Include="entities\Address.cs" />
@@ -205,7 +189,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
