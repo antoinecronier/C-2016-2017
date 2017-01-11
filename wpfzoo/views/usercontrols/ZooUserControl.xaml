@@ -23,11 +23,11 @@
         <Label x:Name="label" Grid.Column="0" Grid.Row="0" />
         <TextBox x:Name="textBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
 
-        <UC: AddressUserControl Grid.Column="0" Grid.Row="1"/>
+        <UC:AddressUserControl Grid.Column="0" Grid.Row="1"/>
         
-        <UC: EmployeeUserControl Grid.Column="0" Grid.Row="2"/>
+        <UC:EmployeeUserControl Grid.Column="0" Grid.Row="2"/>
         
-        <UC: StructureUserControl Grid.Column="0" Grid.Row="3"/>
+        <UC:StructureUserControl Grid.Column="0" Grid.Row="3"/>
         
         <Label x:Name="label1" Grid.Column="0" Grid.Row="4" />
         <TextBox x:Name="textBox1" TextWrapping="Wrap" Grid.Column="1" Grid.Row="4"/>
