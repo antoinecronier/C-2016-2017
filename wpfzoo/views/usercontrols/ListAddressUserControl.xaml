@@ -42,9 +42,6 @@
 
                         <Label x:Name="label3" Grid.Column="0" Grid.Row="3" />
                         <TextBox x:Name="textBox3" TextWrapping="Wrap" Grid.Column="1" Grid.Row="3"/>
-
-                        <Label x:Name="label4" Grid.Column="0" Grid.Row="4" />
-                        <TextBox x:Name="textBox4" TextWrapping="Wrap" Grid.Column="1" Grid.Row="4"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
