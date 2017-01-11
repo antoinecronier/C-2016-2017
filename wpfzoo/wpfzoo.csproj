@@ -87,6 +87,9 @@
     <Compile Include="views\usercontrols\ListStreetNumberUserControl.xaml.cs">
       <DependentUpon>ListStreetNumberUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\usercontrols\ScheduleUserControl.xaml.cs">
+      <DependentUpon>ScheduleUserControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="Application.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\usercontrols\ListStreetNumberUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ScheduleUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
