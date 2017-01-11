@@ -63,9 +63,42 @@
     <Compile Include="views\usercontrols\AnimalUserControl.xaml.cs">
       <DependentUpon>AnimalUserControl.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="views\usercontrols\ZooUserControl.xaml.cs">
       <DependentUpon>ZooUserControl.xaml</DependentUpon>
     </Compile>
+=======
+    <Compile Include="views\usercontrols\ListAddressUserControl.xaml.cs">
+      <DependentUpon>ListAddressUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ListAnimalUserControl.xaml.cs">
+      <DependentUpon>ListAnimalUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ListEmployeeUserControl.xaml.cs">
+      <DependentUpon>ListEmployeeUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\StructureUserControl.xaml.cs">
+      <DependentUpon>StructureUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ZooUserControl.xaml.cs">
+      <DependentUpon>ZooUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ListJobUserControl.xaml.cs">
+      <DependentUpon>ListJobUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ListScheduleUserControl.xaml.cs">
+      <DependentUpon>ListScheduleUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ListStreetNumberUserControl.xaml.cs">
+      <DependentUpon>ListStreetNumberUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ScheduleUserControl.xaml.cs">
+      <DependentUpon>ScheduleUserControl.xaml</DependentUpon>
+      </Compile>
+    <Compile Include="views\usercontrols\StreetNumberUserControl.xaml.cs">
+      <DependentUpon>StreetNumberUserControl.xaml</DependentUpon>
+    </Compile>
+>>>>>>> master
     <Page Include="Application.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -86,10 +119,52 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
+=======
+    <Page Include="views\usercontrols\ListAddressUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ListAnimalUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ListEmployeeUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\StructureUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+>>>>>>> master
     <Page Include="views\usercontrols\ZooUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
+=======
+    <Page Include="views\usercontrols\ListJobUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ListScheduleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ListStreetNumberUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ScheduleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\StreetNumberUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+>>>>>>> master
   </ItemGroup>
   <ItemGroup>
     <Compile Include="entities\Address.cs" />
