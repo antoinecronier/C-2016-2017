@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.entities;
 
 namespace wpfzoo.views.usercontrols
 {
@@ -23,6 +24,15 @@ namespace wpfzoo.views.usercontrols
         public ZooUserControl()
         {
             InitializeComponent();
+            Zoo zoo = new Zoo();
+            zoo.Name = "Zoo Tycoon";
+            zoo.Birth = DateTime.Now;
+
+            this.label.Content = "Name";
+            this.textBox.Text = zoo.Name;
+
+            this.label1.Content = "Birth";
+            this.textBox1.Text = zoo.Birth.ToString();
         }
     }
 }
