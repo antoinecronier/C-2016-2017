@@ -89,6 +89,7 @@
     </Compile>
     <Compile Include="views\usercontrols\ScheduleUserControl.xaml.cs">
       <DependentUpon>ScheduleUserControl.xaml</DependentUpon>
+      </Compile>
     <Compile Include="views\usercontrols\StreetNumberUserControl.xaml.cs">
       <DependentUpon>StreetNumberUserControl.xaml</DependentUpon>
     </Compile>
