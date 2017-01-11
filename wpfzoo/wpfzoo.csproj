@@ -75,6 +75,12 @@
     <Compile Include="views\usercontrols\ListEmployeeUserControl.xaml.cs">
       <DependentUpon>ListEmployeeUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\usercontrols\ListStructureUserControl.xaml.cs">
+      <DependentUpon>ListStructureUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ListZooUserControl.xaml.cs">
+      <DependentUpon>ListZooUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\usercontrols\StructureUserControl.xaml.cs">
       <DependentUpon>StructureUserControl.xaml</DependentUpon>
     </Compile>
@@ -131,6 +137,14 @@
     <Page Include="views\usercontrols\ListEmployeeUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ListStructureUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="views\usercontrols\ListZooUserControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="views\usercontrols\StructureUserControl.xaml">
       <SubType>Designer</SubType>
