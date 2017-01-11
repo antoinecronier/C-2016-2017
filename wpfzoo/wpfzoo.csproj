@@ -63,6 +63,7 @@
     <Compile Include="views\usercontrols\AnimalUserControl.xaml.cs">
       <DependentUpon>AnimalUserControl.xaml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="views\usercontrols\ListAddressUserControl.xaml.cs">
       <DependentUpon>ListAddressUserControl.xaml</DependentUpon>
     </Compile>
@@ -77,6 +78,14 @@
     </Compile>
     <Compile Include="views\usercontrols\ZooUserControl.xaml.cs">
       <DependentUpon>ZooUserControl.xaml</DependentUpon>
+    <Compile Include="views\usercontrols\ListJobUserControl.xaml.cs">
+      <DependentUpon>ListJobUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ListScheduleUserControl.xaml.cs">
+      <DependentUpon>ListScheduleUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\ListStreetNumberUserControl.xaml.cs">
+      <DependentUpon>ListStreetNumberUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="Application.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -115,6 +124,15 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\usercontrols\ZooUserControl.xaml">
+    <Page Include="views\usercontrols\ListJobUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ListScheduleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\ListStreetNumberUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
