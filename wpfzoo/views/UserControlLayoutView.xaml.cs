@@ -55,7 +55,7 @@ namespace wpfzoo.views
             job.Name = "Soigneur";
             job.Salary = 25.5M;
             job.Schedule = schedule;
-            //this.jobUC.Job = job;
+            this.jobUC.Job = job;
 
             Structure structure = new Structure();
             //structure.AssignAnimals.Add(animal);
@@ -73,7 +73,7 @@ namespace wpfzoo.views
             //employee.Jobs.Add(job);
             employee.Lastname = "Del Santos";
             //employee.Planning.Add(schedule, structure);
-            //this.employeeUC.Employee = employee;
+            this.employeeUC.Employee = employee;
 
             Zoo zoo = new Zoo();
             zoo.Address = address;
@@ -81,7 +81,7 @@ namespace wpfzoo.views
             zoo.Name = "lebozoo";
             //zoo.Staff.Add(employee);
             //zoo.Structures.Add(structure);
-            //this.zooUC.Zoo = zoo;
+            this.zooUC.Zoo = zoo;
         }
     }
 }
