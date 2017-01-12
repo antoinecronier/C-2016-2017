@@ -28,12 +28,12 @@ namespace wpfzoo.views
             InitializeComponent();
 
             Animal animal = new Animal();
-            animal.Name = "simba";
-            animal.Gender = Gender.MALE;
+            animal.Name = "moufassa";
+            animal.Gender = Gender.FEMALE;
             animal.Birth = DateTime.Now;
             animal.Height = 1.2M;
             animal.Weight = 120;
-            animal.IsDead = false;
+            animal.IsDead = true;
             this.animalUC.Animal = animal;
 
             StreetNumber streetNumber = new StreetNumber();
@@ -85,11 +85,12 @@ namespace wpfzoo.views
             zoo.Structures.Add(structure);
             this.zooUC.Zoo = zoo;
 
-            MySQLDBManager<Employee> manager = new MySQLDBManager<Employee>();
-            manager.insert(employee);
-            employee.Firstname = "Roberto";
-            manager.update(employee);
-            manager.delete(employee);
+
+
+            /* TODO RM */
+            MySQLManager<Employee> manager = new MySQLManager<Employee>();
+            //employee.Manager = employee;
+            manager.Insert(employee);
         }
     }
 }

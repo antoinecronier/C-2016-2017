@@ -99,7 +99,6 @@ namespace wpfzoo.entities
 
         public Animal()
         {
-
         }
     }
 }
