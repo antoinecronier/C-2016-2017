@@ -18,24 +18,21 @@ using wpfzoo.entities.enums;
 namespace wpfzoo.views.usercontrols
 {
     /// <summary>
-    /// Logique d'interaction pour StreetNumberUserControl.xaml
+    /// Logique d'interaction pour UserControlLayoutView.xaml
     /// </summary>
-    public partial class StreetNumberUserControl : UserControl
+    public partial class UserControlLayoutView : Page
     {
-        private StreetNumber streetNumber;
-
-        public StreetNumber StreetNumber
-        {
-            get { return streetNumber; }
-            set { streetNumber = value; }
-        }
-
-        public StreetNumberUserControl()
+        public UserControlLayoutView()
         {
             InitializeComponent();
-            this.DataContext = this;
+            Animal animal = new Animal();
+            animal.Name = "Moufassa";
+            animal.Gender = Gender.MALE;
+            animal.Birth = DateTime.Now;
+            animal.Height = 1.2M;
+            animal.Weight = 120;
+            animal.IsDead = false;
+            this.animalUC.Animal = animal;
         }
-           
     }
 }
-
