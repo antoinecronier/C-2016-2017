@@ -22,18 +22,20 @@ namespace wpfzoo.views.usercontrols
     /// </summary>
     public partial class StreetNumberUserControl : UserControl
     {
+        private StreetNumber streetNumber;
+
+        public StreetNumber StreetNumber
+        {
+            get { return streetNumber; }
+            set { streetNumber = value; }
+        }
+
         public StreetNumberUserControl()
         {
             InitializeComponent();
-            StreetNumber streetNumber = new StreetNumber();
-            streetNumber.Number = 42;
-            streetNumber.Suf = StreetAvaibleItems.BIS;
-
-            this.label.Content = "Number";
-            this.textBox.Text = streetNumber.Number.ToString();
-
-            this.label1.Content = "Sufix";
-            this.textBox1.Text = streetNumber.Suf.ToString();
+            this.DataContext = this;
         }
+           
     }
 }
+
