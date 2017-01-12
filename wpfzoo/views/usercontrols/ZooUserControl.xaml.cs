@@ -33,7 +33,11 @@ namespace wpfzoo.views.usercontrols
         {
             InitializeComponent();
             this.DataContext = this;
+            //this.ListAddresseUC.Addresse = Zoo.Address;
+            //this.ListEmployeeUC.Employee = Zoo.Employee;
+            //this.ListStructureUC.Structure = Zoo.Structures;
         }
+
 
         // Zoo zoo = new Zoo();
         //zoo.Name = "Zoo Tycoon";
@@ -46,3 +50,4 @@ namespace wpfzoo.views.usercontrols
         //this.textBox1.Text = zoo.Birth.ToString();
     }
 }
+
