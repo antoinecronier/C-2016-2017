@@ -44,7 +44,7 @@ namespace wpfzoo.views
             address.Street = "Rue du fond";
             address.PostalCode = "35147";
             address.StreetNumber = streetNumber;
-            //this.addressUC.Adress = address;
+            this.addressUC.Adress = address;
 
             Schedule schedule = new Schedule();
             schedule.Start = DateTime.Now;
@@ -58,7 +58,7 @@ namespace wpfzoo.views
             this.jobUC.Job = job;
 
             Structure structure = new Structure();
-            //structure.AssignAnimals.Add(animal);
+            structure.AssignAnimals.Add(animal);
             structure.Name = "Cajolion";
             structure.Schedule = schedule;
             structure.Surface = 21.5F;
@@ -70,17 +70,17 @@ namespace wpfzoo.views
             employee.Firstname = "Juan";
             employee.Gender = Gender.MALE;
             employee.Hiring = DateTime.Now;
-            //employee.Jobs.Add(job);
+            employee.Jobs.Add(job);
             employee.Lastname = "Del Santos";
-            //employee.Planning.Add(schedule, structure);
+            employee.Planning.Add(schedule, structure);
             this.employeeUC.Employee = employee;
 
             Zoo zoo = new Zoo();
             zoo.Address = address;
             zoo.Birth = DateTime.Now;
             zoo.Name = "lebozoo";
-            //zoo.Staff.Add(employee);
-            //zoo.Structures.Add(structure);
+            zoo.Staff.Add(employee);
+            zoo.Structures.Add(structure);
             this.zooUC.Zoo = zoo;
         }
     }
