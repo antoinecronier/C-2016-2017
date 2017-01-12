@@ -21,25 +21,18 @@ namespace wpfzoo.views.usercontrols
     /// </summary>
     public partial class StructureUserControl : UserControl
     {
+        private Structure structure;
+
+        public Structure Structure
+        {
+            get { return structure; }
+            set { structure = value; }
+        }
+
         public StructureUserControl()
         {
             InitializeComponent();
-
-            Structure structure = new entities.Structure();
-
-            structure.Name = "cage";
-            structure.Surface = 1000;
-            structure.AssignAnimals = new List<Animal>();
-            structure.AssignEmployees = new List<Employee>();
-            structure.Schedule = new Schedule();
-
-
-            this.label0.Content = "Name";
-            this.textBox0.Text = structure.Name;
-
-            this.label1.Content = "Surface";
-            this.textBox1.Text = structure.Surface.ToString();
-
+            this.DataContext = this;
         }
     }
 }
