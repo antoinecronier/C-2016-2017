@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Zoo
+    public class Zoo : BaseEntity
     {
         private String name;
         private Address address;
@@ -23,21 +24,22 @@ namespace wpfzoo.entities
             set
             {
                 this.name = value;
+                OnPropertyChanged("Name");
             }
         }
-
         public Address Address
         {
             get
             {
                 return this.address;
+                
             }
             set
             {
                 this.address = value;
+                OnPropertyChanged("Address");
             }
         }
-
         public List<Employee> Staff
         {
             get
@@ -47,6 +49,7 @@ namespace wpfzoo.entities
             set
             {
                 this.staff = value;
+                OnPropertyChanged("Staff");
             }
         }
         public List<Structure> Structures
@@ -58,6 +61,7 @@ namespace wpfzoo.entities
             set
             {
                 this.structures = value;
+                OnPropertyChanged("structures");
             }
         }
         public DateTime Birth
@@ -69,6 +73,7 @@ namespace wpfzoo.entities
             set
             {
                 this.birth = value;
+                OnPropertyChanged("birth");
             }
         }
         public Zoo()

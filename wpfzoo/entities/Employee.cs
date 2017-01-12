@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using wpfzoo.entities.bases;
 using wpfzoo.entities.enums;
 
 namespace wpfzoo.entities
 {
-    public class Employee
+    public class Employee : BaseEntity
     {
         private String lastname;
         private String firstname;
@@ -26,6 +27,7 @@ namespace wpfzoo.entities
             set
             {
                 lastname = value;
+                OnPropertyChanged("Lastname");
             }
         }
 
@@ -39,6 +41,7 @@ namespace wpfzoo.entities
             set
             {
                 firstname = value;
+                OnPropertyChanged("Firstname");
             }
         }
 
@@ -52,6 +55,7 @@ namespace wpfzoo.entities
             set
             {
                 birth = value;
+                OnPropertyChanged("Birth");
             }
         }
 
@@ -65,6 +69,7 @@ namespace wpfzoo.entities
             set
             {
                 hiring = value;
+                OnPropertyChanged("Hiring");
             }
         }
 
@@ -78,6 +83,7 @@ namespace wpfzoo.entities
             set
             {
                 jobs = value;
+                OnPropertyChanged("Jobs");
             }
         }
 
@@ -91,6 +97,7 @@ namespace wpfzoo.entities
             set
             {
                 address = value;
+                OnPropertyChanged("Address");
             }
         }
 
@@ -104,6 +111,7 @@ namespace wpfzoo.entities
             set
             {
                 gender = value;
+                OnPropertyChanged("Gender");
             }
         }
 
@@ -117,6 +125,7 @@ namespace wpfzoo.entities
             set
             {
                 manager = value;
+                OnPropertyChanged("Manager");
             }
         }
 
@@ -130,7 +139,14 @@ namespace wpfzoo.entities
             set
             {
                 planning = value;
+                OnPropertyChanged("Planning");
             }
+        }
+
+        public Employee()
+        {
+            this.planning = new Dictionary<Schedule, Structure>();
+            this.jobs = new List<Job>();
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.entities;
 
 namespace wpfzoo.views.usercontrols
 {
@@ -20,9 +21,18 @@ namespace wpfzoo.views.usercontrols
     /// </summary>
     public partial class EmployeeUserControl : UserControl
     {
+        private Employee employee;
+
+        public Employee Employee
+        {
+            get { return employee; }
+            set { employee = value; }
+        }
+
         public EmployeeUserControl()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
     }
 }
