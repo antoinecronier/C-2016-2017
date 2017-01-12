@@ -78,5 +78,12 @@ namespace wpfzoo.entities
                 schedule = value;
             }
         }
+
+        public Structure()
+        {
+            this.assignAnimals = new List<Animal>();
+            this.assignEmployees = new List<Employee>();
+
+        }
     }
 }
