@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="entities\base\BaseEntity.cs" />
     <Compile Include="views\AnimalView.xaml.cs">
       <DependentUpon>AnimalView.xaml</DependentUpon>
     </Compile>
@@ -89,6 +90,9 @@
     </Compile>
     <Compile Include="views\usercontrols\StructureUserControl.xaml.cs">
       <DependentUpon>StructureUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\usercontrols\UserControlLayoutView.xaml.cs">
+      <DependentUpon>UserControlLayoutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\usercontrols\ZooUserControl.xaml.cs">
       <DependentUpon>ZooUserControl.xaml</DependentUpon>
@@ -181,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\usercontrols\StreetNumberUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\usercontrols\UserControlLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
