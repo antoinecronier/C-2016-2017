@@ -21,20 +21,18 @@ namespace wpfzoo.views.usercontrols
     /// </summary>
     public partial class ScheduleUserControl : UserControl
     {
+        private Schedule schedule;
+
+        public Schedule Schedule
+        {
+            get { return schedule; }
+            set { schedule = value; }
+        }
+
         public ScheduleUserControl()
         {
             InitializeComponent();
-
-            Schedule schedule = new Schedule();
-
-            schedule.Start = DateTime.Now;
-            schedule.End = DateTime.Now.AddDays(1.2);
-
-            label1.Content = "Start";
-            textBox1.Text = schedule.Start.ToString();
-
-            label2.Content = "End";
-            textBox2.Text = schedule.End.ToString();
+            this.DataContext = this;
         }
     }
 }
