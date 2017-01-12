@@ -8,6 +8,7 @@ namespace wpfzoo.entities.enums
 {
     public enum StreetAvaibleItems
     {
+        NONE,
         BIS,
         TER,
         A,

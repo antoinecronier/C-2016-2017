@@ -28,5 +28,8 @@ namespace wpfzoo.entities
             }
         }
 
+        public StreetNumber()
+        {
+        }
     }
 }
