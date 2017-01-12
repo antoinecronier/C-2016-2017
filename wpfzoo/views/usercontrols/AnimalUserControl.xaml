@@ -37,5 +37,6 @@
 
         <Label x:Name="lblIsDead" Content="Is Dead" Grid.Column="0" Grid.Row="5" />
         <TextBox x:Name="txtBIsDead" Text="{Binding Animal.IsDead, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="5"/>
+
     </Grid>
 </UserControl>
