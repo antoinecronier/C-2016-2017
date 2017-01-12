@@ -4,7 +4,7 @@ using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Structure : BaseEntity
+    public class Structure : BaseDBEntity
     {
         private String name;
         private float surface;

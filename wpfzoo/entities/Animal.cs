@@ -4,7 +4,7 @@ using wpfzoo.entities.enums;
 
 namespace wpfzoo.entities
 {
-    public class Animal : BaseEntity
+    public class Animal : BaseDBEntity
     {
         private String name;
         private DateTime birth;

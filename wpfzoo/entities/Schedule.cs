@@ -3,7 +3,7 @@ using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Schedule : BaseEntity
+    public class Schedule : BaseDBEntity
     {
         private DateTime start;
         private DateTime end;

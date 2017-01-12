@@ -3,7 +3,7 @@ using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Address : BaseEntity
+    public class Address : BaseDBEntity
     {
         private String city;
         private StreetNumber streetNumber;

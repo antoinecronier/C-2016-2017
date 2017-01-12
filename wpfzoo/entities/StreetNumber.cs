@@ -4,7 +4,7 @@ using wpfzoo.entities.enums;
 
 namespace wpfzoo.entities
 {
-    public class StreetNumber : BaseEntity
+    public class StreetNumber : BaseDBEntity
     {
         private Int32 number;
         private StreetAvaibleItems suf;

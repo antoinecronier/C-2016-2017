@@ -7,7 +7,7 @@ using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Zoo : BaseEntity
+    public class Zoo : BaseDBEntity
     {
         private String name;
         private Address address;
