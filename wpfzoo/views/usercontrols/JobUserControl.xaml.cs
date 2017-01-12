@@ -33,6 +33,7 @@ namespace wpfzoo.views.usercontrols
         {
             InitializeComponent();
             this.DataContext = this;
+            this.ucSchedule.Schedule = Job.Schedule;
         }
     }
 }

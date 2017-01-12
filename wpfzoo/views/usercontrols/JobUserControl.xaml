@@ -24,6 +24,6 @@
         <TextBox x:Name="txtBSalary" Text="{Binding Job.Salary, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
 
         <Label x:Name="lblSchedule" Content="Schedule" Grid.Column="0" Grid.Row="2"/>
-        <TextBox x:Name="txtBSchedule" Text="{Binding Job.Schedule, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="2"/>
+        <UC:ScheduleUserControl x:Name="ucSchedule" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" />
     </Grid>
 </UserControl>
