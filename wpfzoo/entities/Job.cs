@@ -1,8 +1,9 @@
 ﻿using System;
+using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Job
+    public class Job : BaseEntity
     {
         private String name;
         private Decimal salary;
@@ -18,6 +19,7 @@ namespace wpfzoo.entities
             set
             {
                 name = value;
+                OnPropertyChanged("Name");
             }
         }
 
@@ -31,6 +33,7 @@ namespace wpfzoo.entities
             set
             {
                 salary = value;
+                OnPropertyChanged("Salary");
             }
         }
 
@@ -44,6 +47,7 @@ namespace wpfzoo.entities
             set
             {
                 schedule = value;
+                OnPropertyChanged("Schedule");
             }
         }
     }
