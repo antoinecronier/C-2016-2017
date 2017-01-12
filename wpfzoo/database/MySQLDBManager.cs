@@ -5,24 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using wpfzoo.entities;
+using wpfzoo.entities.bases;
 
 namespace wpfzoo.database
 {
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
 
-    public class MySQLDBManager : DbContext
+    public class MySQLDBManager<T> : DbContext where T : BaseDBEntity
     {
-        public DbSet<Animal> AnimalTable { get; set; };
+        public DbSet<T> DbSetT { get; set; }
 
-        public MySQLDBManager() : base("Server=localhost;Port=3306;Database=zoo;Uid=root;Pwd=''")
+        public MySQLDBManager() : base("Server=127.0.0.1;Port=3306;Database=zoo;Uid=root;Pwd=''")
         {
-
         }
 
-        public void insert(Animal animal)
+        public void insert(T item)
         {
-            this.animalTable.Add(animal);
+            this.DbSetT.Add(item);
             this.SaveChanges();
         }
+
+
     }
 }
