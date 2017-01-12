@@ -8,8 +8,7 @@ using wpfzoo.entities;
 
 namespace wpfzoo.database
 {
-    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlConnectionFactory))]
-
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class MySQLDBManager : DbContext
     {
         public DbSet<Animal> animalTable;
@@ -17,7 +16,7 @@ namespace wpfzoo.database
         public void insert(Animal animal)
         {
             this.animalTable.Add(animal);
-            this.SaveChanges();        }
-
+            this.SaveChanges();
+        }
     }
 }

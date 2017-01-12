@@ -78,6 +78,8 @@ namespace wpfzoo.entities
         }
         public Zoo()
         {
+            this.staff = new List<Employee>();
+            this.structures = new List<Structure>();
         }
     }
 }
