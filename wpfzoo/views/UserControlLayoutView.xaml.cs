@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfzoo.database;
 using wpfzoo.entities;
+using wpfzoo.entities.bases;
 using wpfzoo.entities.enums;
 
 namespace wpfzoo.views
@@ -28,14 +29,12 @@ namespace wpfzoo.views
             InitializeComponent();
             Animal animal = new Animal();
             animal.Name = "moufassa";
-            animal.Gender = Gender.MALE;
+            animal.Gender = Gender.FEMALE;
             animal.Birth = DateTime.Now;
             animal.Height = 1.2M;
             animal.Weight = 120;
-            animal.IsDead = false;
+            animal.IsDead = true;
             this.animalUC.Animal = animal;
-            MySQLDBManager manager = new MySQLDBManager();
-            manager.insert(animal);
 
             StreetNumber streetNumber = new StreetNumber();
             streetNumber.Number = 666;
@@ -85,6 +84,13 @@ namespace wpfzoo.views
             zoo.Staff.Add(employee);
             zoo.Structures.Add(structure);
             this.zooUC.Zoo = zoo;
+
+
+
+            /* TODO RM */
+            MySQLDBManager<BaseEntity> manager = new MySQLDBManager<BaseEntity>();
+            //employee.Manager = employee;
+            manager.insert(employee);
         }
     }
 }

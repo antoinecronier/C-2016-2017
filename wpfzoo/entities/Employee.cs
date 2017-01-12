@@ -5,7 +5,7 @@ using wpfzoo.entities.enums;
 
 namespace wpfzoo.entities
 {
-    public class Employee : BaseEntity
+    public class Employee : BaseDBEntity
     {
         private String lastname;
         private String firstname;
