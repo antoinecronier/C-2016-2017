@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfzoo.database;
 using wpfzoo.entities;
-using wpfzoo.entities.bases;
 using wpfzoo.entities.enums;
 
 namespace wpfzoo.views
@@ -92,9 +91,9 @@ namespace wpfzoo.views
 
 
             /* TODO RM */
-            MySQLDBManager<Employee> employeeManager = new MySQLDBManager<Employee>();
+            MySQLManager<Employee> manager = new MySQLManager<Employee>();
             //employee.Manager = employee;
-            manager.delete(employee);
+            manager.Insert(employee);
         }
     }
 }
