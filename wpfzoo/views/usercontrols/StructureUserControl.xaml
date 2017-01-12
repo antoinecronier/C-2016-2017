@@ -21,11 +21,11 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Label x:Name="label0" Grid.Column="0" Grid.Row="0"/>
-        <TextBox x:Name="textBox0" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
+        <Label x:Name="lblName" Content="Name" Grid.Column="0" Grid.Row="0" />
+        <TextBox x:Name="txtBName" Text="{Binding Structure.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
 
-        <Label x:Name="label1" Grid.Column="0" Grid.Row="1"/>
-        <TextBox x:Name="textBox1" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="lblSurface" Grid.Column="0" Grid.Row="1"/>
+        <TextBox x:Name="txtBSurface" Text="{Binding Structure.Surface, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
 
         <LUC:EmployeeUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" />
         

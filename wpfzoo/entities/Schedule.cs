@@ -1,8 +1,9 @@
 ﻿using System;
+using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Schedule
+    public class Schedule : BaseEntity
     {
         private DateTime start;
         private DateTime end;
@@ -17,6 +18,7 @@ namespace wpfzoo.entities
             set
             {
                 start = value;
+                OnPropertyChanged("Start");
             }
         }
 
@@ -30,6 +32,7 @@ namespace wpfzoo.entities
             set
             {
                 end = value;
+                OnPropertyChanged("End");
             }
         }
     }
