@@ -20,11 +20,11 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <UC:AddressUserControl x:Name="addressUC"  Grid.Column="0" Grid.Row="0"/>
+        <UC:AddressUserControl x:Name="addressUC" Grid.Column="0" Grid.Row="0"/>
         <UC:AnimalUserControl x:Name="animalUC" Grid.Column="0" Grid.Row="1"/>
         <UC:EmployeeUserControl x:Name="employeeUC" Grid.Column="0" Grid.Row="2"/>
         <UC:JobUserControl x:Name="jobUC" Grid.Column="1" Grid.Row="0"/>
-        <UC:ScheduleUserControl x:Name="schedulUC" Grid.Column="1" Grid.Row="1"/>
+        <UC:ScheduleUserControl x:Name="scheduleUC" Grid.Column="1" Grid.Row="1"/>
         <UC:StreetNumberUserControl x:Name="streetNumberUC" Grid.Column="1" Grid.Row="2"/>
         <UC:StructureUserControl x:Name="structureUC" Grid.Column="2" Grid.Row="0"/>
         <UC:ZooUserControl x:Name="zooUC" Grid.Column="2" Grid.Row="1"/>

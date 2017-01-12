@@ -19,6 +19,5 @@ namespace wpfzoo.entities.bases
                 handler(this, new PropertyChangedEventArgs(name));
             }
         }
-
     }
 }
