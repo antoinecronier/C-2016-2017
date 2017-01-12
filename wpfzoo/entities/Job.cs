@@ -3,7 +3,7 @@ using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Job : BaseEntity
+    public class Job : BaseDBEntity
     {
         private String name;
         private Decimal salary;

@@ -25,17 +25,16 @@ namespace wpfzoo.views
     {
         public UserControlLayoutView()
         {
-            InitializeComponent();
+            MySQLDBManager<Employee> manager = new MySQLDBManager<Employee>();
             Animal animal = new Animal();
             animal.Name = "moufassa";
-            animal.Gender = Gender.MALE;
+            animal.Gender = Gender.FEMALE;
             animal.Birth = DateTime.Now;
             animal.Height = 1.2M;
             animal.Weight = 120;
-            animal.IsDead = false;
+            animal.IsDead = true;
             this.animalUC.Animal = animal;
             MySQLDBManager manager = new MySQLDBManager();
-            manager.insert(animal);
 
             StreetNumber streetNumber = new StreetNumber();
             streetNumber.Number = 666;
@@ -75,8 +74,10 @@ namespace wpfzoo.views
             employee.Hiring = DateTime.Now;
             employee.Jobs.Add(job);
             employee.Lastname = "Del Santos";
-            employee.Planning.Add(schedule, structure);
+            //employee.Planning.Add(schedule, structure);
             this.employeeUC.Employee = employee;
+
+            manager.insert(employee);
 
             Zoo zoo = new Zoo();
             zoo.Address = address;
