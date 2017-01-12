@@ -15,7 +15,9 @@ namespace wpfzoo.entities.bases
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
+            {
                 handler(this, new PropertyChangedEventArgs(name));
+            }
         }
     }
 }

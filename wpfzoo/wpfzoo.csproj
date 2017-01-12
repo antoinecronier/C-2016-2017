@@ -61,6 +61,9 @@
     <Compile Include="views\AnimalView.xaml.cs">
       <DependentUpon>AnimalView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\UserControlLayoutView.xaml.cs">
+      <DependentUpon>UserControlLayoutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\usercontrols\AddressUserControl.xaml.cs">
       <DependentUpon>AddressUserControl.xaml</DependentUpon>
     </Compile>
@@ -125,6 +128,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="views\AnimalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\UserControlLayoutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
