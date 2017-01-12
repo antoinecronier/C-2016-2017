@@ -21,18 +21,28 @@ namespace wpfzoo.views.usercontrols
     /// </summary>
     public partial class ZooUserControl : UserControl
     {
+        private Zoo zoo;
+
+        public Zoo Zoo
+        {
+            get { return zoo; }
+            set { zoo = value; }
+        }
+
         public ZooUserControl()
         {
             InitializeComponent();
-            Zoo zoo = new Zoo();
-            zoo.Name = "Zoo Tycoon";
-            zoo.Birth = DateTime.Now;
-
-            this.label.Content = "Name";
-            this.textBox.Text = zoo.Name;
-
-            this.label1.Content = "Birth";
-            this.textBox1.Text = zoo.Birth.ToString();
+            this.DataContext = this;
         }
+
+        // Zoo zoo = new Zoo();
+        //zoo.Name = "Zoo Tycoon";
+        //zoo.Birth = DateTime.Now;
+
+        //this.label.Content = "Name";
+        //this.textBox.Text = zoo.Name;
+
+        //this.label1.Content = "Birth";
+        //this.textBox1.Text = zoo.Birth.ToString();
     }
 }
