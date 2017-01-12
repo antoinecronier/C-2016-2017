@@ -37,7 +37,7 @@ namespace wpfzoo.views
             StreetNumber streetNumber = new StreetNumber();
             streetNumber.Number = 666;
             streetNumber.Suf = StreetAvaibleItems.TER;
-            //this.streetNumberUC.StreetNumber = streetNumber;
+            this.streetNumberUC.StreetNumber = streetNumber;
 
             Address address = new Address();
             address.City = "Rennes";
@@ -49,7 +49,7 @@ namespace wpfzoo.views
             Schedule schedule = new Schedule();
             schedule.Start = DateTime.Now;
             schedule.End = DateTime.Now;
-            //this.scheduleUC.Schedule = schedule;
+            this.scheduleUC.Schedule = schedule;
 
             Job job = new Job();
             job.Name = "Soigneur";
@@ -62,7 +62,7 @@ namespace wpfzoo.views
             structure.Name = "Cajolion";
             structure.Schedule = schedule;
             structure.Surface = 21.5F;
-            //this.structureUC.Structure = structure;
+            this.structureUC.Structure = structure;
 
             Employee employee = new Employee();
             employee.Address = address;
