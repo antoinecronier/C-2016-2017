@@ -44,7 +44,7 @@ namespace wpfzoo.views
             address.Street = "Rue du fond";
             address.PostalCode = "35147";
             address.StreetNumber = streetNumber;
-            this.addressUC.Adress = address;
+            this.addressUC.Address = address;
 
             Schedule schedule = new Schedule();
             schedule.Start = DateTime.Now;
