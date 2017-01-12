@@ -20,7 +20,6 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
         <UC:AddressUserControl x:Name="addressUC" Grid.Column="0" Grid.Row="0"/>
         <UC:AnimalUserControl x:Name="animalUC" Grid.Column="0" Grid.Row="1"/>
         <UC:EmployeeUserControl x:Name="employeeUC" Grid.Column="0" Grid.Row="2"/>
