@@ -1,9 +1,10 @@
 ﻿using System;
+using wpfzoo.entities.bases;
 using wpfzoo.entities.enums;
 
 namespace wpfzoo.entities
 {
-    public class StreetNumber
+    public class StreetNumber : BaseEntity
     {
         private Int32 number;
         private StreetAvaibleItems suf;
@@ -11,13 +12,20 @@ namespace wpfzoo.entities
         public StreetAvaibleItems Suf
         {
             get { return suf; }
-            set { suf = value; }
+            set
+            {
+                suf = value;
+                OnPropertyChanged("Suf");
+            }
         }
 
         public Int32 Number
         {
             get { return number; }
-            set { number = value; }
+            set
+            { number = value;
+              OnPropertyChanged("Number");
+            }
         }
 
     }
