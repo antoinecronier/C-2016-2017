@@ -1,8 +1,9 @@
 ﻿using System;
+using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Address
+    public class Address : BaseEntity
     {
         private String city;
         private StreetNumber streetNumber;
@@ -12,26 +13,43 @@ namespace wpfzoo.entities
         public String PostalCode
         {
             get { return postalCode; }
-            set { postalCode = value; }
+            set
+            {
+                postalCode = value;
+                OnPropertyChanged("PostalCode");
+            }
         }
 
         public String Street
         {
             get { return street; }
-            set { street = value; }
+            set
+            {
+                street = value;
+                OnPropertyChanged("Street");
+            }
         }
 
         public StreetNumber StreetNumber
         {
             get { return streetNumber; }
-            set { streetNumber = value; }
+            set
+            {
+                streetNumber = value;
+                OnPropertyChanged("StreetNumber");
+            }
+            
         }
 
 
         public String City
         {
             get { return this.city; }
-            set { this.city = value; }
+            set
+            {
+                this.city = value;
+                OnPropertyChanged("City");
+            }
         }
 
     }

@@ -33,6 +33,17 @@ namespace wpfzoo.views
             animal.Weight = 120;
             animal.IsDead = false;
             this.animalUC.Animal = animal;
+
+            StreetNumber streetNumber = new StreetNumber();
+            streetNumber.Number = 42;
+            streetNumber.Suf = StreetAvaibleItems.BIS;
+
+            Address address = new Address();
+            address.StreetNumber = streetNumber;
+            address.City = "Rennes";
+            address.PostalCode = "35000";
+            address.Street = "Ruduzo";
+            this.addressUC.Address = address;
         }
     }
 }

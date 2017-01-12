@@ -21,22 +21,19 @@ namespace wpfzoo.views.usercontrols
     /// </summary>
     public partial class AddressUserControl : UserControl
     {
+        private Address address;
+
+        public Address Address
+        {
+            get { return address; }
+            set { address = value; }
+        }
+
         public AddressUserControl()
         {
             InitializeComponent();
-            Address address = new Address();
-            address.City = "Rennes";
-            address.PostalCode = "35000";
-            address.Street = "Ruduzo";
-
-            this.label.Content = "City";
-            this.textBox.Text = address.City;
-
-            this.label2.Content = "PostalCode";
-            this.textBox2.Text = address.PostalCode.ToString();
-
-            this.label3.Content = "Street";
-            this.textBox3.Text = address.Street.ToString();
+            this.DataContext = this;
+            this.ucStreetNumber.StreetNumber = Address.StreetNumber;
         }
     }
 }
