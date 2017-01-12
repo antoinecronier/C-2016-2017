@@ -142,5 +142,11 @@ namespace wpfzoo.entities
                 OnPropertyChanged("Planning");
             }
         }
+
+        public Employee()
+        {
+            this.planning = new Dictionary<Schedule, Structure>();
+            this.jobs = new List<Job>();
+        }
     }
 }
