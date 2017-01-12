@@ -1,9 +1,10 @@
 ﻿using System;
+using wpfzoo.entities.bases;
 using wpfzoo.entities.enums;
 
 namespace wpfzoo.entities
 {
-    public class Animal
+    public class Animal : BaseEntity
     {
         private String name;
         private DateTime birth;
@@ -22,6 +23,7 @@ namespace wpfzoo.entities
             set
             {
                 name = value;
+                OnPropertyChanged("Name");
             }
         }
 
