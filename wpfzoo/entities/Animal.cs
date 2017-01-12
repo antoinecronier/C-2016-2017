@@ -37,6 +37,7 @@ namespace wpfzoo.entities
             set
             {
                 birth = value;
+                OnPropertyChanged("Birth");
             }
         }
 
@@ -50,6 +51,7 @@ namespace wpfzoo.entities
             set
             {
                 gender = value;
+                OnPropertyChanged("Gender");
             }
         }
 
@@ -63,6 +65,7 @@ namespace wpfzoo.entities
             set
             {
                 weight = value;
+                OnPropertyChanged("Weight");
             }
         }
 
@@ -76,6 +79,7 @@ namespace wpfzoo.entities
             set
             {
                 height = value;
+                OnPropertyChanged("Height");
             }
         }
 
@@ -89,6 +93,7 @@ namespace wpfzoo.entities
             set
             {
                 isDead = value;
+                OnPropertyChanged("IsDead");
             }
         }
     }

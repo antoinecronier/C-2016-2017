@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
 {
-    public class Structure
+    public class Structure : BaseEntity
     {
         private String name;
         private float surface;
@@ -21,6 +22,7 @@ namespace wpfzoo.entities
             set
             {
                 name = value;
+                OnPropertyChanged("Name");
             }
         }
 
@@ -34,6 +36,7 @@ namespace wpfzoo.entities
             set
             {
                 surface = value;
+                OnPropertyChanged("Surface");
             }
         }
 

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:wpfzoo"
              StartupUri="views/UserControlLayoutView.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

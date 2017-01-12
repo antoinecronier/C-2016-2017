@@ -32,7 +32,7 @@ namespace wpfzoo.views
             animal.Height = 1.2M;
             animal.Weight = 120;
             animal.IsDead = false;
-            this.animalUC.Animal = animal;
+
         }
     }
 }
