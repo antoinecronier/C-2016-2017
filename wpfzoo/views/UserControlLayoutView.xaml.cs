@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.entities.enums;
 
@@ -33,6 +34,8 @@ namespace wpfzoo.views
             animal.Weight = 120;
             animal.IsDead = false;
             this.animalUC.Animal = animal;
+            MySQLDBManager manager = new MySQLDBManager();
+            manager.insert(animal);
 
             StreetNumber streetNumber = new StreetNumber();
             streetNumber.Number = 666;
