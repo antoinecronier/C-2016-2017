@@ -14,7 +14,7 @@ namespace wpfzoo.database
     public class MySQLDBManager<T> : DbContext where T : BaseDBEntity
     {
         public DbSet<T> DbSetT { get; set; }
-
+        
         public MySQLDBManager() : base("Server=127.0.0.1;Port=3306;Database=zoo;Uid=root;Pwd=''")
         {
         }
@@ -23,6 +23,24 @@ namespace wpfzoo.database
         {
             this.DbSetT.Add(item);
             this.SaveChanges();
+        }
+
+        public void delete (T item)
+        {
+            if (item != null)
+            {
+                this.DbSetT.Remove(item);
+                this.SaveChanges();
+            }
+        }
+
+        public void update (T item)
+        {
+            if (item != null)
+            {
+                this.Entry(item).CurrentValues.SetValues(new object());
+                this.SaveChanges();
+            }
         }
 
 

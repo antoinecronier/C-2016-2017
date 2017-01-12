@@ -35,7 +35,8 @@ namespace wpfzoo.views
             animal.Weight = 120;
             animal.IsDead = true;
             this.animalUC.Animal = animal;
-            MySQLDBManager manager = new MySQLDBManager();
+            MySQLDBManager<Animal> animalManager = new MySQLDBManager<Animal>();
+            animalManager.insert(animal);
 
             StreetNumber streetNumber = new StreetNumber();
             streetNumber.Number = 666;
@@ -91,9 +92,9 @@ namespace wpfzoo.views
 
 
             /* TODO RM */
-            MySQLDBManager<BaseEntity> manager = new MySQLDBManager<BaseEntity>();
+            MySQLDBManager<Employee> employeeManager = new MySQLDBManager<Employee>();
             //employee.Manager = employee;
-            manager.insert(employee);
+            manager.delete(employee);
         }
     }
 }
