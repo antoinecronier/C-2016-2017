@@ -3,10 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:LUC="clr-namespace:wpfzoo.views.usercontrols"
+             xmlns:UC="clr-namespace:wpfzoo.views.usercontrols"
              xmlns:local="clr-namespace:wpfzoo.views.usercontrols"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <ListView
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label x:Name="label0" Grid.Column="0" Grid.Row="0"/>
+                        <TextBox x:Name="textBox0" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
+
+                        <Label x:Name="label1" Grid.Column="0" Grid.Row="1"/>
+                        <TextBox x:Name="textBox1" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
+
+                        <LUC:EmployeeUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" />
+
+                        <LUC:AnimalUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" />
+
+                        <UC:ScheduleUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

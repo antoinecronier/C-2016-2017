@@ -40,14 +40,6 @@ namespace wpfzoo.views.usercontrols
             this.label1.Content = "Surface";
             this.textBox1.Text = structure.Surface.ToString();
 
-            this.label2.Content = "AssignAnimals";
-            this.textBox2.Text = structure.AssignAnimals.ToString();
-
-            this.label3.Content = "AssignEmployees";
-            this.textBox3.Text = structure.AssignEmployees.ToString();
-
-            this.label4.Content = "Schedule";
-            this.textBox4.Text = structure.Schedule.ToString();
         }
     }
 }
