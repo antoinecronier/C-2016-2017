@@ -9,8 +9,6 @@ namespace wpfzoo.entities
         private Decimal salary;
         private Schedule schedule;
 
-
-
         public string Name
         {
             get
