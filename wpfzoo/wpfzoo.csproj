@@ -43,6 +43,10 @@
       <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Faker, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Faker.Data.1.0.7\lib\net45\Faker.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.8.8\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
@@ -74,9 +78,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="database\MySQLDBManager.cs" />
+    <Compile Include="database\MySQLFullDB.cs" />
+    <Compile Include="database\MySQLManager.cs" />
     <Compile Include="entities\base\BaseDBEntity.cs" />
     <Compile Include="entities\base\BaseEntity.cs" />
+    <Compile Include="entities\generator\EntityGenerator.cs" />
+    <Compile Include="entities\generator\TypeEnum.cs" />
+    <Compile Include="entities\reflection\Reflectionner.cs" />
     <Compile Include="views\AnimalView.xaml.cs">
       <DependentUpon>AnimalView.xaml</DependentUpon>
     </Compile>
