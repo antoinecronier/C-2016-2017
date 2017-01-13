@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.entities.enums;
+using wpfzoo.json;
 
 namespace wpfzoo.views
 {
@@ -26,6 +27,15 @@ namespace wpfzoo.views
         public UserControlLayoutView()
         {
             InitializeComponent();
+
+            //JsonManager managerJson = new JsonManager();
+
+
+
+
+
+
+
 
             Animal animal = new Animal();
             animal.Name = "moufassa";
