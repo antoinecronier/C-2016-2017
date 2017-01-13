@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfzoo.entities;
+using wpfzoo.views;
+using wpfzoo.views.administration;
 
 namespace wpfzoo
 {
@@ -30,35 +32,59 @@ namespace wpfzoo
 
         private void btnAddress_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Address");
+            Window window = new Window();
+            window.Content = new AddressAdmin();
+
+            window.Show();
         }
         private void btnAnimal_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Animal");
+            Window window = new Window();
+            window.Content = new AnimalAdmin();
+
+            window.Show();
         }
         private void btnEmployee_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Employee");
+            Window window = new Window();
+            window.Content = new EmployeeAdmin();
+
+            window.Show();
         }
         private void btnJob_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Job");
+            Window window = new Window();
+            window.Content = new JobAdmin();
+
+            window.Show();
         }
         private void btnSchedule_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Schedule");
+            Window window = new Window();
+            window.Content = new ScheduleAdmin();
+
+            window.Show();
         }
         private void btnStreetNumber_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("StreetNumber");
+            Window window = new Window();
+            window.Content = new StreetNumberAdmin();
+
+            window.Show();
         }
         private void btnStructure_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Structure");
+            Window window = new Window();
+            window.Content = new StructureAdmin();
+
+            window.Show();
         }
         private void btnZoo_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Zoo");
+            Window window = new Window();
+            window.Content = new ZooAdmin();
+
+            window.Show();
         }
     }
 }
