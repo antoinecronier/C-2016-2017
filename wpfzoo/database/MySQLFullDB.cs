@@ -23,9 +23,9 @@ namespace wpfzoo.database
         public DbSet<Zoo> ZooTable { get; set; }
 
         public MySQLFullDB()
-            : base("Server=127.0.0.1;Port=3306;Database=zoo;Uid=root;Pwd=''")
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\jéjé\Documents\DL2\C#\C-2016-2017\jsonconfig\", @"MysqlConfig.json").ToString())
         {
-                    InitLocalMySQL();
+            InitLocalMySQL();
         }
 
         public void InitLocalMySQL()
@@ -38,6 +38,69 @@ namespace wpfzoo.database
                     AddressTable.Add(generatorAddress.GenerateItem());
                 }
 
+                EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
+                for (int i = 0; i < 10; i++)
+                {
+                    AnimalTable.Add(generatorAnimal.GenerateItem());
+                }
+
+                EntityGenerator<Employee> generatorEmployee = new EntityGenerator<Employee>();
+                for (int i = 0; i < 10; i++)
+                {
+                    EmployeeTable.Add(generatorEmployee.GenerateItem());
+                }
+
+                EntityGenerator<Job> generatorJob = new EntityGenerator<Job>();
+                for (int i = 0; i < 10; i++)
+                {
+                    JobTable.Add(generatorJob.GenerateItem());
+                }
+
+                EntityGenerator<Schedule> generatorSchedule = new EntityGenerator<Schedule>();
+                for (int i = 0; i < 10; i++)
+                {
+                    ScheduleTable.Add(generatorSchedule.GenerateItem());
+                }
+
+                EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
+                for (int i = 0; i < 10; i++)
+                {
+                    StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
+                }
+
+                EntityGenerator<Structure> generatorStructure = new EntityGenerator<Structure>();
+                for (int i = 0; i < 10; i++)
+                {
+                    StructureTable.Add(generatorStructure.GenerateItem());
+                }
+
+                EntityGenerator<Zoo> generatorZoo = new EntityGenerator<Zoo>();
+                for (int i = 0; i < 1; i++)
+                {
+                    ZooTable.Add(generatorZoo.GenerateItem());
+                }
+
+                this.SaveChangesAsync();
+
+/*
+                MySQLManager<Address> addressManager = new MySQLManager<Address>();
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Task<Address> addressT = addressManager.Get(i);
+                    Address address = (Address) addressT.AsyncState;
+
+                    MySQLManager<StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
+                    Task<StreetNumber> addressT = streetNumberManager.Get(i);
+                    Address address = (Address)addressT.AsyncState;
+                    address.StreetNumber = 1;
+                }
+
+                MySQLManager<Employee> employeeManager = new MySQLManager<Employee>(); 
+                MySQLManager<Job> jobManager = new MySQLManager<Job>();
+                MySQLManager<Structure> structureManager = new MySQLManager<Structure>();
+                MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
+                */
                 this.SaveChangesAsync();
             }
         }
