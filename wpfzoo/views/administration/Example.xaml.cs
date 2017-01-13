@@ -40,5 +40,10 @@ namespace wpfzoo.views.administration
             MySQLManager <StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
             this.UCStreetNumberList.LoadItem((await streetNumberManager.Get()).ToList());
         }
+
+        private void UCAddressList_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

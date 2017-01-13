@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,13 +21,19 @@ namespace wpfzoo.views.administration
     /// <summary>
     /// Logique d'interaction pour zooAdmin.xaml
     /// </summary>
-    public partial class zooAdmin : Page
+    public partial class ZooAdmin : Page
     {
-        public zooAdmin()
+        ObservableCollection<Zoo> zooList = new ObservableCollection<Zoo>();
+        public ZooAdmin()
         {
             InitializeComponent();
-            
-            
+            InitLists();
+        }
+
+        private async void InitLists()
+        {
+            MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
+            this.UCZooList.LoadItem((await zooManager.Get()).ToList());
         }
 
         private void btnNewZoo_Click(object sender, RoutedEventArgs e)
@@ -48,14 +55,16 @@ namespace wpfzoo.views.administration
         {
             MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
             Task<Zoo> tZoo = zooManager.Update(ucZoo.Zoo);
-            Zoo zoo = (Zoo) tZoo.AsyncState;
+            Zoo zoo = (Zoo) tZoo.Result;
         }
 
         private void btnDelZoo_Click(object sender, RoutedEventArgs e)
         {
             MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
+            this.UCZooList.Obs.Remove(ucZoo.Zoo);
             Task<Int32> tRes = zooManager.Delete(ucZoo.Zoo);
             Int32 res = (Int32)tRes.AsyncState;
+            
         }
     }
 }
