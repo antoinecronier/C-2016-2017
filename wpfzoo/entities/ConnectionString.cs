@@ -82,5 +82,10 @@ namespace wpfzoo.entities
         public ConnectionString()
         {
         }
+
+        public override string ToString()
+        {
+            return "Server=" + server + ";Port=" + port + ";Database=" + database + ";Uid=" + uuid + ";Pwd=" + pwd;
+        }
     }
 }
