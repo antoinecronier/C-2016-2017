@@ -55,6 +55,10 @@
       <HintPath>..\packages\MySql.Data.Entities.6.8.3.0\lib\net45\mysql.data.entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -82,9 +86,14 @@
     <Compile Include="database\MySQLManager.cs" />
     <Compile Include="entities\base\BaseDBEntity.cs" />
     <Compile Include="entities\base\BaseEntity.cs" />
+    <Compile Include="entities\ConnectionString.cs" />
     <Compile Include="entities\generator\EntityGenerator.cs" />
     <Compile Include="entities\generator\TypeEnum.cs" />
     <Compile Include="entities\reflection\Reflectionner.cs" />
+    <Compile Include="json\JsonManager.cs" />
+    <Compile Include="views\adminstration\AnimalAdmin.xaml.cs">
+      <DependentUpon>AnimalAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\AnimalView.xaml.cs">
       <DependentUpon>AnimalView.xaml</DependentUpon>
     </Compile>
@@ -151,6 +160,10 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="views\adminstration\AnimalAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="views\AnimalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

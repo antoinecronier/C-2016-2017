@@ -1,0 +1,37 @@
+﻿<Page x:Class="wpfzoo.views.adminstration.AnimalAdmin"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:UC="clr-namespace:wpfzoo.views.usercontrols"
+      xmlns:local="clr-namespace:wpfzoo.views.adminstration"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="AnimalAdmin">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnNew" Content="New" HorizontalAlignment="Left" Margin="134,3,0,0" VerticalAlignment="Top" Width="56" Click="ClickNew"/>
+        <Button x:Name="btnOk" Content="OK" Grid.Row="3" Click="ClickOK"/>
+        <Button x:Name="btnDelete" Content="Delete" Grid.Row="2" Click="ClickDelete"/>
+
+        <Label x:Name="lblName" Content="{Binding Animal.Name, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" />
+       
+        <Label x:Name="lblAnimal" Content="Animal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
+
+        <UC:AnimalUserControl Grid.Row="1"/>
+        <ScrollBar x:Name="scrollBar" Grid.Column="1" Margin="83,0,0,0" Grid.RowSpan="5"/>
+
+    </Grid>
+</Page>

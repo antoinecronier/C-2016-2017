@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.entities.enums;
+using wpfzoo.json;
 
 namespace wpfzoo.views
 {
@@ -26,7 +27,10 @@ namespace wpfzoo.views
     {
         public UserControlLayoutView()
         {
-            EntityGenerator<Employee> manager = new EntityGenerator<Employee>();
+
+            InitializeComponent();
+
+            MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
             Animal animal = new Animal();
             animal.Name = "moufassa";
             animal.Gender = Gender.FEMALE;
@@ -35,8 +39,7 @@ namespace wpfzoo.views
             animal.Weight = 120;
             animal.IsDead = true;
             this.animalUC.Animal = animal;
-            EntityGenerator<Animal> animalManager = new EntityGenerator<Animal>();
-            animalManager.insert(animal);
+            MySQLManager<Animal> animalManager = new MySQLManager<Animal>();
 
             StreetNumber streetNumber = new StreetNumber();
             streetNumber.Number = 666;
@@ -76,10 +79,8 @@ namespace wpfzoo.views
             employee.Hiring = DateTime.Now;
             employee.Jobs.Add(job);
             employee.Lastname = "Del Santos";
-            //employee.Planning.Add(schedule, structure);
+            employee.Planning.Add(schedule, structure);
             this.employeeUC.Employee = employee;
-
-            manager.insert(employee);
 
             Zoo zoo = new Zoo();
             zoo.Address = address;
@@ -89,12 +90,8 @@ namespace wpfzoo.views
             zoo.Structures.Add(structure);
             this.zooUC.Zoo = zoo;
 
-
-
             /* TODO RM */
-            MySQLManager<Employee> manager = new MySQLManager<Employee>();
             //employee.Manager = employee;
-            manager.Insert(employee);
         }
     }
 }

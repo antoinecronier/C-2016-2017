@@ -38,6 +38,50 @@ namespace wpfzoo.database
                     AddressTable.Add(generatorAddress.GenerateItem());
                 }
 
+                EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
+                for (int i = 0; i < 10; i++)
+                {
+                    AnimalTable.Add(generatorAnimal.GenerateItem());
+                }
+
+                EntityGenerator<Employee> generatorEmployee = new EntityGenerator<Employee>();
+                for (int i = 0; i < 10; i++)
+                {
+                    EmployeeTable.Add(generatorEmployee.GenerateItem());
+                }
+
+                EntityGenerator<Job> generatorJob = new EntityGenerator<Job>();
+                for (int i = 0; i < 10; i++)
+                {
+                    JobTable.Add(generatorJob.GenerateItem());
+                }
+
+                EntityGenerator<Schedule> generatorSchedule = new EntityGenerator<Schedule>();
+                for (int i = 0; i < 10; i++)
+                {
+                    ScheduleTable.Add(generatorSchedule.GenerateItem());
+                }
+
+                EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
+                for (int i = 0; i < 10; i++)
+                {
+                    StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
+                }
+
+                EntityGenerator<Structure> generatorStructure = new EntityGenerator<Structure>();
+                for (int i = 0; i < 10; i++)
+                {
+                    StructureTable.Add(generatorStructure.GenerateItem());
+                }
+
+                EntityGenerator<Zoo> generatorZoo = new EntityGenerator<Zoo>();
+                for (int i = 0; i < 10; i++)
+                {
+                    ZooTable.Add(generatorZoo.GenerateItem());
+                }
+                this.SaveChangesAsync();
+
+                AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
                 this.SaveChangesAsync();
             }
         }

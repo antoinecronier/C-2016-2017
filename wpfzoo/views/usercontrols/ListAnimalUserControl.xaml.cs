@@ -23,6 +23,7 @@ namespace wpfzoo.views.usercontrols
         public ListAnimalUserControl()
         {
             InitializeComponent();
+
         }
     }
 }
