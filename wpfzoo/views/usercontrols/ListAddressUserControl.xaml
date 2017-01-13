@@ -11,6 +11,15 @@
         <ListView x:Name="itemList"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ContextMenu>
+                <ContextMenu Name="ZoneIformationList" StaysOpen="true" Background="WhiteSmoke">
+                    <ContextMenu.BitmapEffect>
+                        <BitmapEffectGroup/>
+                    </ContextMenu.BitmapEffect>
+                    <MenuItem Header="Edit" Name="EditNutritionContextMenu"  Click="EditNutritionContextMenu_OnClick"/>
+                    <MenuItem Header="Remove" Name="RemoveNutritionContextMenu" Click="RemoveNutritionContextMenu_OnClick"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -29,9 +30,18 @@ namespace wpfzoo.views.administration
         public Example()
         {
             InitializeComponent();
+            this.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             InitLists();
         }
 
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Address item = (e.AddedItems[0] as Address);
+
+            }
+        }
         private async void InitLists()
         {
             MySQLManager<Address> addressManager = new MySQLManager<Address>();
