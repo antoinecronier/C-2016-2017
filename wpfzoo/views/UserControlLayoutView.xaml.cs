@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary2.Entities.Generator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace wpfzoo.views
     {
         public UserControlLayoutView()
         {
-            MySQLDBManager<Employee> manager = new MySQLDBManager<Employee>();
+            EntityGenerator<Employee> manager = new EntityGenerator<Employee>();
             Animal animal = new Animal();
             animal.Name = "moufassa";
             animal.Gender = Gender.FEMALE;
@@ -34,7 +35,7 @@ namespace wpfzoo.views
             animal.Weight = 120;
             animal.IsDead = true;
             this.animalUC.Animal = animal;
-            MySQLDBManager<Animal> animalManager = new MySQLDBManager<Animal>();
+            EntityGenerator<Animal> animalManager = new EntityGenerator<Animal>();
             animalManager.insert(animal);
 
             StreetNumber streetNumber = new StreetNumber();
