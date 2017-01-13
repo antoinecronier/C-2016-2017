@@ -4,6 +4,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using wpfzoo.entities;
+using wpfzoo.json;
 
 namespace wpfzoo.database
 {
@@ -11,7 +13,7 @@ namespace wpfzoo.database
     public class MySQLManager<TEntity> : DbContext where TEntity : class
     {
         public MySQLManager() 
-            : base("Server=127.0.0.1;Port=3306;Database=zoo;Uid=root;Pwd=''")
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\tactfactory\Documents\Visual Studio 2015\Projects\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
         {
             MySQLFullDB initDBIfNotExist = new MySQLFullDB();
         }
