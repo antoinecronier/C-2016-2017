@@ -24,7 +24,9 @@ namespace wpfzoo.database
         public DbSet<Zoo> ZooTable { get; set; }
 
         public MySQLFullDB()
+
             : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\jéjé\Documents\DL2\C#\C-2016-2017\jsonconfig\", @"MysqlConfig.json").ToString())
+
         {
             InitLocalMySQL();
         }
@@ -37,6 +39,13 @@ namespace wpfzoo.database
                 for (int i = 0; i < 10; i++)
                 {
                     AddressTable.Add(generatorAddress.GenerateItem());
+                }
+
+
+                EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
+                for (int i = 0; i < 10; i++)
+                {
+                    StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
                 }
 
                 EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
@@ -63,12 +72,6 @@ namespace wpfzoo.database
                     ScheduleTable.Add(generatorSchedule.GenerateItem());
                 }
 
-                EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
-                for (int i = 0; i < 10; i++)
-                {
-                    StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
-                }
-
                 EntityGenerator<Structure> generatorStructure = new EntityGenerator<Structure>();
                 for (int i = 0; i < 10; i++)
                 {
@@ -76,32 +79,17 @@ namespace wpfzoo.database
                 }
 
                 EntityGenerator<Zoo> generatorZoo = new EntityGenerator<Zoo>();
-                for (int i = 0; i < 1; i++)
+                for (int i = 0; i < 10; i++)
+
                 {
                     ZooTable.Add(generatorZoo.GenerateItem());
                 }
 
                 this.SaveChangesAsync();
 
-/*
-                MySQLManager<Address> addressManager = new MySQLManager<Address>();
 
-                for (int i = 0; i < 10; i++)
-                {
-                    Task<Address> addressT = addressManager.Get(i);
-                    Address address = (Address) addressT.AsyncState;
+                AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
 
-                    MySQLManager<StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
-                    Task<StreetNumber> addressT = streetNumberManager.Get(i);
-                    Address address = (Address)addressT.AsyncState;
-                    address.StreetNumber = 1;
-                }
-
-                MySQLManager<Employee> employeeManager = new MySQLManager<Employee>(); 
-                MySQLManager<Job> jobManager = new MySQLManager<Job>();
-                MySQLManager<Structure> structureManager = new MySQLManager<Structure>();
-                MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
-                */
                 this.SaveChangesAsync();
             }
         }

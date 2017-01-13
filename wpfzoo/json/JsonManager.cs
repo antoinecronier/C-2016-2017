@@ -34,7 +34,7 @@ namespace wpfzoo.json
         }
 
 
-        public T ReadFile<T>(String path, String file) where T : class
+        public T ReadFile<T>(String path, String file)
         {
 
             T toReturn = default(T);

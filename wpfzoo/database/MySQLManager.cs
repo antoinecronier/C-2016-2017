@@ -14,7 +14,9 @@ namespace wpfzoo.database
     {
         
         public MySQLManager() 
+
             : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\jéjé\Documents\DL2\C#\C-2016-2017\jsonconfig\", @"MysqlConfig.json").ToString())
+
         {
             MySQLFullDB initDBIfNotExist = new MySQLFullDB();
         }

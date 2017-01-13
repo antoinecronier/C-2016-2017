@@ -28,7 +28,6 @@ namespace wpfzoo.views
         {
             InitializeComponent();
 
-        
 
             Animal animal = new Animal();
             animal.Name = "moufassa";
