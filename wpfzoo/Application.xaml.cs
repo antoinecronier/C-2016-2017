@@ -27,5 +27,38 @@ namespace wpfzoo
             Zoo zoo = new Zoo();
             Address add = new Address();
         }
+
+        private void btnAddress_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Address");
+        }
+        private void btnAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Animal");
+        }
+        private void btnEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Employee");
+        }
+        private void btnJob_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Job");
+        }
+        private void btnSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Schedule");
+        }
+        private void btnStreetNumber_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("StreetNumber");
+        }
+        private void btnStructure_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Structure");
+        }
+        private void btnZoo_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Zoo");
+        }
     }
 }
