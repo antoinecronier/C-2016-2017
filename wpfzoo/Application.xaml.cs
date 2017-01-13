@@ -33,28 +33,28 @@ namespace wpfzoo
         private void btnAddress_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new AddressAdmin();
+//            window.Content = new AddressAdmin();
 
             window.Show();
         }
         private void btnAnimal_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new AnimalAdmin();
+//            window.Content = new AnimalAdmin();
 
             window.Show();
         }
         private void btnEmployee_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new EmployeeAdmin();
+//            window.Content = new EmployeeAdmin();
 
             window.Show();
         }
         private void btnJob_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new JobAdmin();
+//            window.Content = new JobAdmin();
 
             window.Show();
         }
@@ -68,21 +68,21 @@ namespace wpfzoo
         private void btnStreetNumber_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new StreetNumberAdmin();
+//            window.Content = new StreetNumberAdmin();
 
             window.Show();
         }
         private void btnStructure_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new StructureAdmin();
+//            window.Content = new StructureAdmin();
 
             window.Show();
         }
         private void btnZoo_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new ZooAdmin();
+//            window.Content = new ZooAdmin();
 
             window.Show();
         }

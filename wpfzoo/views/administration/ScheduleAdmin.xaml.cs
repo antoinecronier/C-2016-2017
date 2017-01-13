@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,44 +23,36 @@ namespace wpfzoo.views.administration
     /// </summary>
     public partial class ScheduleAdmin : Page
     {
+        ObservableCollection<Schedule> scheduleList = new ObservableCollection<Schedule>();
         public ScheduleAdmin()
         {
             InitializeComponent();
+            InitLists();
+        }
 
-            Schedule schedule = new Schedule();
-            schedule.Start = DateTime.Now;
-            schedule.End = DateTime.Now;
-            this.scheduleUC.Schedule = schedule;
+        private async void InitLists()
+        {
+            MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
+            this.listScheduleUC.LoadItem((await scheduleManager.Get()).ToList());
         }
 
         private void btnDeleteClick(object sender, RoutedEventArgs e)
         {
             MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
-            scheduleManager.Delete();
+            this.listScheduleUC.Obs.Remove(scheduleUC.Schedule);
+            scheduleManager.Delete(this.scheduleUC.Schedule);
         }
 
         private void btnOkClick(object sender, RoutedEventArgs e)
         {
             MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
-            if (scheduleManager.Get(sender))
-            {
-                scheduleManager.Update(sender);
-            }
-            else
-            {
-                scheduleManager.Insert(sender);
-            }
+            scheduleManager.Update(this.scheduleUC.Schedule);
         }
 
         private void btnNewClick(object sender, RoutedEventArgs e)
         {
             MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
-            scheduleManager.Insert(sender);
-        }
-
-        private void scrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
+            scheduleManager.Insert(this.scheduleUC.Schedule);
         }
     }
 }
