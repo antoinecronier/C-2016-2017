@@ -28,9 +28,12 @@ namespace wpfzoo.views
         {
             InitializeComponent();
 
+<<<<<<< HEAD
             JsonManager managerJson = new JsonManager();
             managerJson.ReadFile<ConnectionString>(@"C:\Users\dcyheat\Documents\git\C-2016-2017\JsonConfig\", @"MysqlConfig.json");
 
+=======
+>>>>>>> 9ab57b97b4665d530b822e9c35755fad41b8be4e
             Animal animal = new Animal();
             animal.Name = "moufassa";
             animal.Gender = Gender.FEMALE;

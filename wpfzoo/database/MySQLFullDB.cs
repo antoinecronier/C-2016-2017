@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using wpfzoo.entities;
+using wpfzoo.json;
 
 namespace wpfzoo.database
 {
@@ -23,9 +24,9 @@ namespace wpfzoo.database
         public DbSet<Zoo> ZooTable { get; set; }
 
         public MySQLFullDB()
-            : base("Server=127.0.0.1;Port=3306;Database=zoo;Uid=root;Pwd=''")
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\tactfactory\Documents\Visual Studio 2015\Projects\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
         {
-                    InitLocalMySQL();
+            InitLocalMySQL();
         }
 
         public void InitLocalMySQL()
@@ -37,6 +38,16 @@ namespace wpfzoo.database
                 {
                     AddressTable.Add(generatorAddress.GenerateItem());
                 }
+
+                EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
+                for (int i = 0; i < 10; i++)
+                {
+                    StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
+                }
+
+                this.SaveChangesAsync();
+
+                AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
 
                 this.SaveChangesAsync();
             }
