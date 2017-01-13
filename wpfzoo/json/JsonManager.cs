@@ -11,17 +11,41 @@ namespace wpfzoo.json
 {
     public class JsonManager
     {
-        public String ReadFile(String path, String file)
-        {
-            JObject o1 = JObject.Parse(File.ReadAllText(path + file));
+        private static volatile JsonManager instance;
+        private static object syncRoot = new Object();
 
+        private JsonManager() { }
+
+        public static JsonManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (instance == null)
+                            instance = new JsonManager();
+                    }
+                }
+
+                return instance;
+            }
+        }
+
+
+        public T ReadFile<T>(String path, String file) where T : class
+        {
+
+            T toReturn = default(T);
             using (StreamReader fileItem = File.OpenText(path + file))
             using (JsonTextReader reader = new JsonTextReader(fileItem))
             {
-                JObject o2 = (JObject)JToken.ReadFrom(reader);
+                JObject jObject = (JObject)JToken.ReadFrom(reader);
+                toReturn = jObject.ToObject<T>();
             }
 
-            return null;
+            return toReturn;
         }
     }
 
