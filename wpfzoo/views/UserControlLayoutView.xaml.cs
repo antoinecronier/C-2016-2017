@@ -29,8 +29,7 @@ namespace wpfzoo.views
         {
 
             InitializeComponent();
-
-            MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
+            
             Animal animal = new Animal();
             animal.Name = "moufassa";
             animal.Gender = Gender.FEMALE;

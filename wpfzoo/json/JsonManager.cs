@@ -34,16 +34,15 @@ namespace wpfzoo.json
         }
 
         public T ReadFile<T>(String path, String file)
-         {
+        {
             T toReturn = default(T);
             using (StreamReader fileItem = File.OpenText(path + file))
             using (JsonTextReader reader = new JsonTextReader(fileItem))
             {
                 JObject jObject = (JObject)JToken.ReadFrom(reader);
                 toReturn = jObject.ToObject<T>();
-
             }
-        return toReturn;
+            return toReturn;
+        }
     }
-}
 }
