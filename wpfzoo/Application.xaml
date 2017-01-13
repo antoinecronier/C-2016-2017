@@ -7,6 +7,25 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="btnAddress" Click="btnAddress_Click" Content="Address" Grid.Row="0" Grid.Column="0" />
+        <Button x:Name="btnAnimal" Click="btnAnimal_Click" Content="Animal"  Grid.Row="0" Grid.Column="1" />
+        <Button x:Name="btnEmployee" Click="btnEmployee_Click" Content="Employee"  Grid.Row="0" Grid.Column="2" />
+        <Button x:Name="btnJob" Click="btnJob_Click" Content="Job"  Grid.Row="1" Grid.Column="0" />
+        <Button x:Name="btnSchedule" Click="btnSchedule_Click" Content="Schedule"  Grid.Row="1" Grid.Column="1" />
+        <Button x:Name="btnStreetNumber" Click="btnStreetNumber_Click" Content="StreetNumber"  Grid.Row="1" Grid.Column="2" />
+        <Button x:Name="btnStructure" Click="btnStructure_Click" Content="Structure"  Grid.Row="2" Grid.Column="0" />
+        <Button x:Name="btnZoo" Click="btnZoo_Click" Content="Zoo"  Grid.Row="2" Grid.Column="2" />
     </Grid>
 </Window>
