@@ -8,6 +8,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+JsonConfig/MysqlConfig.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.entities.enums;
+using wpfzoo.json;
 
 namespace wpfzoo.views
 {
@@ -26,6 +27,10 @@ namespace wpfzoo.views
         public UserControlLayoutView()
         {
             InitializeComponent();
+
+            JsonManager managerJson = new JsonManager();
+            managerJson.ReadFile<ConnectionString>(@"C:\Users\dcyheat\Documents\git\C-2016-2017\JsonConfig\", @"MysqlConfig.json");
+
             Animal animal = new Animal();
             animal.Name = "moufassa";
             animal.Gender = Gender.FEMALE;
