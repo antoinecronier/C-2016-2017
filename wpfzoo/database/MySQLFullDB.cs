@@ -24,7 +24,7 @@ namespace wpfzoo.database
         public DbSet<Zoo> ZooTable { get; set; }
 
         public MySQLFullDB()
-            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\tactfactory\Documents\Visual Studio 2015\Projects\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"B:\kevin_profile\Documents\Visual Studio 2015\Projects\C-2016-2017\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
         {
             InitLocalMySQL();
         }
@@ -39,22 +39,24 @@ namespace wpfzoo.database
                     AddressTable.Add(generatorAddress.GenerateItem());
                 }
 
+
                 EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
                 for (int i = 0; i < 10; i++)
                 {
                     StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
                 }
 
-                EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
-                for (int i = 0; i < 10; i++)
-                {
-                    AnimalTable.Add(generatorAnimal.GenerateItem());
-                }
-
                 EntityGenerator<Employee> generatorEmployee = new EntityGenerator<Employee>();
                 for (int i = 0; i < 10; i++)
                 {
                     EmployeeTable.Add(generatorEmployee.GenerateItem());
+
+                }
+
+                EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
+                for (int i = 0; i < 10; i++)
+                {
+                    AnimalTable.Add(generatorAnimal.GenerateItem());
                 }
 
                 EntityGenerator<Job> generatorJob = new EntityGenerator<Job>();
@@ -69,6 +71,7 @@ namespace wpfzoo.database
                     ScheduleTable.Add(generatorSchedule.GenerateItem());
                 }
 
+
                 EntityGenerator<Structure> generatorStructure = new EntityGenerator<Structure>();
                 for (int i = 0; i < 10; i++)
                 {
@@ -80,6 +83,7 @@ namespace wpfzoo.database
                 {
                     ZooTable.Add(generatorZoo.GenerateItem());
                 }
+
 
                 this.SaveChangesAsync();
 

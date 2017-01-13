@@ -41,6 +41,7 @@ namespace wpfzoo.entities
         }
 
         public String Database
+
         {
             get
             {

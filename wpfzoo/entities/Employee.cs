@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using wpfzoo.entities.bases;
 using wpfzoo.entities.enums;
 
@@ -71,6 +72,11 @@ namespace wpfzoo.entities
                 hiring = value;
                 OnPropertyChanged("Hiring");
             }
+        }
+
+        public static explicit operator Employee(ListViewItemSelectionChangedEventArgs v)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Job> Jobs
