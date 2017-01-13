@@ -27,11 +27,7 @@ namespace wpfzoo.entities
             }
         }
 
-<<<<<<< HEAD
-        public string Port
-=======
         public String Port
->>>>>>> master
         {
             get
             {
@@ -44,11 +40,8 @@ namespace wpfzoo.entities
             }
         }
 
-<<<<<<< HEAD
-        public string Database
-=======
         public String Database
->>>>>>> master
+
         {
             get
             {
@@ -61,11 +54,8 @@ namespace wpfzoo.entities
             }
         }
 
-<<<<<<< HEAD
-        public string Uuid
-=======
         public String Uuid
->>>>>>> master
+
         {
             get
             {
@@ -78,11 +68,7 @@ namespace wpfzoo.entities
             }
         }
 
-<<<<<<< HEAD
-        public string Pwd
-=======
         public String Pwd
->>>>>>> master
         {
             get
             {
@@ -98,10 +84,6 @@ namespace wpfzoo.entities
         public ConnectionString()
         {
         }
-<<<<<<< HEAD
-    }
-}
-=======
 
         public override String ToString()
         {
@@ -110,4 +92,3 @@ namespace wpfzoo.entities
         }
     }
 }
->>>>>>> master

@@ -26,7 +26,7 @@
         <Button x:Name="btnOk" Content="OK" Grid.Row="3" Click="ClickOK"/>
         <Button x:Name="btnDelete" Content="Delete" Grid.Row="2" Click="ClickDelete"/>
 
-        <Label x:Name="lblName" Content="{Binding Animal.Name, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" />
+        <UC:ListAnimalUserControl Grid.Column="1" Grid.Row="0" />
        
         <Label x:Name="lblAnimal" Content="Animal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
 
