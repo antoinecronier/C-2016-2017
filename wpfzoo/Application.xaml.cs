@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfzoo.entities;
+using wpfzoo.views;
+using wpfzoo.views.administration;
 
 namespace wpfzoo
 {
@@ -26,6 +28,63 @@ namespace wpfzoo
             InitializeComponent();
             Zoo zoo = new Zoo();
             Address add = new Address();
+        }
+
+        private void btnAddress_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window();
+            window.Content = new AddressAdmin();
+
+            window.Show();
+        }
+        private void btnAnimal_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window();
+            window.Content = new AnimalAdmin();
+
+            window.Show();
+        }
+        private void btnEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window();
+            window.Content = new EmployeeAdmin();
+
+            window.Show();
+        }
+        private void btnJob_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window();
+            window.Content = new JobAdmin();
+
+            window.Show();
+        }
+        private void btnSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window();
+            window.Content = new ScheduleAdmin();
+
+            window.Show();
+        }
+        private void btnStreetNumber_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window();
+            window.Content = new StreetNumberAdmin();
+
+            window.Show();
+        }
+        private void btnStructure_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window();
+            window.Content = new StructureAdmin();
+
+            window.Show();
+        }
+        private void btnZoo_Click(object sender, RoutedEventArgs e)
+        {
+            Window window = new Window();
+            window.Content = new ZooAdmin();
+
+            window.Show();
         }
     }
 }

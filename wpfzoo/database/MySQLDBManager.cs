@@ -5,16 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using wpfzoo.entities;
+<<<<<<< HEAD
+=======
+using wpfzoo.entities.bases;
+>>>>>>> master
 
 namespace wpfzoo.database
 {
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
+<<<<<<< HEAD
     public class MySQLDBManager<T> : DbContext where T : class
+=======
+
+    public class MySQLDBManager<T> : DbContext where T : BaseDBEntity
+>>>>>>> master
     {
         public DbSet<T> DbSetT { get; set; }
 
         public MySQLDBManager() : base("Server=127.0.0.1;Port=3306;Database=zoo;Uid=root;Pwd=''")
         {
+<<<<<<< HEAD
             InitTables init = new InitTables();
             this.SaveChanges();
         }
@@ -22,10 +32,13 @@ namespace wpfzoo.database
         public void initTables()
         {
 
+=======
+>>>>>>> master
         }
 
         public void insert(T item)
         {
+<<<<<<< HEAD
             if (item != null)
             {
                 this.DbSetT.Add(item);
@@ -68,5 +81,12 @@ namespace wpfzoo.database
         public InitTables()
         {
         }
+=======
+            this.DbSetT.Add(item);
+            this.SaveChanges();
+        }
+
+
+>>>>>>> master
     }
 }

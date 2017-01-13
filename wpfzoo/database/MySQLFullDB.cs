@@ -26,7 +26,7 @@ namespace wpfzoo.database
         public MySQLFullDB()
             : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\Dereck\Desktop\C#\C-2016-2017\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
         {
-                    InitLocalMySQL();
+            InitLocalMySQL();
         }
 
         public void InitLocalMySQL()
@@ -37,6 +37,12 @@ namespace wpfzoo.database
                 for (int i = 0; i < 10; i++)
                 {
                     AddressTable.Add(generatorAddress.GenerateItem());
+                }
+
+                EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
+                for (int i = 0; i < 10; i++)
+                {
+                    StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
                 }
 
                 EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
@@ -63,12 +69,6 @@ namespace wpfzoo.database
                     ScheduleTable.Add(generatorSchedule.GenerateItem());
                 }
 
-                EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
-                for (int i = 0; i < 10; i++)
-                {
-                    StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
-                }
-
                 EntityGenerator<Structure> generatorStructure = new EntityGenerator<Structure>();
                 for (int i = 0; i < 10; i++)
                 {
@@ -84,15 +84,6 @@ namespace wpfzoo.database
                 this.SaveChangesAsync();
 
                 AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
-                AddressTable.Find(2).StreetNumber = StreetNumberTable.Find(2);
-                AddressTable.Find(3).StreetNumber = StreetNumberTable.Find(3);
-                AddressTable.Find(4).StreetNumber = StreetNumberTable.Find(4);
-                AddressTable.Find(5).StreetNumber = StreetNumberTable.Find(5);
-                AddressTable.Find(6).StreetNumber = StreetNumberTable.Find(6);
-                AddressTable.Find(7).StreetNumber = StreetNumberTable.Find(7);
-                AddressTable.Find(8).StreetNumber = StreetNumberTable.Find(8);
-                AddressTable.Find(9).StreetNumber = StreetNumberTable.Find(9);
-                AddressTable.Find(10).StreetNumber = StreetNumberTable.Find(10);
                 this.SaveChangesAsync();
             }
         }

@@ -11,7 +11,6 @@ namespace wpfzoo.json
 {
     public class JsonManager
     {
-
         private static volatile JsonManager instance;
         private static object syncRoot = new Object();
 

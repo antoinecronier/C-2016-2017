@@ -28,15 +28,6 @@ namespace wpfzoo.views
         {
             InitializeComponent();
 
-            //JsonManager managerJson = new JsonManager();
-
-
-
-
-
-
-
-
             Animal animal = new Animal();
             animal.Name = "moufassa";
             animal.Gender = Gender.FEMALE;
@@ -98,7 +89,7 @@ namespace wpfzoo.views
 
 
             /* TODO RM */
-            MySQLManager<Employee> manager = new MySQLManager<Employee>();
+            //MySQLManager<Employee> manager = new MySQLManager<Employee>();
             //employee.Manager = employee;
             //manager.Insert(employee);
         }
