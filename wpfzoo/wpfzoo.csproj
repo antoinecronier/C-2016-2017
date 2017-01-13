@@ -91,6 +91,9 @@
     <Compile Include="entities\generator\TypeEnum.cs" />
     <Compile Include="entities\reflection\Reflectionner.cs" />
     <Compile Include="json\JsonManager.cs" />
+    <Compile Include="views\administration\ScheduleAdmin.xaml.cs">
+      <DependentUpon>ScheduleAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\AnimalView.xaml.cs">
       <DependentUpon>AnimalView.xaml</DependentUpon>
     </Compile>
@@ -157,6 +160,10 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="views\administration\ScheduleAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="views\AnimalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

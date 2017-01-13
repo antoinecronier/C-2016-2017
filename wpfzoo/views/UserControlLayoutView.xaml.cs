@@ -100,7 +100,7 @@ namespace wpfzoo.views
             /* TODO RM */
             MySQLManager<Employee> manager = new MySQLManager<Employee>();
             //employee.Manager = employee;
-            manager.Insert(employee);
+            //manager.Insert(employee);
         }
     }
 }
