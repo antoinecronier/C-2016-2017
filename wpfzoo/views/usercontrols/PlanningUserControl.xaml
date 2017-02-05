@@ -9,37 +9,11 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListView Name="valueList"
+        <ListView Name="planningList"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1*" />
-                            <RowDefinition Height="1*" />
-                        </Grid.RowDefinitions>
-
-                        <TextBlock x:Name="txtBStructureName" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
-
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <ListView Name="keyList"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="1">
+            ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Column="0"
+            ItemsSource="{DynamicResource Plannings}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
@@ -52,17 +26,20 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="1*" />
                             <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
 
-                        <Label x:Name="lblStart" Content="Start" Grid.Column="0" Grid.Row="0" />
-                        <TextBlock x:Name="txtBStart" TextWrapping="Wrap" Text="{Binding Start, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" />
+                        <TextBlock x:Name="txtBStructureName" TextWrapping="Wrap" Text="{Binding Value.Name, Mode=TwoWay}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" />
 
-                        <Label x:Name="lblEnd" Content="End" Grid.Column="0" Grid.Row="1" />
-                        <TextBlock x:Name="txtBEnd" TextWrapping="Wrap" Text="{Binding End, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" />
+                        <Label x:Name="lblStart" Content="Start" Grid.Column="1" Grid.Row="0" />
+                        <TextBlock x:Name="txtBStart" TextWrapping="Wrap" Text="{Binding Key.Start, Mode=TwoWay}" Grid.Column="2" Grid.Row="0" />
+
+                        <Label x:Name="lblEnd" Content="End" Grid.Column="1" Grid.Row="1" />
+                        <TextBlock x:Name="txtBEnd" TextWrapping="Wrap" Text="{Binding Key.End, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" />
 
                     </Grid>
                 </DataTemplate>
