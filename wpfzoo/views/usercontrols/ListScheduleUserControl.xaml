@@ -10,6 +10,15 @@
         <ListView x:Name="itemList"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ContextMenu>
+                <ContextMenu Name="ZoneIformationList" StaysOpen="true" Background="WhiteSmoke">
+                    <ContextMenu.BitmapEffect>
+                        <BitmapEffectGroup/>
+                    </ContextMenu.BitmapEffect>
+                    <MenuItem Header="Edit" Name="EditNutritionContextMenu"  Click="EditNutritionContextMenu_OnClick"/>
+                    <MenuItem Header="Remove" Name="RemoveNutritionContextMenu" Click="RemoveNutritionContextMenu_OnClick"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
@@ -29,10 +38,10 @@
                         </Grid.RowDefinitions>
 
                         <Label x:Name="lblStart" Grid.Column="0" Grid.Row="0" />
-                        <TextBox x:Name="txtBStart" Text="{Binding Start, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" />
+                        <TextBlock x:Name="txtBStart" Text="{Binding Start, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" />
 
                         <Label x:Name="lblEnd" Grid.Column="0" Grid.Row="1" />
-                        <TextBox x:Name="txtBEnd" Text="{Binding End, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" />
+                        <TextBlock x:Name="txtBEnd" Text="{Binding End, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" />
 
                     </Grid>
                 </DataTemplate>

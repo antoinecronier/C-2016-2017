@@ -41,6 +41,22 @@ namespace wpfzoo.views.usercontrols
         #endregion
 
         #region methods
+        private void RemoveNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            Obs.Remove(ItemsList.SelectedItem as Schedule);  // remove the selected Item 
+        }
+
+        private void EditNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (ItemsList.SelectedIndex > -1)
+            {
+                var schedule = new Schedule();
+                schedule = (Schedule)ItemsList.SelectedItem; // casting the list view 
+                MessageBox.Show("You are in edit for Name:" + schedule.Start, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+
+        }
         /// <summary>
         /// Current list for User items.
         /// </summary>

@@ -54,5 +54,10 @@ namespace wpfzoo.views.administration
             MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
             scheduleManager.Insert(this.scheduleUC.Schedule);
         }
+
+        private void listScheduleUC_Loaded(object sender, SelectedCellsChangedEventArgs e)
+        {
+//            this.scheduleUC = this.listScheduleUC.
+        }
     }
 }

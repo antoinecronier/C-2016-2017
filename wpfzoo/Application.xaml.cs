@@ -40,7 +40,7 @@ namespace wpfzoo
         private void btnAnimal_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-//            window.Content = new AnimalAdmin();
+//           window.Content = new AnimalAdmin();
 
             window.Show();
         }
