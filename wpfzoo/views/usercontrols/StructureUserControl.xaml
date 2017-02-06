@@ -31,6 +31,6 @@
         
         <LUC:AnimalUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" />
 
-        <UC:ScheduleUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" />
+        <UC:ScheduleUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" />
     </Grid>
 </UserControl>

@@ -40,6 +40,8 @@ namespace wpfzoo.views.administration
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        
+
         #region clicks
         private void listEmployees_Click(object sender, RoutedEventArgs e)
         {
@@ -47,7 +49,7 @@ namespace wpfzoo.views.administration
 
         private void buttonNew_Click(object sender, RoutedEventArgs e)
         {
-            //this.oneInfos.Visibility = Visibility.Visible;
+            this.oneInfos.Visibility = Visibility.Visible;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -62,12 +64,42 @@ namespace wpfzoo.views.administration
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            //StructureManager.Delete()
+            Structure structureToDelete = new Structure();
+            structureToDelete.Name = this.StructureToDeleteName.Text;
+            foreach (Structure struc in this.UCstructureList.Obs)
+            {
+                if (struc.Name == structureToDelete.Name)
+                {
+                    StructureManager.Delete(struc);
+                    this.UCstructureList.Obs.Remove(struc);
+                    break;
+                }
+            }
+
         }
 
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
+            Structure newStructure = new Structure();
+            newStructure.Name = this.StructureName.Text;
+            String surfaceString = this.StructureSurface.Text;
+            float leOut;
+            if (float.TryParse(surfaceString, out leOut))
+            {
+                float surfaceFloat = float.Parse(surfaceString);
+                newStructure.Surface = surfaceFloat;
+            }
+            else
+            {
+                //MessageBox.Show("echec du parse du float de la surface de la structure le message est long");
+                newStructure.Surface = 0;
+            }
+            newStructure.Schedule = null;
+            
+            StructureManager.Insert(newStructure);
+            this.UCstructureList.AddItem(newStructure);
 
+            this.oneInfos.Visibility = Visibility.Collapsed;
         }
         #endregion
     }

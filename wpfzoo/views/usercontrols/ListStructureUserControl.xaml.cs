@@ -42,10 +42,15 @@ namespace wpfzoo.views.usercontrols
         public void LoadItem(List<Structure> items)
         {
             Obs.Clear();
-            foreach (var item in items)
+            foreach (Structure structure in items)
             {
-                Obs.Add(item);
+                    Obs.Add(structure);
             }
+        }
+
+        public void AddItem(Structure structure)
+        {
+            Obs.Add(structure);
         }
         #endregion
     }
