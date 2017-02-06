@@ -75,7 +75,7 @@ namespace wpfzoo
         private void btnStructure_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new StructureAdmin();
+            //window.Content = new StructureAdmin();
 
             window.Show();
         }
