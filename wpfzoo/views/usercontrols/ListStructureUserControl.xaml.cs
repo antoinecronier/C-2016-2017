@@ -61,7 +61,11 @@ namespace wpfzoo.views.usercontrols
         }
         #endregion
 
+        private void itemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
+    }
 
         #region events
         #endregion

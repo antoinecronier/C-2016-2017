@@ -24,7 +24,7 @@
         <Button x:Name="buttonNew" Width="40" Click="buttonNew_Click">New</Button>
         <UC:ListStructureUserControl x:Name="UCstructureList" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
 
-        <Grid x:Name="oneInfos"  Grid.Column="0" Grid.Row="1" Visibility="Collapsed">
+        <Grid x:Name="oneInfos"  Grid.Column="0" Grid.Row="1" Visibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -45,7 +45,7 @@
             <TextBox x:Name="StructureSurface" Grid.Row="1" Grid.Column="1" Text="{Binding Surface,Mode=TwoWay}"/>
 
             <Label Grid.Row="2">Employee :</Label>
-            <Button x:Name="listEmployees" Grid.Row="2" Grid.Column="1" FontSize="9" Click="listEmployees_Click" Height="17" Margin="0,0.2,0,0" VerticalAlignment="Top">La liste d'Employés</Button>
+            <Button x:Name="listEmployees" Grid.Row="2" Grid.Column="1" FontSize="9"  Height="17" Margin="0,0.2,0,0" VerticalAlignment="Top">La liste d'Employés</Button>
 
             <Label Grid.Row="3">Animaux :</Label>
             <Button x:Name="listAnimaux" Grid.Row="3" Grid.Column="1" FontSize="9" >La liste d'Animaux</Button>
@@ -63,7 +63,7 @@
                 <Label Grid.Row="1" Grid.Column="0">Schedule :</Label>
                 <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Schedule.start}"/>
                 <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Schedule.end}"/>
-                <Button x:Name="toSchedule" Grid.Row="2" Grid.Column="1" FontSize="9" Click="toSchedule_Click">Naviguer vers</Button>
+                <Button x:Name="toSchedule" Grid.Row="2" Grid.Column="1" FontSize="9">Naviguer vers</Button>
             </Grid>
 
 

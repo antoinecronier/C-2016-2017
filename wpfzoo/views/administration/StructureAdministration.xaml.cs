@@ -45,6 +45,7 @@ namespace wpfzoo.views.administration
         #region clicks
         private void listEmployees_Click(object sender, RoutedEventArgs e)
         {
+
         }
 
         private void buttonNew_Click(object sender, RoutedEventArgs e)
@@ -52,29 +53,24 @@ namespace wpfzoo.views.administration
             this.oneInfos.Visibility = Visibility.Visible;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void toSchedule_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
-            Structure structureToDelete = new Structure();
-            structureToDelete.Name = this.StructureToDeleteName.Text;
-            foreach (Structure struc in this.UCstructureList.Obs)
+            int intToDelete;
+            bool isInt = Int32.TryParse(this.StructureToDeleteName.Text, out intToDelete);
+            if (isInt)
             {
-                if (struc.Name == structureToDelete.Name)
+                foreach (Structure struc in this.UCstructureList.Obs)
                 {
-                    StructureManager.Delete(struc);
-                    this.UCstructureList.Obs.Remove(struc);
-                    break;
+                    if (struc.Id == Int32.Parse(this.StructureToDeleteName.Text))
+                    {
+                        StructureManager.Delete(struc);
+                        this.UCstructureList.Obs.Remove(struc);
+                        break;
+                    }
                 }
             }
+            
+
 
         }
 
