@@ -27,7 +27,17 @@ namespace wpfzoo.views.administration
         public ZooAdmin()
         {
             InitializeComponent();
+            this.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             InitLists();
+        }
+
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Zoo item = (e.AddedItems[0] as Zoo);
+
+            }
         }
 
         private async void InitLists()
@@ -53,6 +63,11 @@ namespace wpfzoo.views.administration
 
         private void btnAddZoo_Click(object sender, RoutedEventArgs e)
         {
+            //tester si id alors update si non insert...
+            if (true)
+            {
+
+            }
             MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
             Task<Zoo> tZoo = zooManager.Update(ucZoo.Zoo);
             Zoo zoo = (Zoo) tZoo.Result;
