@@ -22,11 +22,16 @@ namespace wpfzoo.views.usercontrols
     /// </summary>
     public partial class ListStructureUserControl : UserControl
     {
+        #region attributs
+        #endregion
+        
         #region properties
         public ListView ItemsList { get; set; }
         public ObservableCollection<Structure> Obs { get; set; }
         #endregion
 
+
+        #region constructor
         public ListStructureUserControl()
         {
             InitializeComponent();
@@ -34,6 +39,8 @@ namespace wpfzoo.views.usercontrols
             this.itemList.ItemsSource = Obs;
             this.ItemsList = this.itemList;
         }
+
+        #endregion
 
         #region methods
         /// <summary>
@@ -53,5 +60,10 @@ namespace wpfzoo.views.usercontrols
             Obs.Add(structure);
         }
         #endregion
+
+        }
+
+        #region events
+        #endregion
     }
-}
+
