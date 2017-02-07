@@ -72,6 +72,5 @@ namespace wpfzoo.views.usercontrols
 
         #region events
         #endregion
-
     }
 }

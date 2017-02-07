@@ -34,7 +34,22 @@ namespace wpfzoo.views.administration
             InitializeComponent();
             this.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             InitLists();
+            //AsyncExample();
         }
+
+        //private void AsyncExample()
+        //{
+        //    MySQLManager<Address> addMan = new MyS
+        //    Task.Factory.StartNew(() =>
+        //    {
+        //        EntityGenerator<Address> generator = new EntityGenerator<Address>();
+        //        while (true)
+        //        {
+        //            System.Windows.Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new D);
+        //            this.UCAddressList.Obs.Add(generator.GenerateItem());
+        //        }
+        //    });
+        //}
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -52,6 +67,11 @@ namespace wpfzoo.views.administration
 
             MySQLManager <StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
             this.UCStreetNumberList.LoadItem((await streetNumberManager.Get()).ToList());
+        }
+
+        private void UCAddressList_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
