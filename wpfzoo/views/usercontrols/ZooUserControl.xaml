@@ -16,24 +16,25 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <!--<RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>-->
         </Grid.RowDefinitions>
 
-        <Label x:Name="lblName"  Grid.Column="0" Grid.Row="0" />
+        <Label x:Name="lblName" Content="Name" Grid.Column="0" Grid.Row="0" />
         <TextBox x:Name="txtBName" Text="{Binding Zoo.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
 
-        <Label x:Name="lblAddress" Grid.Column="0" Grid.Row="1" />
-        <local:ListAddressUserControl x:Name="ListAddresseUC" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"/>
+        <!--<Label x:Name="lblAddress" Content="Address" Grid.Column="0" Grid.Row="1" />
+        <local:AddressUserControl x:Name="ucAddress" Grid.Column="1" Grid.Row="1"/>
 
-        <Label x:Name="lblEmployee" Grid.Column="0" Grid.Row="1" />
-        <local:ListEmployeeUserControl x:Name="ListEmployeeUC" Grid.ColumnSpan="2" Grid.Row="3"/>
+        <Label x:Name="lblEmployee" Content="Staff" Grid.Column="0" Grid.Row="2" />
+        <local:ListEmployeeUserControl x:Name="ListEmployeeUC" Grid.Column="1" Grid.Row="2"/>
 
-        <local:ListStructureUserControl x:Name="ListStructureUC" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4"/>
+        <Label x:Name="lblStructure" Content="Structures" Grid.Column="0" Grid.Row="3" />
+        <local:ListStructureUserControl x:Name="ListStructureUC" Grid.Column="1" Grid.Row="3"/>-->
 
-        <Label x:Name="lblBirht" Grid.Column="0" Grid.Row="5" />
-        <TextBox x:Name="txtBBirth" Text="{Binding Zoo.Birth, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="5"/>
+        <Label x:Name="lblBirht" Content="Birth" Grid.Column="0" Grid.Row="4" />
+        <TextBox x:Name="txtBBirth" Text="{Binding Zoo.Birth, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="4"/>
     </Grid>
 </UserControl>

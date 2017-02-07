@@ -94,6 +94,9 @@
     <Compile Include="views\administration\AnimalAdmin.xaml.cs">
       <DependentUpon>AnimalAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\administration\ZooAdmin.xaml.cs">
+      <DependentUpon>ZooAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\administration\Example.xaml.cs">
       <DependentUpon>Example.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,9 @@
     <Compile Include="views\usercontrols\ListZooUserControl.xaml.cs">
       <DependentUpon>ListZooUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\usercontrols\PlanningUserControl.xaml.cs">
+      <DependentUpon>PlanningUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\usercontrols\StructureUserControl.xaml.cs">
       <DependentUpon>StructureUserControl.xaml</DependentUpon>
     </Compile>
@@ -165,6 +171,9 @@
     </Compile>
     <Page Include="views\administration\AnimalAdmin.xaml">
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="views\administration\ZooAdmin.xaml">
+    <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\administration\Example.xaml">
@@ -214,6 +223,10 @@
     <Page Include="views\usercontrols\ListZooUserControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="views\usercontrols\PlanningUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\usercontrols\StructureUserControl.xaml">
       <SubType>Designer</SubType>

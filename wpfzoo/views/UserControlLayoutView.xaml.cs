@@ -27,9 +27,7 @@ namespace wpfzoo.views
     {
         public UserControlLayoutView()
         {
-
             InitializeComponent();
-            
             Animal animal = new Animal();
             animal.Name = "moufassa";
             animal.Gender = Gender.FEMALE;
