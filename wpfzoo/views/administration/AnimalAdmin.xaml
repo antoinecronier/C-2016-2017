@@ -16,22 +16,21 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="btnNew" Content="New" HorizontalAlignment="Left" Margin="134,3,0,0" VerticalAlignment="Top" Width="56" Click="ClickNew"/>
-        <Button x:Name="btnOk" Content="OK" Grid.Row="3" Click="ClickOK"/>
-        <Button x:Name="btnDelete" Content="Delete" Grid.Row="2" Click="ClickDelete"/>
+        <Label x:Name="lblAnimal" Content="Animal &#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" FontSize="25" FontWeight="Bold" AutomationProperties.Name="Animal" Background="Black" FontFamily="Wide Latin" Foreground="White" FontStyle="Italic" FontStretch="SemiCondensed" BorderThickness="0"/>
 
-        <UC:ListAnimalUserControl Grid.Column="1" Grid.Row="0" />
-       
-        <Label x:Name="lblAnimal" Content="Animal" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btnNew" Content="New" Grid.Row="1" Click="ClickNew"/>
+        <Button x:Name="btnOk" Content="OK" Grid.Row="4" Click="ClickOK"/>
+        <Button x:Name="btnDelete" Content="Delete" Grid.Row="3" Click="ClickDelete"/>
 
-        <UC:AnimalUserControl Grid.Row="1"/>
-        <ScrollBar x:Name="scrollBar" Grid.Column="1" Margin="83,0,0,0" Grid.RowSpan="5"/>
+        <UC:ListAnimalUserControl x:Name="UCAnimalList" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" Loaded="ClickAnimalList" />
+        <UC:AnimalUserControl x:Name="UCAnimal" Grid.Row="2"/>
 
     </Grid>
 </Page>

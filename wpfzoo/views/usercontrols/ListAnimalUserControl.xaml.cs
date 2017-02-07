@@ -37,14 +37,33 @@ namespace wpfzoo.views.usercontrols
             Obs = new ObservableCollection<Animal>();
             this.itemList.ItemsSource = Obs;
             this.ItemsList = this.itemList;
+            this.ItemsList.SelectionMode = SelectionMode.Single;
         }
+
         #endregion
 
         #region methods
+        private void RemoveAnimalContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            Obs.Remove(ItemsList.SelectedItem as Animal);
+        }
+
+        private void EditAnimalContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (ItemsList.SelectedIndex > -1)
+            {
+                var address = new Animal();
+                address = (Animal)ItemsList.SelectedItem;
+                MessageBox.Show("You are in edit for Name:" + Name, "Animal", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            }
+
+        }
+
         /// <summary>
         /// Current list for User items.
         /// </summary>
-        public void LoadItem(List<Address> items)
+        public void LoadItem(List<Animal> items)
         {
             Obs.Clear();
             foreach (var item in items)

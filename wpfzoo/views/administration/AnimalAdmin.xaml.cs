@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary2.Entities.Generator;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -27,7 +28,36 @@ namespace wpfzoo.views.adminstration
         public AnimalAdmin()
         {
             InitializeComponent();
-            MySQLManager<Animal> managerAnimal = new MySQLManager<Animal>();
+            InitLists();
+            LinkItem();
+            AsyncExemple();
+        }
+
+        private void AsyncExemple()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                EntityGenerator<Address> generator = new EntityGenerator<Address>();
+                while (true)
+                {
+
+                    this.UCAnimal.Obs.Add(generator.GenerateItem());
+
+                }
+            });
+        } 
+
+        private async void InitLists()
+        {
+            MySQLManager<Animal> listAnimalManager = new MySQLManager<Animal>();
+            List<Animal> l = (await listAnimalManager.Get()).ToList();
+            this.UCAnimalList.LoadItem(l);
+        }
+
+        private async void LinkItem()
+        {
+            MySQLManager<Animal> itemAnimalManager = new MySQLManager<Animal>();
+            
         }
 
         private void ClickNew(object sender, RoutedEventArgs e)
@@ -37,7 +67,9 @@ namespace wpfzoo.views.adminstration
 
         private void ClickDelete(object sender, RoutedEventArgs e)
         {
-        
+            MySQLManager<Animal> animalManager = new MySQLManager<Animal>();
+            this.UCAnimalList.Obs.Remove(UCAnimalList.Animal);
+
         }
 
         private void ClickOK(object sender, RoutedEventArgs e)
@@ -45,7 +77,10 @@ namespace wpfzoo.views.adminstration
         
         }
 
-
+        private void ClickAnimalList(object sender, SelectionChangedEventArgs e)
+        {
+           
+        }
     }
 }
 
