@@ -75,14 +75,14 @@ namespace wpfzoo
         private void btnStructure_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            //window.Content = new StructureAdmin();
+            window.Content = new StructureAdmin();
 
             window.Show();
         }
         private void btnZoo_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            //window.Content = new ZooAdmin();
+            window.Content = new ZooAdmin();
 
             window.Show();
         }
