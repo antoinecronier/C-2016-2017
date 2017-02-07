@@ -47,7 +47,7 @@ namespace wpfzoo
         private void btnEmployee_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new EmployeeAdmin();
+            //window.Content = new EmployeeAdmin();
 
             window.Show();
         }
@@ -68,14 +68,22 @@ namespace wpfzoo
         private void btnStreetNumber_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
+<<<<<<< HEAD
            // window.Content = new StreetNumberAdmin();
+=======
+            //window.Content = new StreetNumberAdmin();
+>>>>>>> master
 
             window.Show();
         }
         private void btnStructure_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
+<<<<<<< HEAD
            // window.Content = new StructureAdmin();
+=======
+            //window.Content = new StructureAdmin();
+>>>>>>> master
 
             window.Show();
         }

@@ -80,12 +80,14 @@ namespace wpfzoo.database
 
                 EntityGenerator<Zoo> generatorZoo = new EntityGenerator<Zoo>();
                 for (int i = 0; i < 10; i++)
+
                 {
                     ZooTable.Add(generatorZoo.GenerateItem());
                 }
 
 
                 this.SaveChangesAsync();
+
 
                 AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
 
