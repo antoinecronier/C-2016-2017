@@ -40,9 +40,7 @@ namespace wpfzoo.views.adminstration
                 EntityGenerator<Address> generator = new EntityGenerator<Address>();
                 while (true)
                 {
-
-                    this.UCAnimal.Obs.Add(generator.GenerateItem());
-
+                    this.UCAnimal.Add(generator.GenerateItem());
                 }
             });
         } 
