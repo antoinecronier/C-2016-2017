@@ -27,6 +27,7 @@ namespace wpfzoo.views.administration
         public ScheduleAdmin()
         {
             InitializeComponent();
+            this.listScheduleUC.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             InitLists();
         }
 
@@ -57,7 +58,16 @@ namespace wpfzoo.views.administration
 
         private void listScheduleUC_Loaded(object sender, SelectedCellsChangedEventArgs e)
         {
-//            this.scheduleUC = this.listScheduleUC.
+//            this.listScheduleUC.LoadItem();
+        }
+
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Address item = (e.AddedItems[0] as Address);
+
+            }
         }
     }
 }
