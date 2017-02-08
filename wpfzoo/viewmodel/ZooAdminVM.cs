@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
@@ -45,10 +46,27 @@ namespace wpfzoo.viewmodel
             this.zooAdmin.btnValidateZoo.Click += BtnValidate_Click;
             this.zooAdmin.btnDelZoo.Click += BtnDel_Click;
             this.zooAdmin.btnNewZoo.Click += BtnNew_Click;
+            //this.zooadmin.btnaddress.click += btnaddress_click;
+            //this.zooadmin.btnemployee.click += btnemployee_click;
+            //this.zooadmin.btnstructure.click += btnstructure_click;
             this.zooAdmin.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
         }
 
-        
+        //private void BtnStructure_Click(object sender, RoutedEventArgs e)
+        //{
+            
+        //    throw new NotImplementedException();
+        //}
+
+        //private void BtnEmployee_Click(object sender, RoutedEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //private void BtnAddress_Click(object sender, RoutedEventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -77,10 +95,15 @@ namespace wpfzoo.viewmodel
 
         private async void BtnDel_Click(object sender, RoutedEventArgs e)
         {
-            this.zooAdmin.UCZooList.Obs.Remove(zooAdmin.ucZoo.Zoo);
-            await zooManager.Delete(zooAdmin.ucZoo.Zoo);
-            currentZoo = new Zoo();
-            this.zooAdmin.ucZoo.Zoo = currentZoo;
+            if (System.Windows.Forms.MessageBox.Show("Do you want to delete "+ this.zooAdmin.ucZoo.Zoo.Name + " Zoo?", "Delete Zoo",
+         MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+         == DialogResult.Yes)
+            {
+                this.zooAdmin.UCZooList.Obs.Remove(zooAdmin.ucZoo.Zoo);
+                await zooManager.Delete(zooAdmin.ucZoo.Zoo);
+                currentZoo = new Zoo();
+                this.zooAdmin.ucZoo.Zoo = currentZoo;
+            }
         }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
