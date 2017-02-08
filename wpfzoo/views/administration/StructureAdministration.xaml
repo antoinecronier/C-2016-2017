@@ -21,59 +21,26 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="buttonNew" Width="40" Click="buttonNew_Click">New</Button>
+        <Button x:Name="buttonNew" Margin="0,0.4,100,38.8" Grid.Row="2">New</Button>
         <UC:ListStructureUserControl x:Name="UCstructureList" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
 
         <Grid x:Name="oneInfos"  Grid.Column="0" Grid.Row="1" Visibility="Visible">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.3*"/>
-                <RowDefinition Height="0.3*"/>
-                <RowDefinition Height="0.3*"/>
-                <RowDefinition Height="0.3*"/>
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0">Nom :</Label>
-            <TextBox x:Name="StructureName" Grid.Row="0" Grid.Column="1" Text="{Binding Name,Mode=TwoWay}"/>
-
-            <Label Grid.Row="1">Surface :</Label>
-            <TextBox x:Name="StructureSurface" Grid.Row="1" Grid.Column="1" Text="{Binding Surface,Mode=TwoWay}"/>
-
-            <Label Grid.Row="2">Employee :</Label>
-            <Button x:Name="listEmployees" Grid.Row="2" Grid.Column="1" FontSize="9"  Height="17" Margin="0,0.2,0,0" VerticalAlignment="Top">La liste d'Employés</Button>
-
-            <Label Grid.Row="3">Animaux :</Label>
-            <Button x:Name="listAnimaux" Grid.Row="3" Grid.Column="1" FontSize="9" >La liste d'Animaux</Button>
-
-            <Grid Grid.Row="4" Grid.ColumnSpan="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="1" Grid.Column="0">Schedule :</Label>
-                <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Schedule.start}"/>
-                <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Schedule.end}"/>
-                <Button x:Name="toSchedule" Grid.Row="2" Grid.Column="1" FontSize="9">Naviguer vers</Button>
-            </Grid>
+            <ScrollViewer Grid.Row="0">
+                <StackPanel>
+                    <UC:StructureUserControl x:Name="ucStructure"/>
+                    <Button x:Name="btnValidate"/>
+                </StackPanel>
+            </ScrollViewer>
 
 
-            <Button x:Name="Ok" Grid.Row="6" Margin="53,23.4,57,13.6" Grid.ColumnSpan="2" Click="Ok_Click">OK</Button>
+            <Button x:Name="Ok" Grid.Row="1" Margin="100,79.6,0,-40.4">Update</Button>
         </Grid>
-        <Grid Grid.Column="0" Grid.Row="2">
-            <Label Grid.Row="0" Content="Nom :" Margin="10,14,141,33.8"/>
-            <TextBox x:Name="StructureToDeleteName" Grid.Row="0" Text="{Binding Name,Mode=TwoWay}" Margin="54,18,73,33.8"/>
-            <Button x:Name="Delete"  Click="Delete_Click" Margin="127,18,0,33.8">DELETE</Button>
-        </Grid>
+        <Button x:Name="Delete" Margin="0,40.4,0,14.8" Grid.Row="2" >DELETE</Button>
         <Grid x:Name="allInfos"  Grid.Column="0" Grid.Row="3">
 
         </Grid>

@@ -95,6 +95,7 @@
     <Compile Include="viewmodel\AddressAdminVM.cs" />
     <Compile Include="viewmodel\EmployeeAdminVM.cs" />
     <Compile Include="viewmodel\StreetNumberAdminVM.cs" />
+    <Compile Include="viewmodel\StructureAdminVM.cs" />
     <Compile Include="viewmodel\ZooAdminVM.cs" />
     <Compile Include="views\administration\AddressAdmin.xaml.cs">
       <DependentUpon>AddressAdmin.xaml</DependentUpon>

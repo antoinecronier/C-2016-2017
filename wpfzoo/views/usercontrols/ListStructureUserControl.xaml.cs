@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.database;
 using wpfzoo.entities;
 
 namespace wpfzoo.views.usercontrols
@@ -28,6 +29,7 @@ namespace wpfzoo.views.usercontrols
         #region properties
         public ListView ItemsList { get; set; }
         public ObservableCollection<Structure> Obs { get; set; }
+        public MySQLManager<Structure> mySQLManager;
         #endregion
 
 
@@ -35,6 +37,7 @@ namespace wpfzoo.views.usercontrols
         public ListStructureUserControl()
         {
             InitializeComponent();
+            mySQLManager = new MySQLManager<Structure>();
             Obs = new ObservableCollection<Structure>();
             this.itemList.ItemsSource = Obs;
             this.ItemsList = this.itemList;
