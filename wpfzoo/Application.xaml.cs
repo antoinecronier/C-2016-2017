@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using wpfzoo.entities;
 using wpfzoo.views;
 using wpfzoo.views.administration;
+using wpfzoo.views.adminstration;
 
 
 namespace wpfzoo
@@ -41,7 +42,7 @@ namespace wpfzoo
         private void btnAnimal_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            //window.Content = new AnimalAdmin();
+            window.Content = new AnimalAdmin();
 
             window.Show();
         }
@@ -73,13 +74,15 @@ namespace wpfzoo
 
             window.Show();
         }
+
         private void btnStructure_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            window.Content = new StructureAdmin();
+           //window.Content = new StructureAdmin();
 
-            window.Show();
+           window.Show();
         }
+
         private void btnZoo_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();

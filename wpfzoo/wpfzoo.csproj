@@ -91,6 +91,7 @@
     <Compile Include="entities\generator\TypeEnum.cs" />
     <Compile Include="entities\reflection\Reflectionner.cs" />
     <Compile Include="entities\json\JsonManager.cs" />
+    <Compile Include="viewmodel\AnimalAdminVM.cs" />
     <Compile Include="viewmodel\AddressAdminVM.cs" />
     <Compile Include="viewmodel\EmployeeAdminVM.cs" />
     <Compile Include="viewmodel\ZooAdminVM.cs" />
@@ -102,6 +103,9 @@
     </Compile>
     <Compile Include="views\administration\EmployeeAdmin.xaml.cs">
       <DependentUpon>EmployeeAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\administration\JobAdministration.xaml.cs">
+      <DependentUpon>StructureAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\administration\ZooAdmin.xaml.cs">
       <DependentUpon>ZooAdmin.xaml</DependentUpon>
@@ -197,20 +201,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="views\administration\JobAdministration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="views\administration\StructureAdministration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="views\administration\ZooAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\administration\JobAdmin.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\administration\Example.xaml">
 		<SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="views\administration\StructureAdministration.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\AnimalView.xaml">

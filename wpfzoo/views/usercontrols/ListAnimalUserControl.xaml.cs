@@ -64,6 +64,7 @@ namespace wpfzoo.views.usercontrols
         /// <summary>
         /// Current list for User items.
         /// </summary>
+        /// 
         public void LoadItem(List<Animal> items)
         {
             Obs.Clear();
