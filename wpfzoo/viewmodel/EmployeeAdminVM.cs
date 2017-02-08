@@ -57,16 +57,20 @@ namespace wpfzoo.viewmodel
         private async void btnDelEmployee_Click(object sender, RoutedEventArgs e)
         {
             await employeeManager.Delete(this.employeeAdmin.ucEmployee.Employee);
+            InitLUC();
+            InitUC();
         }
 
         private async void btnUpdateEmployee_Click(object sender, RoutedEventArgs e)
         {
             await employeeManager.Update(this.employeeAdmin.ucEmployee.Employee);
+            InitLUC();
         }
 
         private async void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
             await employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
+            InitLUC();
         }
     }
 }
