@@ -16,31 +16,29 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.3*"/>
-            <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="buttonNew" Margin="0,0.4,100,38.8" Grid.Row="2">New</Button>
+        <Label HorizontalAlignment="Center" >STRUCTURES</Label>
         <UC:ListStructureUserControl x:Name="UCstructureList" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
 
         <Grid x:Name="oneInfos"  Grid.Column="0" Grid.Row="1" Visibility="Visible">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <ScrollViewer Grid.Row="0" Margin="0,0,0,9.6" Grid.RowSpan="2">
-                <StackPanel>
-                    <UC:StructureUserControl x:Name="ucStructure"/>
-                    <Button x:Name="btnValidate"/>
-                </StackPanel>
-            </ScrollViewer>
-
-
-            <Button x:Name="Ok" Grid.Row="1" Margin="100,79.6,0,-40.4">Update</Button>
+            <UC:StructureUserControl x:Name="ucStructure"/>
         </Grid>
-        <Button x:Name="Delete" Margin="0,40.4,0,14.8" Grid.Row="2" >DELETE</Button>
+        <Grid  Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="buttonNew" Grid.Column="0">New</Button>
+            <Button x:Name="Ok" Grid.Column="2">Update</Button>
+            <Button x:Name="Delete" Grid.Column="4">Delete</Button>
+        </Grid>
         <Grid x:Name="allInfos"  Grid.Column="0" Grid.Row="3">
 
         </Grid>
