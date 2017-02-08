@@ -32,11 +32,11 @@ namespace wpfzoo.viewmodel
 
         private void InitActions()
         {
-/*          this.scheduleAdmin.btnDelete.Click += btnDeleteClick;
+            this.scheduleAdmin.btnDelete.Click += btnDeleteClick;
             this.scheduleAdmin.btnOk.Click += btnOkClick;
             this.scheduleAdmin.btnNew.Click += btnNewClick;
-*/        }
-        /*
+        }
+
         private void btnDeleteClick(object sender, RoutedEventArgs e)
         {
             scheduleManager.Delete(this.scheduleAdmin.scheduleUC.Schedule);
@@ -51,6 +51,5 @@ namespace wpfzoo.viewmodel
         {
             scheduleManager.Insert(this.scheduleAdmin.scheduleUC.Schedule);
         }
-        */
     }
 }
