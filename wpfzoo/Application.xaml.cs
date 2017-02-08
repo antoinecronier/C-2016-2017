@@ -34,7 +34,7 @@ namespace wpfzoo
         private void btnAddress_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            //window.Content = new AddressAdmin();
+            window.Content = new AddressAdmin();
 
             window.Show();
         }
