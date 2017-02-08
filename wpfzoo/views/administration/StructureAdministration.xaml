@@ -38,7 +38,7 @@
             </ScrollViewer>
 
 
-            <Button x:Name="Ok" Grid.Row="1" Margin="53,23.4,57,13.6" Grid.ColumnSpan="2" >OK</Button>
+            <Button x:Name="Ok" Grid.Row="1" Margin="53,23.4,57,13.6" Grid.ColumnSpan="2" Click="Ok_Click">OK</Button>
         </Grid>
         <Grid Grid.Column="0" Grid.Row="2">
             <Label Grid.Row="0" Content="Nom :" Margin="10,14,141,33.8"/>

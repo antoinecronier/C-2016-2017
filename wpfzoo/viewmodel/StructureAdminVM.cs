@@ -21,18 +21,12 @@ namespace wpfzoo.viewmodel
             this.structureAdmin = structureAdmin;
 
             InitUC();
-            InitActions();
         }
 
         private void InitUC()
         {
             currentStructure = new Structure();
             this.structureAdmin.ucStructure.Structure = currentStructure;
-        }
-
-        private void InitActions()
-        {
-            this.structureAdmin.btnValidate.Click += BtnValidate_Click;
         }
 
         private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
