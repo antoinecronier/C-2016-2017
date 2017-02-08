@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.database;
+using wpfzoo.entities;
 using wpfzoo.viewmodel;
 
 namespace wpfzoo.views.administration

@@ -282,10 +282,14 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
+<<<<<<< HEAD
+./jsonconfig/
+=======
 
 <<<<<<< HEAD
 wpfzoo/jsonconfig/
 =======
 ./jsonconfig/
 
+>>>>>>> master
 >>>>>>> master
