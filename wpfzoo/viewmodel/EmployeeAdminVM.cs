@@ -58,8 +58,8 @@ namespace wpfzoo.viewmodel
             listTxtB.Clear();
             listTxtB.Add(this.employeeAdmin.ucEmployee.txtBLastname);
             listTxtB.Add(this.employeeAdmin.ucEmployee.txtBFirstname);
-            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerFirstname);
             listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerLastname);
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerFirstname);
         }
 
         public void disableTypingDatePHiring(object sender, KeyEventArgs e)
@@ -131,13 +131,14 @@ namespace wpfzoo.viewmodel
                 await employeeManager.Delete(this.employeeAdmin.ucEmployee.Employee);
                 InitLUC();
                 InitUC();
-                clearTextBBg(listTxtB);
             }
         }
 
         public bool checkRegexTxtBName()
         {
             bool output = true;
+
+            clearTextBBg(listTxtB);
 
             for (int index = 0; index < ListName.Length; index++)
             {
@@ -146,7 +147,6 @@ namespace wpfzoo.viewmodel
                     listTxtB.ElementAt(index).Background = Brushes.Red;
                     MessageBox.Show(ListName[index] + " is not valid.");
                     output = false;
-                    break;
                 }
             }
 
@@ -167,7 +167,6 @@ namespace wpfzoo.viewmodel
             {
                 await employeeManager.Update(this.employeeAdmin.ucEmployee.Employee);
                 InitLUC();
-                clearTextBBg(listTxtB);
             }
         }
 
@@ -177,7 +176,6 @@ namespace wpfzoo.viewmodel
             {
                 await employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
                 InitLUC();
-                clearTextBBg(listTxtB);
             } 
         }
     }
