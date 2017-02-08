@@ -25,11 +25,11 @@
 
         <Label x:Name="lblAnimal" Content="Animal &#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" FontSize="15" FontWeight="Bold" AutomationProperties.Name="Animal" Background="Black" FontFamily="Wide Latin" Foreground="White" FontStyle="Italic" FontStretch="SemiCondensed" BorderThickness="0"/>
 
-        <Button x:Name="btnNew" Content="New" Grid.Row="1" Click="ClickNew"/>
-        <Button x:Name="btnOk" Content="OK" Grid.Row="4" Click="ClickOK"/>
-        <Button x:Name="btnDelete" Content="Delete" Grid.Row="3" Click="ClickDelete"/>
+        <Button x:Name="btnNew" Content="New" Grid.Row="1"/>
+        <Button x:Name="btnOk" Content="OK" Grid.Row="4"/>
+        <Button x:Name="btnDelete" Content="Delete" Grid.Row="3"/>
 
-        <UC:ListAnimalUserControl x:Name="UCAnimalList" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" Loaded="ClickAnimalList" />
+        <UC:ListAnimalUserControl x:Name="UCAnimalList" Grid.Column="1" Grid.Row="0" Grid.RowSpan="6" />
         <UC:AnimalUserControl x:Name="UCAnimal" Grid.Row="2"/>
 
     </Grid>
