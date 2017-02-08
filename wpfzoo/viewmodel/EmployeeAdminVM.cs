@@ -18,7 +18,9 @@ namespace wpfzoo.viewmodel
 {
     public class EmployeeAdminVM
     {
-        private const String REGEXNAME = "^[a-zA-Z]+$-*";
+        private const String RegexName = "^[a-zA-Z]+$-*"; //Work with method checkRegex()
+        private readonly string[] ListName = {"Last name", "First name", "Manager last name", "Manager first name" }; //Work with method checkRegexTxtBName()
+        List<TextBox> listTxtB = new List<TextBox>();
         private Employee currentEmployee;
         private EmployeeAdmin employeeAdmin;
         private MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
@@ -52,6 +54,12 @@ namespace wpfzoo.viewmodel
             {
                 this.employeeAdmin.ucEmployee.cboCGender.Items.Add(gender);
             }
+
+            listTxtB.Clear();
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBLastname);
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBFirstname);
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerFirstname);
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerLastname);
         }
 
         public void disableTypingDatePHiring(object sender, KeyEventArgs e)
@@ -123,52 +131,33 @@ namespace wpfzoo.viewmodel
                 await employeeManager.Delete(this.employeeAdmin.ucEmployee.Employee);
                 InitLUC();
                 InitUC();
+                clearTextBBg(listTxtB);
             }
         }
 
         public bool checkRegexTxtBName()
         {
-            TextBox txtBLastName = this.employeeAdmin.ucEmployee.txtBLastname;
-            TextBox txtBFirstname = this.employeeAdmin.ucEmployee.txtBFirstname;
-            TextBox txtBManagerFirstname = this.employeeAdmin.ucEmployee.txtBManagerFirstname;
-            TextBox txtBManagerLastname = this.employeeAdmin.ucEmployee.txtBManagerLastname;
+            bool output = true;
 
-            if (checkRegex(txtBLastName, REGEXNAME))
+            for (int index = 0; index < ListName.Length; index++)
             {
-                if (checkRegex(txtBFirstname, REGEXNAME))
+                if (!checkRegex(listTxtB.ElementAt(index), RegexName))
                 {
-                    if (checkRegex(txtBManagerLastname, REGEXNAME))
-                    {
-                        if (checkRegex(txtBManagerFirstname, REGEXNAME))
-                        {
-                            return true;
-                        }
-                        else
-                        {
-                            this.employeeAdmin.ucEmployee.txtBManagerFirstname.Background = Brushes.Red;
-                            MessageBox.Show("First name of manager is not valid.");
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        this.employeeAdmin.ucEmployee.txtBManagerLastname.Background = Brushes.Red;
-                        MessageBox.Show("Last name of manager is not valid.");
-                        return false;
-                    }
-                }
-                else
-                {
-                    this.employeeAdmin.ucEmployee.txtBFirstname.Background = Brushes.Red;
-                    MessageBox.Show("First name is not valid.");
-                    return false;
+                    listTxtB.ElementAt(index).Background = Brushes.Red;
+                    MessageBox.Show(ListName[index] + " is not valid.");
+                    output = false;
+                    break;
                 }
             }
-            else
+
+            return output;
+        }
+
+        public void clearTextBBg(List<TextBox> listTextBoxs)
+        {
+            for (int index = 0; index < ListName.Length; index++)
             {
-                this.employeeAdmin.ucEmployee.txtBLastname.Background = Brushes.Red;
-                MessageBox.Show("Last name is not valid.");
-                return false;
+                listTextBoxs.ElementAt(index).Background = Brushes.White;
             }
         }
 
@@ -178,6 +167,7 @@ namespace wpfzoo.viewmodel
             {
                 await employeeManager.Update(this.employeeAdmin.ucEmployee.Employee);
                 InitLUC();
+                clearTextBBg(listTxtB);
             }
         }
 
@@ -187,6 +177,7 @@ namespace wpfzoo.viewmodel
             {
                 await employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
                 InitLUC();
+                clearTextBBg(listTxtB);
             } 
         }
     }
