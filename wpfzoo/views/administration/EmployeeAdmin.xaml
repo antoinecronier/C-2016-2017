@@ -3,63 +3,16 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:uc="clr-namespace:wpfzoo.views.usercontrols"
       xmlns:local="clr-namespace:wpfzoo.views.administration"
-      xmlns:UC="clr-na mespace:wpfzoo.views.usercontrols"
-      xmlns:LUC="clr-namespace:wpfzoo.views.usercontrols"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EmployeeAdmin">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="5*"/>
-        </Grid.RowDefinitions>
-        
-        <LUC:ListEmployeeUserControl x:Name="LUCListEmployee" Grid.Column="2" Grid.RowSpan="11" Loaded="LUCListEmployee_OnLoaded" />
-        
-        <Label x:Name="lblLastname" Content="Lastname" Grid.Column="0" Grid.Row="0" />
-        <TextBox x:Name="txtBLastname"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" />
-        
-        <Label x:Name="lblFirstname" Content="Firstname" Grid.Column="0" Grid.Row="1" />
-        <TextBox x:Name="txtBFirstname"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" />
-        
-        <Label x:Name="lblBirth" Content="Birth" Grid.Column="0" Grid.Row="2" />
-        <TextBox x:Name="txtBBirth"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="2" />
-        
-        <Label x:Name="lblHiring" Content="Hiring" Grid.Column="0" Grid.Row="3" />
-        <TextBox x:Name="txtBHiring"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="3" />
-        
-        <Label x:Name="lblJob" Content="List Job" Grid.Column="0" Grid.Row="4" />
-        <Button x:Name="btnListJob" Content="Details" HorizontalAlignment="center"  VerticalAlignment="center" Grid.Column="1" Grid.Row="4" />
-        
-        <Label x:Name="lblAddress" Content="Address" Grid.Column="0" Grid.Row="5" />
-        <TextBox x:Name="txtBAddress"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="5" />
-        
-        <Label x:Name="lblGender" Content="Gender" Grid.Column="0" Grid.Row="6" />
-        <TextBox x:Name="txtBGender"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="6" />
-        
-        <Label x:Name="lblManager" Content="Manager" Grid.Column="0" Grid.Row="7" />
-        <TextBox x:Name="txtBManager"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="7" />
-        
-        <Label x:Name="lblPlanning" Content="Planning" Grid.Column="0" Grid.Row="8" />
-        <Button x:Name="btnListPlanning" Content="Details" HorizontalAlignment="center"  VerticalAlignment="center" Grid.Column="1" Grid.Row="8" />
-
-        <Button x:Name="btnAdd" Content="Add" HorizontalAlignment="center"  VerticalAlignment="center" Grid.Column="0" Grid.Row="9" />
-        <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="center"  VerticalAlignment="center" Grid.Column="1" Grid.Row="9" />
-    </Grid>
+    <ScrollViewer>
+        <StackPanel>
+            <uc:EmployeeUserControl x:Name="ucEmployee"/>
+            <Button x:Name="btnValidate"/>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

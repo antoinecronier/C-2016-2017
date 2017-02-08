@@ -30,6 +30,8 @@ namespace wpfzoo.views.usercontrols
             set { animal = value; }
         }
 
+        public object Obs { get; internal set; }
+
         public AnimalUserControl()
         {
             InitializeComponent();
