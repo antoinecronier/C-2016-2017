@@ -98,7 +98,9 @@
     <Compile Include="viewmodel\AnimalAdminVM.cs" />
     <Compile Include="viewmodel\AddressAdminVM.cs" />
     <Compile Include="viewmodel\EmployeeAdminVM.cs" />
+    <Compile Include="viewmodel\JobAdminVM.cs" />
     <Compile Include="viewmodel\StreetNumberAdminVM.cs" />
+    <Compile Include="viewmodel\StructureAdminVM.cs" />
     <Compile Include="viewmodel\ZooAdminVM.cs" />
     <Compile Include="views\administration\AddressAdmin.xaml.cs">
       <DependentUpon>AddressAdmin.xaml</DependentUpon>
@@ -108,9 +110,6 @@
     </Compile>
     <Compile Include="views\administration\EmployeeAdmin.xaml.cs">
       <DependentUpon>EmployeeAdmin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="views\administration\JobAdministration.xaml.cs">
-      <DependentUpon>StructureAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\administration\ZooAdmin.xaml.cs">
       <DependentUpon>ZooAdmin.xaml</DependentUpon>
