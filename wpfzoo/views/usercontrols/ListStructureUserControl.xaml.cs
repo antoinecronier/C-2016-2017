@@ -24,20 +24,22 @@ namespace wpfzoo.views.usercontrols
     {
         #region attributs
         #endregion
-
+        
         #region properties
         public ListView ItemsList { get; set; }
         public ObservableCollection<Structure> Obs { get; set; }
         #endregion
 
+
         #region constructor
         public ListStructureUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Obs = new ObservableCollection<Structure>();
             this.itemList.ItemsSource = Obs;
             this.ItemsList = this.itemList;
         }
+
         #endregion
 
         #region methods
@@ -47,14 +49,25 @@ namespace wpfzoo.views.usercontrols
         public void LoadItem(List<Structure> items)
         {
             Obs.Clear();
-            foreach (var item in items)
+            foreach (Structure structure in items)
             {
-                Obs.Add(item);
+                    Obs.Add(structure);
             }
         }
+
+        public void AddItem(Structure structure)
+        {
+            Obs.Add(structure);
+        }
         #endregion
+
+        private void itemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+    }
 
         #region events
         #endregion
     }
-}
+

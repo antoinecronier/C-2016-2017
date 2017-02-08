@@ -63,7 +63,7 @@ namespace wpfzoo.database
                 {
                     JobTable.Add(generatorJob.GenerateItem());
                 }
-
+                
                 EntityGenerator<Schedule> generatorSchedule = new EntityGenerator<Schedule>();
                 for (int i = 0; i < 10; i++)
                 {
