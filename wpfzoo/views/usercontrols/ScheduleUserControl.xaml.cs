@@ -19,14 +19,17 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Logique d'interaction pour ScheduleUserControl.xaml
     /// </summary>
-    public partial class ScheduleUserControl : UserControl
+    public partial class ScheduleUserControl : UserControlBase
     {
         private Schedule schedule;
 
         public Schedule Schedule
         {
             get { return schedule; }
-            set { schedule = value; }
+            set {
+                schedule = value;
+                base.OnPropertyChanged("Schedule");
+            }
         }
 
         public ScheduleUserControl()
