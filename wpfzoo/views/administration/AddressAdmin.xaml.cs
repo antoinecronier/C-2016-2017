@@ -12,29 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using wpfzoo.entities;
-using wpfzoo.entities.enums;
+using wpfzoo.viewmodel;
 
-namespace wpfzoo.views.usercontrols
+namespace wpfzoo.views.administration
 {
-    public partial class AnimalUserControl : UserControlBase
+    /// <summary>
+    /// Logique d'interaction pour AddressAdmin.xaml
+    /// </summary>
+    public partial class AddressAdmin : Page
     {
-
-        private Animal animal;
-
-        public Animal Animal
-        {
-            get { return animal; }
-            set {
-                animal = value;
-                base.OnPropertyChanged("Animal");
-            }
-        }
-
-        public AnimalUserControl()
+        public AddressAdmin()
         {
             InitializeComponent();
-            base.DataContext = this;
+            this.DataContext = new AddressAdminVM(this);
         }
     }
 }

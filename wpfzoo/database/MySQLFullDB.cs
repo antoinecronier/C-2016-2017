@@ -45,16 +45,17 @@ namespace wpfzoo.database
                     StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
                 }
 
-                EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
-                for (int i = 0; i < 10; i++)
-                {
-                    AnimalTable.Add(generatorAnimal.GenerateItem());
-                }
-
                 EntityGenerator<Employee> generatorEmployee = new EntityGenerator<Employee>();
                 for (int i = 0; i < 10; i++)
                 {
                     EmployeeTable.Add(generatorEmployee.GenerateItem());
+
+                }
+
+                EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
+                for (int i = 0; i < 10; i++)
+                {
+                    AnimalTable.Add(generatorAnimal.GenerateItem());
                 }
 
                 EntityGenerator<Job> generatorJob = new EntityGenerator<Job>();
@@ -68,6 +69,7 @@ namespace wpfzoo.database
                 {
                     ScheduleTable.Add(generatorSchedule.GenerateItem());
                 }
+
 
                 EntityGenerator<Structure> generatorStructure = new EntityGenerator<Structure>();
                 for (int i = 0; i < 10; i++)

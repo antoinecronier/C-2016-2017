@@ -12,8 +12,14 @@ namespace wpfzoo.database
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class MySQLManager<TEntity> : DbContext where TEntity : class
     {
+<<<<<<< HEAD
         public MySQLManager()
            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
+=======
+
+        public MySQLManager() 
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
+>>>>>>> 08354390412fe1ce8853681aa2af91b9e442c7d4
         {
             MySQLFullDB initDBIfNotExist = new MySQLFullDB();
         }
