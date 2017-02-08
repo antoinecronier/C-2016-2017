@@ -9,10 +9,16 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="AddressAdmin">
 
-    <ScrollViewer>
-        <StackPanel>
-            <uc:AddressUserControl x:Name="ucAddress"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column="0">
+            <uc:AddressUserControl x:Name="UCAddress"/>
             <Button x:Name="btnValidate" Content="Save" Height="20"/>
         </StackPanel>
-    </ScrollViewer>
+        <uc:ListAddressUserControl x:Name="UCAddressList" Grid.Column="1"/>
+    </Grid>
 </Page>
