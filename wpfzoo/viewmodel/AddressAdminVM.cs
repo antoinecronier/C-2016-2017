@@ -32,8 +32,7 @@ namespace wpfzoo.viewmodel
 
         private void InitUC()
         {
-            currentAddress = new Address();
-            this.addressAdmin.UCAddress.Address = currentAddress;
+            this.ResetAddress();
 
         }
 
@@ -72,8 +71,25 @@ namespace wpfzoo.viewmodel
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
-            currentAddress = new Address();
-            this.addressAdmin.UCAddress.Address = currentAddress;
+            throw new NotImplementedException();
+
+            currentAddress = this.addressAdmin.UCAddress.Address;
+
+            // Check if we have filled props
+            if (currentAddress.GetType().GetProperties().Any(value => value != null ))
+            {
+                MessageBoxResult mbr = MessageBox.Show("You have filled some data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+
+                if (mbr == MessageBoxResult.OK)
+                {
+                    this.ResetAddress();
+                }
+            }
+            else
+            {
+                this.ResetAddress();
+            }
+            
         }
 
         private async void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -92,10 +108,15 @@ namespace wpfzoo.viewmodel
                 {
                     await addressManager.Delete(currentAddress);
                     this.addressAdmin.UCAddressList.RemoveItem(currentAddress);
-                    currentAddress = new Address();
-                    this.addressAdmin.UCAddress.Address = currentAddress;
+                    this.ResetAddress();
                 }          
             }
+        }
+
+        private void ResetAddress()
+        {
+            currentAddress = new Address();
+            this.addressAdmin.UCAddress.Address = currentAddress;
         }
     }
 }
