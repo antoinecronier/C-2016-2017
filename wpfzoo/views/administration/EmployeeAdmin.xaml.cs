@@ -26,10 +26,11 @@ namespace wpfzoo.views.administration
         public EmployeeAdmin()
         {
             InitializeComponent();
-            this.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-            InitLists();
+            this.DataContext = new EmployeeAdminVM(this);
+            /*this.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+            InitLists();*/
         }
-
+        /*
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
@@ -58,5 +59,6 @@ namespace wpfzoo.views.administration
         {
             throw new NotImplementedException();
         }
+        */
     }
 }
