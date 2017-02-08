@@ -34,7 +34,10 @@ namespace wpfzoo.database
 
         public async Task<IEnumerable<TEntity>> Insert(IEnumerable<TEntity> items)
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
         {
             foreach (var item in items)
             {
@@ -45,6 +48,7 @@ namespace wpfzoo.database
         }
 
         public async Task<TEntity> Update(TEntity item)
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
         {
             await Task.Factory.StartNew(() =>
@@ -163,6 +167,57 @@ namespace wpfzoo.database
             return await this.SaveChangesAsync();
         }
 
+=======
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                this.Entry<TEntity>(item).State = EntityState.Modified;
+            });
+            await this.SaveChangesAsync();
+            return item;
+        }
+
+        public async Task<IEnumerable<TEntity>> Update(IEnumerable<TEntity> items)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                foreach (var item in items)
+                {
+                    this.Entry<TEntity>(item).State = EntityState.Modified;
+                }
+            });
+            await this.SaveChangesAsync();
+            return items;
+        }
+
+        public async Task<TEntity> Get(Int32 id)
+        {
+            return await this.DbSetT.FindAsync(id) as TEntity;
+        }
+
+        public async Task<IEnumerable<TEntity>> Get()
+        {
+            DbSet<TEntity> temp = default(DbSet<TEntity>);
+            List<TEntity> result = new List<TEntity>();
+            await Task.Factory.StartNew(() =>
+            {
+                temp = base.Set<TEntity>();
+            });
+            result.AddRange(temp);
+            return result;
+        }
+
+        public async Task<Int32> Delete(TEntity item)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                this.DbSetT.Attach(item);
+                this.DbSetT.Remove(item);
+            });
+            return await this.SaveChangesAsync();
+        }
+
+>>>>>>> Stashed changes
         public async Task<Int32> Delete(IEnumerable<TEntity> items)
         {
             await Task.Factory.StartNew(() =>

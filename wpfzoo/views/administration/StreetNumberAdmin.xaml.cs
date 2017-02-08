@@ -25,6 +25,7 @@ namespace wpfzoo.views.administration
     /// </summary>
     public partial class StreetNumberAdmin : Page
     {
+<<<<<<< Updated upstream
 
 
         //ObservableCollection<StreetNumber> streetNumberList = new ObservableCollection<StreetNumber>();
@@ -38,5 +39,14 @@ namespace wpfzoo.views.administration
         }
 
 
+=======
+        public StreetNumberAdmin()
+        {
+            InitializeComponent();
+            this.DataContext = new StreetNumberAdminVM(this);
+        }
+
+
+>>>>>>> Stashed changes
     }
 }

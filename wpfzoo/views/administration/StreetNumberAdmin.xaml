@@ -31,10 +31,17 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
+<<<<<<< Updated upstream
             <Button Name="New" Content="New" Grid.Column="1" Grid.Row="0" Click="New_Click"/>
             <UC:StreetNumberUserControl  x:Name="ucStreetNumber" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0,27,0,5" />
             <Button Name="Delete" Content="Delete" Grid.Column="1" Grid.Row="3" Click="Delete_Click"/>
             <Button Name="ok" Content="ok" Grid.Column="1" Grid.Row="5" Click="ok_Click"/>
+=======
+            <Button Name="New" Content="New" Grid.Column="1" Grid.Row="0"/>
+            <UC:StreetNumberUserControl  x:Name="ucStreetNumber" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0,27,0,5" />
+            <Button Name="Delete" Content="Delete" Grid.Column="1" Grid.Row="3"/>
+            <Button Name="ok" Content="ok" Grid.Column="1" Grid.Row="5" />
+>>>>>>> Stashed changes
         </Grid>
     </Grid>
 </Page>
