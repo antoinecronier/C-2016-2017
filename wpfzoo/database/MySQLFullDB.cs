@@ -24,7 +24,8 @@ namespace wpfzoo.database
         public DbSet<Zoo> ZooTable { get; set; }
 
         public MySQLFullDB()
-            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"S:\IMIE\DL_2_(2016-2017)\C#\C-2016-2017\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
+
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
         {
             InitLocalMySQL();
         }

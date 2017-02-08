@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using wpfzoo.views.administration;
 
 namespace wpfzoo
 {
@@ -13,5 +14,8 @@ namespace wpfzoo
     /// </summary>
     public partial class App : System.Windows.Application
     {
+        public App()
+        {
+        }
     }
 }
