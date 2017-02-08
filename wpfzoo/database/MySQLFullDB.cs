@@ -25,7 +25,8 @@ namespace wpfzoo.database
 
         public MySQLFullDB()
 
-            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
+
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
         {
             InitLocalMySQL();
         }
@@ -63,7 +64,7 @@ namespace wpfzoo.database
                 {
                     JobTable.Add(generatorJob.GenerateItem());
                 }
-
+                
                 EntityGenerator<Schedule> generatorSchedule = new EntityGenerator<Schedule>();
                 for (int i = 0; i < 10; i++)
                 {
@@ -82,6 +83,7 @@ namespace wpfzoo.database
                 {
                     ZooTable.Add(generatorZoo.GenerateItem());
                 }
+
                 this.SaveChangesAsync();
 
 
