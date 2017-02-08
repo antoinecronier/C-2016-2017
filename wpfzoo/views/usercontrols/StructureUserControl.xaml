@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="wpfzoo.views.usercontrols.StructureUserControl"
+﻿<local:UserControlBase x:Class="wpfzoo.views.usercontrols.StructureUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -31,6 +31,6 @@
         
         <LUC:AnimalUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" />
 
-        <UC:ScheduleUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" />
+        <UC:ScheduleUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" />
     </Grid>
-</UserControl>
+</local:UserControlBase>

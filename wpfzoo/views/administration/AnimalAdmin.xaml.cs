@@ -31,20 +31,20 @@ namespace wpfzoo.views.adminstration
             InitializeComponent();
             InitLists();
             LinkItem();
-            AsyncExemple();
+            //AsyncExemple();
         }
 
-        private void AsyncExemple()
+       /* private void AsyncExemple()
         {
             Task.Factory.StartNew(() =>
             {
                 EntityGenerator<Animal> generator = new EntityGenerator<Animal>();
                 while (true)
                 {
-                    this.UCAnimal.Obs.Add(generator.GenerateItem());
+                  //  this.UCAnimal.Obs.Add(generator.GenerateItem());
                 }
             });
-        } 
+        }*/
 
         private async void InitLists()
         {

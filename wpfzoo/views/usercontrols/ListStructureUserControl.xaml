@@ -9,9 +9,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+
         <ListView Name="itemList"
+
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ScrollViewer.VerticalScrollBarVisibility="Auto">
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectionChanged="itemList_SelectionChanged">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
@@ -31,18 +34,18 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-
                         <Label x:Name="lblName" Grid.Column="0" Grid.Row="0"/>
-                        <TextBlock x:Name="txtBName" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" Grid.Column="1" Grid.Row="0"/>
+                        <TextBox x:Name="txtName" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Text="{Binding Name, Mode=TwoWay}"/>
 
                         <Label x:Name="lblSurface" Grid.Column="0" Grid.Row="1"/>
-                        <TextBlock x:Name="txtBSurface" TextWrapping="Wrap" Text="{Binding Surface, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"/>
+                        <TextBox x:Name="txtSurface" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Text="{Binding Id,Mode=TwoWay}"/>
 
-                        <LUC:EmployeeUserControl x:Name="listEmployeeUC" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" />
+                        <LUC:EmployeeUserControl x:Name="listEmployeeUC" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Visibility="Collapsed"/>
 
-                        <LUC:AnimalUserControl x:Name="listAnimalUC" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" />
+                        <LUC:AnimalUserControl x:Name="listAnimalUC" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Visibility="Collapsed" />
 
-                        <UC:ScheduleUserControl x:Name="scheduleUC" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" />
+                        <UC:ScheduleUserControl x:Name="scheduleUC" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Visibility="Collapsed" />
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -1,3 +1,5 @@
+
+
 #Custom ignores
 jsonconfig/
 
@@ -14,6 +16,8 @@ jsonconfig/
 *.userosscache
 *.sln.docstates
 JsonConfig/MysqlConfig.json
+wpfzoo/database/MySQLManager.cs
+wpfzoo/database/MySQLFullDB.cs
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -278,10 +282,14 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
+<<<<<<< HEAD
+./jsonconfig/
+=======
 
 <<<<<<< HEAD
 wpfzoo/jsonconfig/
 =======
 ./jsonconfig/
 
+>>>>>>> master
 >>>>>>> master

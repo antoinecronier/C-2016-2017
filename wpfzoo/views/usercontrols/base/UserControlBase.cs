@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
-namespace wpfzoo.entities.bases
+namespace wpfzoo.views.usercontrols
 {
-    public class BaseEntity : INotifyPropertyChanged
+    public class UserControlBase : UserControl, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -16,6 +17,7 @@ namespace wpfzoo.entities.bases
             PropertyChangedEventHandler handler = PropertyChanged;
 
             if (handler != null)
+
             {
                 handler(this, new PropertyChangedEventArgs(name));
             }

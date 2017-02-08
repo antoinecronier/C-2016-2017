@@ -19,20 +19,23 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Logique d'interaction pour ZooUserControl.xaml
     /// </summary>
-    public partial class ZooUserControl : UserControl
+    public partial class ZooUserControl : UserControlBase
     {
         private Zoo zoo;
 
         public Zoo Zoo
         {
             get { return zoo; }
-            set { zoo = value; }
+            set {
+                zoo = value;
+                base.OnPropertyChanged("Zoo");
+            }
         }
 
         public ZooUserControl()
         {
             InitializeComponent();
-            this.DataContext = this;
+            base.DataContext = this;
             //this.ListAddresseUC.Addresse = Zoo.Address;
             //this.ListEmployeeUC.Employee = Zoo.Employee;
             //this.ListStructureUC.Structure = Zoo.Structures;

@@ -12,21 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using wpfzoo.database;
-using wpfzoo.entities;
 using wpfzoo.viewmodel;
 
 namespace wpfzoo.views.administration
 {
     /// <summary>
-    /// Logique d'interaction pour EmployeeAdmin.xaml
+    /// Logique d'interaction pour AddressAdmin.xaml
     /// </summary>
-    public partial class EmployeeAdmin : Page
+    public partial class AddressAdmin : Page
     {
-        public EmployeeAdmin()
+        public AddressAdmin()
         {
             InitializeComponent();
-            this.DataContext = new EmployeeAdminVM(this);
+            this.DataContext = new AddressAdminVM(this);
         }
     }
 }
