@@ -64,13 +64,17 @@ namespace wpfzoo.views.administration
         private void btnAddZoo_Click(object sender, RoutedEventArgs e)
         {
             //tester si id alors update si non insert...
-            if (true)
-            {
-
-            }
             MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
-            Task<Zoo> tZoo = zooManager.Update(ucZoo.Zoo);
-            Zoo zoo = (Zoo) tZoo.Result;
+            if (zooManager.Get(ucZoo.Zoo.Id))
+            {
+                Task<Zoo> tZoo = zooManager.Update(ucZoo.Zoo);
+                Zoo zoo = (Zoo)tZoo.Result;
+            }
+            else
+            {
+                Task<Zoo> tZoo = zooManager.Insert(ucZoo.Zoo);
+                Zoo zoo = (Zoo)tZoo.Result;
+            }
         }
 
         private void btnDelZoo_Click(object sender, RoutedEventArgs e)
