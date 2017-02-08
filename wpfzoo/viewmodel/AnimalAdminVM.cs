@@ -69,6 +69,7 @@ namespace wpfzoo.viewmodel
                 await animalManager.Delete(this.animalAdmin.UCAnimal.Animal);
                 this.animalAdmin.UCAnimal.Animal = new Animal();
                 InitLists();
+                MessageBox.Show("You have deleted a animal");
             }
         }
 
@@ -77,12 +78,12 @@ namespace wpfzoo.viewmodel
             if (this.animalAdmin.UCAnimal.Animal.Id != 0)
             {
                 await animalManager.Update(this.animalAdmin.UCAnimal.Animal);
-
+                MessageBox.Show("You have update a animal");
             }
             else
             {
                 await animalManager.Insert(this.animalAdmin.UCAnimal.Animal);
-
+                MessageBox.Show("You have create a new animal");
             }
             InitLists();
         }

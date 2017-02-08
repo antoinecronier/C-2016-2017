@@ -53,8 +53,8 @@ namespace wpfzoo.views.usercontrols
         {
             if (ItemsList.SelectedIndex > -1)
             {
-                var address = new Animal();
-                address = (Animal)ItemsList.SelectedItem;
+                var animal = new Animal();
+                animal = (Animal)ItemsList.SelectedItem;
                 MessageBox.Show("You are in edit for Name:" + Name, "Animal", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
