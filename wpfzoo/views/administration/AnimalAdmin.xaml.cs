@@ -29,28 +29,24 @@ namespace wpfzoo.views.adminstration
         public AnimalAdmin()
         {
             InitializeComponent();
+            this.UCAnimal.Animal = new Animal();
+            this.UCAnimalList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             InitLists();
-            LinkItem();
-            AsyncExemple();
         }
 
-        private void AsyncExemple()
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Task.Factory.StartNew(() =>
+            if (e.AddedItems.Count > 0)
             {
-                EntityGenerator<Animal> generator = new EntityGenerator<Animal>();
-                while (true)
-                {
-                    this.UCAnimalList.Obs.Add(generator.GenerateItem());
-                }
-            });
-        } 
+                Animal item = (e.AddedItems[0] as Animal);
+                this.UCAnimal.Animal = item;
+            }
+        }
 
         private async void InitLists()
         {
             MySQLManager<Animal> listAnimalManager = new MySQLManager<Animal>();
-            List<Animal> l = (await listAnimalManager.Get()).ToList();
-            this.UCAnimalList.LoadItem(l);
+            this.UCAnimalList.LoadItem((await listAnimalManager.Get()).ToList());
         }
 
         private async void LinkItem()
@@ -61,7 +57,7 @@ namespace wpfzoo.views.adminstration
 
         private void ClickNew(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void ClickDelete(object sender, RoutedEventArgs e)
@@ -74,7 +70,7 @@ namespace wpfzoo.views.adminstration
         private void ClickOK(object sender, RoutedEventArgs e)
         {
             MySQLManager<Animal> animalManager = new MySQLManager<Animal>();
-            this.UCAnimalList.Obs.Add(UCAnimalList.Animal);
+            Task<Animal> tAnimal = animalManager.Insert(UCAnimal.Animal);
         }
 
         private void ClickAnimalList(object sender, SelectionChangedEventArgs e)

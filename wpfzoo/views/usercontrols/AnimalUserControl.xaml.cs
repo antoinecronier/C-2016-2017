@@ -28,7 +28,10 @@ namespace wpfzoo.views.usercontrols
         public Animal Animal
         {
             get { return animal; }
-            set { animal = value; }
+            set {
+                animal = value;
+                this.OnPropertyChanged("Animal");
+                  }
         }
 
         public object Obs { get; internal set; }
