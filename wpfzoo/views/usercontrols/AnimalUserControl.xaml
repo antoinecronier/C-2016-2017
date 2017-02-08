@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="wpfzoo.views.usercontrols.AnimalUserControl"
+﻿<local:UserControlBase x:Class="wpfzoo.views.usercontrols.AnimalUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -39,4 +39,4 @@
         <TextBox x:Name="txtBIsDead" Text="{Binding Animal.IsDead, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="5"/>
 
     </Grid>
-</UserControl>
+</local:UserControlBase>

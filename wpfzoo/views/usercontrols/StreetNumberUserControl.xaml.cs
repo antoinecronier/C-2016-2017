@@ -20,14 +20,17 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Logique d'interaction pour StreetNumberUserControl.xaml
     /// </summary>
-    public partial class StreetNumberUserControl : UserControl
+    public partial class StreetNumberUserControl : UserControlBase
     {
         private StreetNumber streetNumber;
 
         public StreetNumber StreetNumber
         {
             get { return streetNumber; }
-            set { streetNumber = value; }
+            set {
+                streetNumber = value;
+                base.OnPropertyChanged("StreetNumber");
+            }
         }
 
         public StreetNumberUserControl()
