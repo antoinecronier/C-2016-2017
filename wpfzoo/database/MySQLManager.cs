@@ -12,9 +12,9 @@ namespace wpfzoo.database
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class MySQLManager<TEntity> : DbContext where TEntity : class
     {
-
-        public MySQLManager() 
+        public MySQLManager()
             : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
+
         {
             MySQLFullDB initDBIfNotExist = new MySQLFullDB();
         }
@@ -99,9 +99,11 @@ namespace wpfzoo.database
             return res;
         }
 
-        /*public async Task<IEnumerable<TEntity>> CustomQuery(Criteria criteria)
-        {
-            return await this.DbSetT.SqlQuery(criteria.MySQLCompute()).ToListAsync();
-        }*/
     }
 }
+
+/*public async Task<IEnumerable<TEntity>> CustomQuery(Criteria criteria)
+{
+    return await this.DbSetT.SqlQuery(criteria.MySQLCompute()).ToListAsync();
+}*/
+
