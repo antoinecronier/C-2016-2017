@@ -23,7 +23,7 @@
             <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
 
-        <Label x:Name="lblAnimal" Content="Animal &#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" FontSize="25" FontWeight="Bold" AutomationProperties.Name="Animal" Background="Black" FontFamily="Wide Latin" Foreground="White" FontStyle="Italic" FontStretch="SemiCondensed" BorderThickness="0"/>
+        <Label x:Name="lblAnimal" Content="Animal &#xD;&#xA;" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" FontSize="15" FontWeight="Bold" AutomationProperties.Name="Animal" Background="Black" FontFamily="Wide Latin" Foreground="White" FontStyle="Italic" FontStretch="SemiCondensed" BorderThickness="0"/>
 
         <Button x:Name="btnNew" Content="New" Grid.Row="1" Click="ClickNew"/>
         <Button x:Name="btnOk" Content="OK" Grid.Row="4" Click="ClickOK"/>

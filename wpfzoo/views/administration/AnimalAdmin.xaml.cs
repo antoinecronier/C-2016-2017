@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfzoo.database;
 using wpfzoo.entities;
+using wpfzoo.views.usercontrols;
 
 namespace wpfzoo.views.adminstration
 {
@@ -37,10 +38,10 @@ namespace wpfzoo.views.adminstration
         {
             Task.Factory.StartNew(() =>
             {
-                EntityGenerator<Address> generator = new EntityGenerator<Address>();
+                EntityGenerator<Animal> generator = new EntityGenerator<Animal>();
                 while (true)
                 {
-                    this.UCAnimal.Add(generator.GenerateItem());
+                    this.UCAnimal.Obs.Add(generator.GenerateItem());
                 }
             });
         } 
@@ -72,7 +73,8 @@ namespace wpfzoo.views.adminstration
 
         private void ClickOK(object sender, RoutedEventArgs e)
         {
-        
+            MySQLManager<Animal> animalManager = new MySQLManager<Animal>();
+            this.UCAnimalList.Obs.Add(UCAnimalList.Animal);
         }
 
         private void ClickAnimalList(object sender, SelectionChangedEventArgs e)
