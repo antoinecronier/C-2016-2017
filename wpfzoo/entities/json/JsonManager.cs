@@ -7,12 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-<<<<<<< HEAD:wpfzoo/json/JsonManager.cs
-namespace wpfzoo.entities.json
-=======
-
 namespace wpfzoo.json
->>>>>>> master:wpfzoo/entities/json/JsonManager.cs
 {
     public class JsonManager
     {

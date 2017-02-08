@@ -42,16 +42,6 @@ namespace wpfzoo.viewmodel
             this.streetNumberAdmin.ucStreetNumberList.itemList.SelectionChanged += ItemsList_SelectionChanged;
         }
 
-        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                this.ucStreetNumber.StreetNumber = (e.AddedItems[0] as StreetNumber);
-                this.ucStreetNumber = item;
-            }
-
-        }
-
         private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             await streetNumberManager.Insert(this.streetNumberAdmin.ucStreetNumber.StreetNumber);
@@ -74,7 +64,6 @@ namespace wpfzoo.viewmodel
             {
                 this.streetNumberAdmin.ucStreetNumber.StreetNumber = (e.AddedItems[0] as StreetNumber);
             }
-
         }
 
         private async void InitLists()
