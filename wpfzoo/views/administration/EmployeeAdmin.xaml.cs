@@ -12,30 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using wpfzoo.entities;
-using wpfzoo.entities.enums;
+using wpfzoo.viewmodel;
 
-namespace wpfzoo.views.usercontrols
+namespace wpfzoo.views.administration
 {
     /// <summary>
-    /// Logique d'interaction pour AnimalUserControl.xaml
+    /// Logique d'interaction pour EmployeeAdmin.xaml
     /// </summary>
-    public partial class AnimalUserControl : UserControl
+    public partial class EmployeeAdmin : Page
     {
-        private Animal animal;
-
-        public Animal Animal
-        {
-            get { return animal; }
-            set { animal = value; }
-        }
-
-        public object Obs { get; internal set; }
-
-        public AnimalUserControl()
+        public EmployeeAdmin()
         {
             InitializeComponent();
-            this.DataContext = this;
+            this.DataContext = new EmployeeAdminVM(this);
         }
     }
 }

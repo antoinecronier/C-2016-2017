@@ -90,7 +90,11 @@
     <Compile Include="entities\generator\EntityGenerator.cs" />
     <Compile Include="entities\generator\TypeEnum.cs" />
     <Compile Include="entities\reflection\Reflectionner.cs" />
-    <Compile Include="json\JsonManager.cs" />
+    <Compile Include="entities\json\JsonManager.cs" />
+    <Compile Include="viewmodel\EmployeeAdminVM.cs" />
+    <Compile Include="views\administration\EmployeeAdmin.xaml.cs">
+      <DependentUpon>EmployeeAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\administration\ZooAdmin.xaml.cs">
       <DependentUpon>ZooAdmin.xaml</DependentUpon>
     </Compile>
@@ -169,6 +173,10 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="views\administration\EmployeeAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="views\administration\ZooAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
