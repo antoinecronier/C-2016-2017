@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfzoo.database;
 using wpfzoo.entities;
+using wpfzoo.viewmodel;
 
 namespace wpfzoo.views.administration
 {
@@ -29,6 +30,8 @@ namespace wpfzoo.views.administration
         public ScheduleAdmin()
         {
             InitializeComponent();
+//            this.DataContext = new ScheduleAdminVM(this);
+            this.scheduleUC.Schedule = new Schedule();
             this.listScheduleUC.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             InitLists();
         }
@@ -40,7 +43,6 @@ namespace wpfzoo.views.administration
 
         private void btnDeleteClick(object sender, RoutedEventArgs e)
         {
-            this.listScheduleUC.Obs.Remove(scheduleUC.Schedule);
             scheduleManager.Delete(this.scheduleUC.Schedule);
         }
 
@@ -54,16 +56,12 @@ namespace wpfzoo.views.administration
             scheduleManager.Insert(this.scheduleUC.Schedule);
         }
 
-        private void listScheduleUC_Loaded(object sender, SelectedCellsChangedEventArgs e)
-        {
-//            this.scheduleUC = this.listScheduleUC.
-        }
-
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
             {
                 Schedule item = (e.AddedItems[0] as Schedule);
+                this.scheduleUC.Schedule = item;
 
             }
         }
