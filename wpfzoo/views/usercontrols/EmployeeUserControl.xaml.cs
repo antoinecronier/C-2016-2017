@@ -28,7 +28,7 @@ namespace wpfzoo.views.usercontrols
             get { return employee; }
             set {
                 employee = value;
-                base.OnPropertyChanged("Address");
+                base.OnPropertyChanged("Employee");
             }
         }
 
