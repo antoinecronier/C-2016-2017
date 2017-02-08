@@ -24,6 +24,8 @@ namespace wpfzoo.views.administration
     public partial class ScheduleAdmin : Page
     {
         ObservableCollection<Schedule> scheduleList = new ObservableCollection<Schedule>();
+        MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
+
         public ScheduleAdmin()
         {
             InitializeComponent();
@@ -33,39 +35,35 @@ namespace wpfzoo.views.administration
 
         private async void InitLists()
         {
-            MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
             this.listScheduleUC.LoadItem((await scheduleManager.Get()).ToList());
         }
 
         private void btnDeleteClick(object sender, RoutedEventArgs e)
         {
-            MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
             this.listScheduleUC.Obs.Remove(scheduleUC.Schedule);
             scheduleManager.Delete(this.scheduleUC.Schedule);
         }
 
         private void btnOkClick(object sender, RoutedEventArgs e)
         {
-            MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
             scheduleManager.Update(this.scheduleUC.Schedule);
         }
 
         private void btnNewClick(object sender, RoutedEventArgs e)
         {
-            MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
             scheduleManager.Insert(this.scheduleUC.Schedule);
         }
 
         private void listScheduleUC_Loaded(object sender, SelectedCellsChangedEventArgs e)
         {
-//            this.listScheduleUC.LoadItem();
+//            this.scheduleUC = this.listScheduleUC.
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
             {
-                Address item = (e.AddedItems[0] as Address);
+                Schedule item = (e.AddedItems[0] as Schedule);
 
             }
         }
