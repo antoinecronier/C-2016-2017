@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfzoo.database;
 using wpfzoo.entities;
+using wpfzoo.viewmodel;
 
 namespace wpfzoo.views.administration
 {
@@ -23,67 +24,10 @@ namespace wpfzoo.views.administration
     /// </summary>
     public partial class ZooAdmin : Page
     {
-        ObservableCollection<Zoo> zooList = new ObservableCollection<Zoo>();
         public ZooAdmin()
         {
             InitializeComponent();
-            this.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-            InitLists();
-        }
-
-        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                Zoo item = (e.AddedItems[0] as Zoo);
-
-            }
-        }
-
-        private async void InitLists()
-        {
-            MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
-            this.UCZooList.LoadItem((await zooManager.Get()).ToList());
-        }
-
-        private void btnNewZoo_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void btnStructure_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnEmployee_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAddZoo_Click(object sender, RoutedEventArgs e)
-        {
-            //tester si id alors update si non insert...
-            MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
-            if (zooManager.Get(ucZoo.Zoo.Id))
-            {
-                Task<Zoo> tZoo = zooManager.Update(ucZoo.Zoo);
-                Zoo zoo = (Zoo)tZoo.Result;
-            }
-            else
-            {
-                Task<Zoo> tZoo = zooManager.Insert(ucZoo.Zoo);
-                Zoo zoo = (Zoo)tZoo.Result;
-            }
-        }
-
-        private void btnDelZoo_Click(object sender, RoutedEventArgs e)
-        {
-            MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
-            this.UCZooList.Obs.Remove(ucZoo.Zoo);
-            Task<Int32> tRes = zooManager.Delete(ucZoo.Zoo);
-            Int32 res = (Int32)tRes.AsyncState;
-            
+            this.DataContext = new ZooAdminVM(this);
         }
     }
 }

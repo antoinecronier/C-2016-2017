@@ -92,6 +92,7 @@
     <Compile Include="entities\reflection\Reflectionner.cs" />
     <Compile Include="entities\json\JsonManager.cs" />
     <Compile Include="viewmodel\EmployeeAdminVM.cs" />
+    <Compile Include="viewmodel\ZooAdminVM.cs" />
     <Compile Include="views\administration\EmployeeAdmin.xaml.cs">
       <DependentUpon>EmployeeAdmin.xaml</DependentUpon>
     </Compile>
