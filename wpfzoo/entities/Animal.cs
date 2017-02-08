@@ -96,7 +96,7 @@ namespace wpfzoo.entities
                 OnPropertyChanged("IsDead");
             }
         }
-
+        
         public Animal()
         {
         }

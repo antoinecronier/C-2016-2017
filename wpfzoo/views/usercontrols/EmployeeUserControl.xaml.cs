@@ -19,7 +19,7 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Interaction logic for EmployeeUserControl.xaml
     /// </summary>
-    public partial class EmployeeUserControl : UserControl
+    public partial class EmployeeUserControl
     {
         private Employee employee;
 
@@ -32,7 +32,7 @@ namespace wpfzoo.views.usercontrols
         public EmployeeUserControl()
         {
             InitializeComponent();
-            this.DataContext = this;
+            base.DataContext = this;
         }
     }
 }

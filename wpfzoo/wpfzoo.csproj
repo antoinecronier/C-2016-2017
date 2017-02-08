@@ -94,6 +94,11 @@
     <Compile Include="views\administration\ScheduleAdmin.xaml.cs">
       <DependentUpon>ScheduleAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="entities\json\JsonManager.cs" />
+    <Compile Include="viewmodel\EmployeeAdminVM.cs" />
+    <Compile Include="views\administration\EmployeeAdmin.xaml.cs">
+      <DependentUpon>EmployeeAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\administration\ZooAdmin.xaml.cs">
       <DependentUpon>ZooAdmin.xaml</DependentUpon>
     </Compile>
@@ -170,6 +175,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="views\administration\ScheduleAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\administration\EmployeeAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
