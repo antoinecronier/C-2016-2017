@@ -20,6 +20,7 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Logique d'interaction pour AnimalUserControl.xaml
     /// </summary>
+    
     public partial class AnimalUserControl : UserControl
     {
         private Animal animal;

@@ -91,9 +91,16 @@
     <Compile Include="entities\generator\TypeEnum.cs" />
     <Compile Include="entities\reflection\Reflectionner.cs" />
     <Compile Include="entities\json\JsonManager.cs" />
+    <Compile Include="viewmodel\AnimalAdminVM.cs" />
     <Compile Include="viewmodel\EmployeeAdminVM.cs" />
+    <Compile Include="views\administration\AnimalAdmin.xaml.cs">
+      <DependentUpon>AnimalAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\administration\EmployeeAdmin.xaml.cs">
       <DependentUpon>EmployeeAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\administration\JobAdministration.xaml.cs">
+      <DependentUpon>JobAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\administration\ZooAdmin.xaml.cs">
       <DependentUpon>ZooAdmin.xaml</DependentUpon>
@@ -103,9 +110,6 @@
     </Compile>
     <Compile Include="views\administration\Example.xaml.cs">
       <DependentUpon>Example.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="views\administration\StructureAdministration.xaml.cs">
-      <DependentUpon>StructureAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\AnimalView.xaml.cs">
       <DependentUpon>AnimalView.xaml</DependentUpon>
@@ -176,9 +180,17 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="views\administration\AnimalAdmin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="views\administration\EmployeeAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\administration\JobAdministration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="views\administration\ZooAdmin.xaml">
       <SubType>Designer</SubType>
@@ -189,10 +201,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\administration\Example.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="views\administration\StructureAdministration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
