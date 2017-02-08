@@ -12,7 +12,7 @@ namespace wpfzoo.database
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class MySQLManager<TEntity> : DbContext where TEntity : class
     {
-        
+
         public MySQLManager() 
             : base(JsonManager.Instance.ReadFile<ConnectionString>(@"D:\Workspaces\Tp_Csharp\C-2016-2017\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
 

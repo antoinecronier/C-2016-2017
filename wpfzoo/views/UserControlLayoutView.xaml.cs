@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary2.Entities.Generator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,8 +28,6 @@ namespace wpfzoo.views
         public UserControlLayoutView()
         {
             InitializeComponent();
-
-
             Animal animal = new Animal();
             animal.Name = "moufassa";
             animal.Gender = Gender.FEMALE;
@@ -37,6 +36,7 @@ namespace wpfzoo.views
             animal.Weight = 120;
             animal.IsDead = true;
             this.animalUC.Animal = animal;
+            MySQLManager<Animal> animalManager = new MySQLManager<Animal>();
 
             StreetNumber streetNumber = new StreetNumber();
             streetNumber.Number = 666;
@@ -87,12 +87,8 @@ namespace wpfzoo.views
             zoo.Structures.Add(structure);
             this.zooUC.Zoo = zoo;
 
-
-
             /* TODO RM */
-            MySQLManager<Employee> manager = new MySQLManager<Employee>();
             //employee.Manager = employee;
-            manager.Insert(employee);
         }
     }
 }
