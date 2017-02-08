@@ -36,6 +36,6 @@
         <local:ListStructureUserControl x:Name="ListStructureUC" Grid.Column="1" Grid.Row="3"/>-->
 
         <Label x:Name="lblBirht" Content="Birth" Grid.Column="0" Grid.Row="4" />
-        <TextBox x:Name="txtBBirth" Text="{Binding Zoo.Birth, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="4"/>
+        <DatePicker x:Name="dpBirth" Grid.Column="1" Grid.Row="1" SelectedDate="{Binding Zoo.Birth, Mode=TwoWay}"/>
     </Grid>
 </local:UserControlBase>
