@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using wpfzoo.database;
 using wpfzoo.entities;
@@ -26,7 +27,7 @@ namespace wpfzoo.viewmodel
 
         private async void InitLists()
         {
-            this.addressAdmin.UCAddressList.LoadItem((await addressManager.Get()).ToList());
+            this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
         }
 
         private void InitUC()
@@ -39,7 +40,14 @@ namespace wpfzoo.viewmodel
         private void InitActions()
         {
             this.addressAdmin.btnValidate.Click += BtnValidate_Click;
+            this.addressAdmin.btnNew.Click += BtnNew_Click;
             this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+        }
+
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
+        {
+            currentAddress = new Address();
+            this.addressAdmin.UCAddress.Address = currentAddress;
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,14 +60,18 @@ namespace wpfzoo.viewmodel
             }
         }
 
-        private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (addressManager.Get(currentAddress.Id) != null)
+            currentAddress = this.addressAdmin.UCAddress.Address;
+
+            if (currentAddress.Id != 0)
             {
-                addressManager.Update(this.addressAdmin.UCAddress.Address);
-            } else
+                await addressManager.Update(currentAddress);
+            }
+            else
             {
-                addressManager.Insert(this.addressAdmin.UCAddress.Address);
+                await addressManager.Insert(currentAddress);
+                this.addressAdmin.UCAddressList.AddItem(currentAddress);
             }
         }
     }
