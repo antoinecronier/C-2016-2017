@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using wpfzoo.entities;
 using wpfzoo.views;
 using wpfzoo.views.administration;
+using wpfzoo.views.adminstration;
 
 namespace wpfzoo
 {
@@ -40,7 +41,7 @@ namespace wpfzoo
         private void btnAnimal_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            //window.Content = new AnimalAdmin();
+            window.Content = new AnimalAdmin();
 
             window.Show();
         }

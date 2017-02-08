@@ -17,12 +17,9 @@ using wpfzoo.entities.enums;
 
 namespace wpfzoo.views.usercontrols
 {
-    /// <summary>
-    /// Logique d'interaction pour AnimalUserControl.xaml
-    /// </summary>
-
     public partial class AnimalUserControl : UserControlBase
     {
+
         private Animal animal;
 
         public Animal Animal

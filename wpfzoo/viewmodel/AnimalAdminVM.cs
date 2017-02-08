@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.views.adminstration;
@@ -15,12 +17,17 @@ namespace wpfzoo.viewmodel
         private AnimalAdmin animalAdmin;
         private MySQLManager<Animal> animalManager = new MySQLManager<Animal>();
 
+  
+
         public AnimalAdminVM(AnimalAdmin animalAdmin)
         {
             this.animalAdmin = animalAdmin;
 
             InitUC();
             InitActions();
+            this.animalAdmin.UCAnimal.Animal = new Animal();
+            this.animalAdmin.UCAnimalList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+            InitLists();
         }
 
         private void InitUC()
@@ -31,12 +38,120 @@ namespace wpfzoo.viewmodel
 
         private void InitActions()
         {
-            this.animalAdmin.btnOk.Click += BtnValidate_Click;
+            this.animalAdmin.btnOk.Click += ClickOK;
+            this.animalAdmin.btnDelete.Click += ClickDelete;
+            this.animalAdmin.btnNew.Click += ClickNew;
         }
 
-        private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            animalManager.Insert(this.animalAdmin.UCAnimal.Animal);
+            if (e.AddedItems.Count > 0)
+            {
+                Animal item = (e.AddedItems[0] as Animal);
+                this.animalAdmin.UCAnimal.Animal = item;
+            }
+        }
+
+        private async void InitLists()
+        {
+            this.animalAdmin.UCAnimalList.LoadItem((await animalManager.Get()).ToList());
+        }
+
+        private void ClickNew(object sender, RoutedEventArgs e)
+        {
+            this.animalAdmin.UCAnimal.Animal = new Animal();
+        }
+
+        private async void ClickDelete(object sender, RoutedEventArgs e)
+        {
+            if (this.animalAdmin.UCAnimal.Animal.Id != 0)
+            {
+                await animalManager.Delete(this.animalAdmin.UCAnimal.Animal);
+                this.animalAdmin.UCAnimal.Animal = new Animal();
+                InitLists();
+            }
+        }
+
+        private async void ClickOK(object sender, RoutedEventArgs e)
+        {
+            if (this.animalAdmin.UCAnimal.Animal.Id != 0)
+            {
+                await animalManager.Update(this.animalAdmin.UCAnimal.Animal);
+
+            }
+            else
+            {
+                await animalManager.Insert(this.animalAdmin.UCAnimal.Animal);
+
+            }
+            InitLists();
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* public AnimalAdmin()
+        {
+            InitializeComponent();
+            this.animalAdmin.UCAnimal.Animal = new Animal();
+            this.animalAdmin.UCAnimalList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+            InitLists();
+        }
+
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Animal item = (e.AddedItems[0] as Animal);
+                this.animalAdmin.UCAnimal.Animal = item;
+            }
+        }
+
+        private async void InitLists()
+        {
+            this.animalAdmin.UCAnimalList.LoadItem((await animalManager.Get()).ToList());
+        }
+
+        private void ClickNew(object sender, RoutedEventArgs e)
+        {
+            this.animalAdmin.UCAnimal.Animal = new Animal();
+        }
+
+        private async void ClickDelete(object sender, RoutedEventArgs e)
+        {
+            if (this.animalAdmin.UCAnimal.Animal.Id != 0)
+            {
+                await animalManager.Delete(this.animalAdmin.UCAnimal.Animal);
+                InitLists();
+            }
+        }
+
+        private async void ClickOK(object sender, RoutedEventArgs e)
+        {
+            if (this.animalAdmin.UCAnimal.Animal.Id != 0) 
+            {
+                await animalManager.Update(this.animalAdmin.UCAnimal.Animal);
+
+            }
+            else
+            {
+                await animalManager.Insert(this.animalAdmin.UCAnimal.Animal);
+                
+            }
+            InitLists();
+        }
+    }
+}
+
+*/
