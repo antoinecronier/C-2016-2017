@@ -69,6 +69,16 @@ namespace wpfzoo.views.usercontrols
             }
         }
 
+        public void AddItem(Schedule item)
+        {
+            Obs.Add(item);
+        }
+
+        public void SupItem(Schedule item)
+        {
+            Obs.Remove(item);
+        }
+
         #endregion
 
         #region events

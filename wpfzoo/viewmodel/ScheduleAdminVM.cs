@@ -53,7 +53,8 @@ namespace wpfzoo.viewmodel
             if (this.scheduleAdmin.scheduleUC.Schedule.Id != 0)
             {
                 await scheduleManager.Delete(this.scheduleAdmin.scheduleUC.Schedule);
-                InitLists();
+                this.scheduleAdmin.listScheduleUC.SupItem(this.scheduleAdmin.scheduleUC.Schedule);
+
             }
         }
 
@@ -66,12 +67,14 @@ namespace wpfzoo.viewmodel
             else
             {
                 await scheduleManager.Insert(this.scheduleAdmin.scheduleUC.Schedule);
+                this.scheduleAdmin.listScheduleUC.AddItem(this.scheduleAdmin.scheduleUC.Schedule);
             }
         }
 
         private async void btnNew_Click(object sender, RoutedEventArgs e)
         {
             await scheduleManager.Insert(this.scheduleAdmin.scheduleUC.Schedule);
+            this.scheduleAdmin.listScheduleUC.AddItem(this.scheduleAdmin.scheduleUC.Schedule);
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
