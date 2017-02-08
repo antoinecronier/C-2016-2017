@@ -11,7 +11,7 @@
 
     <ScrollViewer>
         <StackPanel>
-            <uc:AddressUserControl x:Name="ucEmployee"/>
+            <uc:AddressUserControl x:Name="ucAddress"/>
             <Button x:Name="btnValidate" Content="Save" Height="20"/>
         </StackPanel>
     </ScrollViewer>

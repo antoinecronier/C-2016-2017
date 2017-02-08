@@ -25,7 +25,7 @@ namespace wpfzoo.viewmodel
         private void InitUC()
         {
             currentAddress = new Address();
-            this.addressAdmin.ucEmployee.Address = currentAddress;
+            this.addressAdmin.ucAddress.Address = currentAddress;
         }
 
         private void InitActions()
@@ -35,7 +35,7 @@ namespace wpfzoo.viewmodel
 
         private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            addressManager.Insert(this.addressAdmin.ucEmployee.Address);
+            addressManager.Insert(this.addressAdmin.ucAddress.Address);
         }
     }
 }

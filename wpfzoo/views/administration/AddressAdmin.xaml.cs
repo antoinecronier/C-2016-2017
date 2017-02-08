@@ -21,8 +21,6 @@ namespace wpfzoo.views.administration
     /// </summary>
     public partial class AddressAdmin : Page
     {
-        private AddressAdmin addressAdmin;
-
         public AddressAdmin()
         {
             InitializeComponent();
