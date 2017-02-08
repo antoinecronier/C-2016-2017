@@ -74,11 +74,6 @@ namespace wpfzoo.entities
             }
         }
 
-        public static explicit operator Employee(ListViewItemSelectionChangedEventArgs v)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Job> Jobs
         {
             get

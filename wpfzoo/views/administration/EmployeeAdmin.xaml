@@ -8,11 +8,36 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EmployeeAdmin">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lblListEmployee" Content="Liste des employers" Grid.Column="1" Grid.Row="0"/>
+        <uc:ListEmployeeUserControl x:Name="ucEmployeeList" Grid.Column="1" Grid.Row="1" Grid.RowSpan="7"/>
 
-    <ScrollViewer>
-        <StackPanel>
-            <uc:EmployeeUserControl x:Name="ucEmployee"/>
-            <Button x:Name="btnValidate"/>
-        </StackPanel>
-    </ScrollViewer>
+        <Button x:Name="buttonNew" Width="40" Grid.Row="0" Grid.Column="0" Click="buttonNew_Click">New</Button>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="4">
+            <StackPanel Height="152">
+                <uc:EmployeeUserControl x:Name="ucEmployee"/>
+                <Button x:Name="btnValidate"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button x:Name="btnDelEmployee" Content="Delete" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" Width="75" Height="21" Click="btnDelEmployee_Click"/>
+
+        <Button x:Name="btnAddEmployee" Content="Ok" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" Width="75" Height="21" Click="btnAddEmployee_Click"/>
+
+    </Grid>
 </Page>

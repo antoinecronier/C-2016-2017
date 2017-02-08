@@ -104,9 +104,6 @@
     <Compile Include="views\administration\Example.xaml.cs">
       <DependentUpon>Example.xaml</DependentUpon>
 	</Compile>
-    <Compile Include="views\administration\EmployeeAdmin.xaml.cs">
-      <DependentUpon>EmployeeAdmin.xaml</DependentUpon>
-    </Compile>
     <Compile Include="views\administration\StructureAdministration.xaml.cs">
       <DependentUpon>StructureAdministration.xaml</DependentUpon>
     </Compile>
@@ -193,10 +190,6 @@
     </Page>
     <Page Include="views\administration\Example.xaml">
 		<SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="views\administration\EmployeeAdmin.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\administration\StructureAdministration.xaml">
