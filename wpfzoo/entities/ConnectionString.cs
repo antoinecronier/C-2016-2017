@@ -94,11 +94,9 @@ namespace wpfzoo.entities
 
         }
 
-
-        public override String ToString()
+        public override string ToString()
         {
-            String connectionString = "Server="+this.server+";Port="+this.port+";Database="+this.database+";Uid="+this.uuid+";Pwd=" +this.pwd;
-            return connectionString;
+            return "Server=" + server + ";Port=" + port + ";Database=" + database + ";Uid=" + uuid + ";Pwd=" + pwd;
         }
 
     }

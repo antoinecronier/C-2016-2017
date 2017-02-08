@@ -102,6 +102,9 @@
     <Compile Include="views\administration\ZooAdmin.xaml.cs">
       <DependentUpon>ZooAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\administration\JobAdmin.xaml.cs">
+      <DependentUpon>JobAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\administration\Example.xaml.cs">
       <DependentUpon>Example.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\administration\ZooAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\administration\JobAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
