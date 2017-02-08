@@ -19,14 +19,17 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Interaction logic for EmployeeUserControl.xaml
     /// </summary>
-    public partial class EmployeeUserControl
+    public partial class EmployeeUserControl : UserControlBase
     {
         private Employee employee;
 
         public Employee Employee
         {
             get { return employee; }
-            set { employee = value; }
+            set {
+                employee = value;
+                base.OnPropertyChanged("Address");
+            }
         }
 
         public EmployeeUserControl()
