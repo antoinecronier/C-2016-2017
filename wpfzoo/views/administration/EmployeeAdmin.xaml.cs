@@ -27,38 +27,6 @@ namespace wpfzoo.views.administration
         {
             InitializeComponent();
             this.DataContext = new EmployeeAdminVM(this);
-            /*this.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-            InitLists();*/
         }
-        /*
-        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                Employee item = (e.AddedItems[0] as Employee);
-            }
-        }
-
-        private async void InitLists()
-        {
-            MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
-            this.ucEmployeeList.LoadItem((await employeeManager.Get()).ToList());
-        }
-
-        private void btnDelEmployee_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void buttonNew_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-        */
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
+using System.Windows.Controls;
 
 namespace wpfzoo.viewmodel
 {
@@ -19,10 +20,19 @@ namespace wpfzoo.viewmodel
         public EmployeeAdminVM(EmployeeAdmin employeeAdmin)
         {
             this.employeeAdmin = employeeAdmin;
-
             InitUC();
             InitLUC();
             InitActions();
+        }
+
+
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Employee item = (e.AddedItems[0] as Employee);
+                this.employeeAdmin.ucEmployee.Employee = item;
+            }
         }
 
         private void InitUC()
@@ -30,6 +40,7 @@ namespace wpfzoo.viewmodel
             currentEmployee = new Employee();
             this.employeeAdmin.ucEmployee.Employee = currentEmployee;
         }
+
         private async void InitLUC()
         {
             this.employeeAdmin.ucEmployeeList.LoadItem((await employeeManager.Get()).ToList());
@@ -37,27 +48,25 @@ namespace wpfzoo.viewmodel
 
         private void InitActions()
         {
-            this.employeeAdmin.btnValidate.Click += BtnValidate_Click;
+            this.employeeAdmin.btnAddEmployee.Click += btnAddEmployee_Click;
+            this.employeeAdmin.btnUpdateEmployee.Click += btnUpdateEmployee_Click;
+            this.employeeAdmin.btnDelEmployee.Click += btnDelEmployee_Click;
+            this.employeeAdmin.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
         }
 
-        private void BtnValidate_Click(object sender, RoutedEventArgs e)
+        private async void btnDelEmployee_Click(object sender, RoutedEventArgs e)
         {
-            employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
+            await employeeManager.Delete(this.employeeAdmin.ucEmployee.Employee);
         }
 
-        private void btnDelEmployee_Click(object sender, RoutedEventArgs e)
+        private async void btnUpdateEmployee_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            await employeeManager.Update(this.employeeAdmin.ucEmployee.Employee);
         }
 
-        private void btnAddEmployee_Click(object sender, RoutedEventArgs e)
+        private async void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-        }
-
-        private void buttonNew_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
+            await employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
         }
     }
 }
