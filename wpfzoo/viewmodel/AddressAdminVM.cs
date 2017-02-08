@@ -41,13 +41,8 @@ namespace wpfzoo.viewmodel
         {
             this.addressAdmin.btnValidate.Click += BtnValidate_Click;
             this.addressAdmin.btnNew.Click += BtnNew_Click;
+            this.addressAdmin.btnDelete.Click += BtnDelete_Click;
             this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-        }
-
-        private void BtnNew_Click(object sender, RoutedEventArgs e)
-        {
-            currentAddress = new Address();
-            this.addressAdmin.UCAddress.Address = currentAddress;
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -72,6 +67,34 @@ namespace wpfzoo.viewmodel
             {
                 await addressManager.Insert(currentAddress);
                 this.addressAdmin.UCAddressList.AddItem(currentAddress);
+            }
+        }
+
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
+        {
+            currentAddress = new Address();
+            this.addressAdmin.UCAddress.Address = currentAddress;
+        }
+
+        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            currentAddress = this.addressAdmin.UCAddress.Address;
+
+            if (currentAddress.Id == 0)
+            {
+                MessageBox.Show("Cannot delete new element in database");
+            }
+            else
+            {
+                 MessageBoxResult mbr = MessageBox.Show("Do you really want to delete this item ?","Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+
+                if (mbr == MessageBoxResult.OK)
+                {
+                    await addressManager.Delete(currentAddress);
+                    this.addressAdmin.UCAddressList.RemoveItem(currentAddress);
+                    currentAddress = new Address();
+                    this.addressAdmin.UCAddress.Address = currentAddress;
+                }          
             }
         }
     }
