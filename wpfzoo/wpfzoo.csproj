@@ -150,6 +150,7 @@
     <Compile Include="views\usercontrols\StructureUserControl.xaml.cs">
       <DependentUpon>StructureUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\usercontrols\base\UserControlBase.cs" />
     <Compile Include="views\usercontrols\ZooUserControl.xaml.cs">
       <DependentUpon>ZooUserControl.xaml</DependentUpon>
     </Compile>

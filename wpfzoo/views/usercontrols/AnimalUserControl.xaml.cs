@@ -20,8 +20,8 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Logique d'interaction pour AnimalUserControl.xaml
     /// </summary>
-    
-    public partial class AnimalUserControl : UserControl
+
+    public partial class AnimalUserControl : UserControlBase
     {
         private Animal animal;
 
@@ -30,16 +30,14 @@ namespace wpfzoo.views.usercontrols
             get { return animal; }
             set {
                 animal = value;
-                this.OnPropertyChanged("Animal");
-                  }
+                base.OnPropertyChanged("Animal");
+            }
         }
-
-        public object Obs { get; internal set; }
 
         public AnimalUserControl()
         {
             InitializeComponent();
-            this.DataContext = this;
+            base.DataContext = this;
         }
     }
 }
