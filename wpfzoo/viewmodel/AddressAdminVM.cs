@@ -47,13 +47,20 @@ namespace wpfzoo.viewmodel
             if (e.AddedItems.Count > 0)
             {
                 Address item = (e.AddedItems[0] as Address);
-                this.addressAdmin.UCAddress.Address = item;
+                currentAddress = item;
+                this.addressAdmin.UCAddress.Address = currentAddress;
             }
         }
 
         private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            addressManager.Insert(this.addressAdmin.UCAddress.Address);
+            if (addressManager.Get(currentAddress.Id) != null)
+            {
+                addressManager.Update(this.addressAdmin.UCAddress.Address);
+            } else
+            {
+                addressManager.Insert(this.addressAdmin.UCAddress.Address);
+            }
         }
     }
 }
