@@ -51,17 +51,20 @@ namespace wpfzoo.viewmodel
         private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             structureManager.Insert(this.structureAdmin.ucStructure.Structure);
-            //structureAdmin.UCstructureList.Obs.Add(this.structureAdmin.ucStructure.Structure);
+            structureAdmin.UCstructureList.Obs.Add(this.structureAdmin.ucStructure.Structure);
         }
 
         private void BtnUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             structureManager.Update(this.structureAdmin.ucStructure.Structure);
+            Structure item = structureAdmin.UCstructureList.Obs.FirstOrDefault(i => i.Id == this.structureAdmin.ucStructure.Structure.Id);
+            item = this.structureAdmin.ucStructure.Structure;
         }
 
         private void BtnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             structureManager.Delete(this.structureAdmin.ucStructure.Structure);
+            structureAdmin.UCstructureList.Obs.Remove(this.structureAdmin.ucStructure.Structure);
         }
 
     }
