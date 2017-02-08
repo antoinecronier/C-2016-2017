@@ -2,7 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:wpfzoo"
+<<<<<<< HEAD
+             StartupUri="views/administration/JobAdministration.xaml">
+=======
              StartupUri="/views/administration/EmployeeAdmin.xaml">
+>>>>>>> 8ea3525025dc2e04745f60447e2b6c51f0b84806
     <Application.Resources>
 
     </Application.Resources>
