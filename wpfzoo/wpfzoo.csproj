@@ -96,6 +96,9 @@
     </Compile>
     <Compile Include="entities\json\JsonManager.cs" />
     <Compile Include="viewmodel\EmployeeAdminVM.cs" />
+    <Compile Include="views\administration\AnimalAdmin.xaml.cs">
+      <DependentUpon>AnimalAdmin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\administration\EmployeeAdmin.xaml.cs">
       <DependentUpon>EmployeeAdmin.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,9 @@
     </Compile>
     <Compile Include="views\administration\Example.xaml.cs">
       <DependentUpon>Example.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\administration\StructureAdministration.xaml.cs">
+      <DependentUpon>StructureAdministration.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\AnimalView.xaml.cs">
       <DependentUpon>AnimalView.xaml</DependentUpon>
@@ -147,6 +153,7 @@
     <Compile Include="views\usercontrols\StructureUserControl.xaml.cs">
       <DependentUpon>StructureUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\usercontrols\base\UserControlBase.cs" />
     <Compile Include="views\usercontrols\ZooUserControl.xaml.cs">
       <DependentUpon>ZooUserControl.xaml</DependentUpon>
     </Compile>
@@ -181,6 +188,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="views\administration\AnimalAdmin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="views\administration\EmployeeAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -194,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\administration\Example.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\administration\StructureAdministration.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
