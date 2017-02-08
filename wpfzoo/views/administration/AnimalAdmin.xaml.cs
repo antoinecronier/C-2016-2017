@@ -39,10 +39,7 @@ namespace wpfzoo.views.adminstration
             Task.Factory.StartNew(() =>
             {
                 EntityGenerator<Animal> generator = new EntityGenerator<Animal>();
-                while (true)
-                {
-                    this.UCAnimal.Obs.Add(generator.GenerateItem());
-                }
+
             });
         } 
 

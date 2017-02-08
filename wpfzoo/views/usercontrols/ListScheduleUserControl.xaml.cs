@@ -68,6 +68,7 @@ namespace wpfzoo.views.usercontrols
                 Obs.Add(item);
             }
         }
+
         #endregion
 
         #region events

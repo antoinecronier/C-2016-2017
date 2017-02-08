@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using wpfzoo.entities;
 using wpfzoo.views;
 using wpfzoo.views.administration;
+using wpfzoo.views.adminstration;
 
 namespace wpfzoo
 {
@@ -47,19 +48,19 @@ namespace wpfzoo
         private void btnEmployee_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-//            window.Content = new EmployeeAdmin();
+            window.Content = new EmployeeAdmin();
             window.Show();
         }
         private void btnJob_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-//            window.Content = new JobAdmin();
+            window.Content = new JobAdmin();
             window.Show();
         }
         private void btnSchedule_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-            //window.Content = new ScheduleAdmin();
+            window.Content = new ScheduleAdmin();
 
             window.Show();
         }
@@ -72,13 +73,13 @@ namespace wpfzoo
         private void btnStructure_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-//            window.Content = new StructureAdmin();
+            window.Content = new StructureAdmin();
             window.Show();
         }
         private void btnZoo_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-//            window.Content = new ZooAdmin();
+            window.Content = new ZooAdmin();
             window.Show();
         }
     }

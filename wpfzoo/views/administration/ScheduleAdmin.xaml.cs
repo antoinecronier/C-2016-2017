@@ -30,40 +30,7 @@ namespace wpfzoo.views.administration
         public ScheduleAdmin()
         {
             InitializeComponent();
-//            this.DataContext = new ScheduleAdminVM(this);
-            this.scheduleUC.Schedule = new Schedule();
-            this.listScheduleUC.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-            InitLists();
-        }
-
-        private async void InitLists()
-        {
-            this.listScheduleUC.LoadItem((await scheduleManager.Get()).ToList());
-        }
-
-        private void btnDeleteClick(object sender, RoutedEventArgs e)
-        {
-            scheduleManager.Delete(this.scheduleUC.Schedule);
-        }
-
-        private void btnOkClick(object sender, RoutedEventArgs e)
-        {
-            scheduleManager.Update(this.scheduleUC.Schedule);
-        }
-
-        private void btnNewClick(object sender, RoutedEventArgs e)
-        {
-            scheduleManager.Insert(this.scheduleUC.Schedule);
-        }
-
-        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                Schedule item = (e.AddedItems[0] as Schedule);
-                this.scheduleUC.Schedule = item;
-
-            }
+            this.DataContext = new ScheduleAdminVM(this);
         }
     }
 }
