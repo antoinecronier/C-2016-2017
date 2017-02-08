@@ -19,20 +19,23 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Interaction logic for JobUserControl.xaml
     /// </summary>
-    public partial class JobUserControl : UserControl
+    public partial class JobUserControl : UserControlBase
     {
         private Job job;
 
         public Job Job
         {
             get { return job; }
-            set { job = value; }
+            set {
+                job = value;
+                base.OnPropertyChanged("Job");
+            }
         }
 
         public JobUserControl()
         {
             InitializeComponent();
-            this.DataContext = this;
+            base.DataContext = this;
             if (Job != null)
             {
                 this.ucSchedule.Schedule = Job.Schedule;

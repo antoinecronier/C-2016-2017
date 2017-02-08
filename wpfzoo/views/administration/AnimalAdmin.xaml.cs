@@ -41,7 +41,7 @@ namespace wpfzoo.views.adminstration
                 EntityGenerator<Animal> generator = new EntityGenerator<Animal>();
                 while (true)
                 {
-                    this.UCAnimal.Obs.Add(generator.GenerateItem());
+                  //  this.UCAnimal.Obs.Add(generator.GenerateItem());
                 }
             });
         } 
