@@ -62,7 +62,7 @@ namespace wpfzoo.views.administration
         private async void InitLists()
         {
             MySQLManager<Address> addressManager = new MySQLManager<Address>();
-            this.UCAddressList.LoadItem((await addressManager.Get()).ToList());
+            this.UCAddressList.LoadItems((await addressManager.Get()).ToList());
 
             MySQLManager <StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
             this.UCStreetNumberList.LoadItem((await streetNumberManager.Get()).ToList());

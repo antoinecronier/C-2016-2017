@@ -63,13 +63,23 @@ namespace wpfzoo.views.usercontrols
         /// <summary>
         /// Current list for User items.
         /// </summary>
-        public void LoadItem(List<Address> items)
+        public void LoadItems(List<Address> items)
         {
             Obs.Clear();
             foreach (var item in items)
             {
                 Obs.Add(item);
             }
+        }
+
+        public void AddItem(Address item)
+        {
+            Obs.Add(item);
+        }
+
+        public void RemoveItem(Address item)
+        {
+            Obs.Remove(item);
         }
         #endregion
 
