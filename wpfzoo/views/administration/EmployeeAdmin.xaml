@@ -9,6 +9,18 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EmployeeAdmin">
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem 
+                    x:Name="menuDuplicate" 
+                    Header="Duplicate"
+                />
+                <MenuItem  
+                    x:Name="menuDelete" 
+                    Header="Delete"
+                />
+            </ContextMenu>
+        </Grid.ContextMenu>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="2*"/>
@@ -29,9 +41,8 @@
         <Button x:Name="btnAddEmployee" Width="40" Grid.Row="0" Grid.Column="0" >New</Button>
 
         <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Margin="0,0,0,10">
-            <StackPanel Height="152">
+            <StackPanel>
                 <uc:EmployeeUserControl x:Name="ucEmployee"/>
-                <Button x:Name="btnValidate"/>
             </StackPanel>
         </ScrollViewer>
 
@@ -39,3 +50,4 @@
         <Button x:Name="btnUpdateEmployee" Content="Update" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" Width="75" Height="21"/>
     </Grid>
 </Page>
+    
