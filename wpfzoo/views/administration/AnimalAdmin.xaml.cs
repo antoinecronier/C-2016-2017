@@ -31,5 +31,6 @@ namespace wpfzoo.views.adminstration
         {
             InitializeComponent();
             DataContext = new AnimalAdminVM(this);
+        }
     }
 }
