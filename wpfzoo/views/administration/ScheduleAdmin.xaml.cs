@@ -24,9 +24,6 @@ namespace wpfzoo.views.administration
     /// </summary>
     public partial class ScheduleAdmin : Page
     {
-        ObservableCollection<Schedule> scheduleList = new ObservableCollection<Schedule>();
-        MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
-
         public ScheduleAdmin()
         {
             InitializeComponent();

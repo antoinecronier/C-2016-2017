@@ -23,11 +23,12 @@ namespace wpfzoo.viewmodel
         public ScheduleAdminVM(ScheduleAdmin scheduleAdmin)
         {
             this.scheduleAdmin = scheduleAdmin;
-            this.scheduleAdmin.listScheduleUC.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
 
             InitUC();
-            InitLists();
             InitActions();
+            this.scheduleAdmin.scheduleUC.Schedule = new Schedule();
+            this.scheduleAdmin.listScheduleUC.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+            InitLists();
         }
 
         private void InitUC()
@@ -39,6 +40,16 @@ namespace wpfzoo.viewmodel
         private async void InitLists()
         {
             this.scheduleAdmin.listScheduleUC.LoadItem((await scheduleManager.Get()).ToList());
+        }
+
+        private void AddInList()
+        {
+            this.scheduleAdmin.listScheduleUC.AddItem(this.scheduleAdmin.scheduleUC.Schedule);
+        }
+
+        private void SupInList()
+        {
+            this.scheduleAdmin.listScheduleUC.SupItem(this.scheduleAdmin.scheduleUC.Schedule);
         }
 
         private void InitActions()
@@ -53,8 +64,7 @@ namespace wpfzoo.viewmodel
             if (this.scheduleAdmin.scheduleUC.Schedule.Id != 0)
             {
                 await scheduleManager.Delete(this.scheduleAdmin.scheduleUC.Schedule);
-                this.scheduleAdmin.listScheduleUC.SupItem(this.scheduleAdmin.scheduleUC.Schedule);
-
+                SupInList();
             }
         }
 
@@ -67,14 +77,13 @@ namespace wpfzoo.viewmodel
             else
             {
                 await scheduleManager.Insert(this.scheduleAdmin.scheduleUC.Schedule);
-                this.scheduleAdmin.listScheduleUC.AddItem(this.scheduleAdmin.scheduleUC.Schedule);
+                AddInList();
             }
         }
 
-        private async void btnNew_Click(object sender, RoutedEventArgs e)
+        private void btnNew_Click(object sender, RoutedEventArgs e)
         {
-            await scheduleManager.Insert(this.scheduleAdmin.scheduleUC.Schedule);
-            this.scheduleAdmin.listScheduleUC.AddItem(this.scheduleAdmin.scheduleUC.Schedule);
+            this.scheduleAdmin.scheduleUC.Schedule = new Schedule();
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)

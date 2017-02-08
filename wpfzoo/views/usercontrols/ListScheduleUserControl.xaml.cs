@@ -37,6 +37,7 @@ namespace wpfzoo.views.usercontrols
             Obs = new ObservableCollection<Schedule>();
             this.itemList.ItemsSource = Obs;
             this.ItemsList = this.itemList;
+            this.ItemsList.SelectionMode = SelectionMode.Single;
         }
         #endregion
 
