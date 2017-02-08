@@ -31,10 +31,10 @@ namespace wpfzoo.views.adminstration
             InitializeComponent();
             InitLists();
             LinkItem();
-            AsyncExemple();
+            //AsyncExemple();
         }
 
-        private void AsyncExemple()
+       /* private void AsyncExemple()
         {
             Task.Factory.StartNew(() =>
             {
@@ -44,7 +44,7 @@ namespace wpfzoo.views.adminstration
                   //  this.UCAnimal.Obs.Add(generator.GenerateItem());
                 }
             });
-        } 
+        }*/
 
         private async void InitLists()
         {
