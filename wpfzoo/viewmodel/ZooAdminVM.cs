@@ -25,25 +25,12 @@ namespace wpfzoo.viewmodel
             this.zooAdmin = zooAdmin;
 
             InitUC();
+            InitLUC();
             InitActions();
-            InitModel();
-            InitEvent();
         }
 
-        private void InitEvent()
+        private async void InitLUC()
         {
-            this.zooAdmin.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-        }
-
-        private void InitModel()
-        {
-            ObservableCollection<Zoo> zooList = new ObservableCollection<Zoo>();
-            InitLists();
-        }
-
-        private async void InitLists()
-        {
-            MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
             this.zooAdmin.UCZooList.LoadItem((await zooManager.Get()).ToList());
         }
 
@@ -56,7 +43,12 @@ namespace wpfzoo.viewmodel
         private void InitActions()
         {
             this.zooAdmin.btnValidateZoo.Click += BtnValidate_Click;
+            this.zooAdmin.btnDelZoo.Click += BtnDel_Click;
+            this.zooAdmin.btnNewZoo.Click += BtnNew_Click;
+            this.zooAdmin.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
         }
+
+        
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -67,28 +59,33 @@ namespace wpfzoo.viewmodel
             }
         }
 
-        private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (this.zooAdmin.ucZoo.Zoo.Id != 0)
             {
-                Task<Zoo> tZoo = zooManager.Insert(this.zooAdmin.ucZoo.Zoo);
-                Zoo zoo = (Zoo)tZoo.Result;
+                await zooManager.Update(this.zooAdmin.ucZoo.Zoo);
             }
             else
             {
-                Task<Zoo> tZoo = zooManager.Update(this.zooAdmin.ucZoo.Zoo);
+                Task<Zoo> tZoo = zooManager.Insert(this.zooAdmin.ucZoo.Zoo);
                 Zoo zoo = (Zoo)tZoo.Result;
+                this.zooAdmin.ucZoo.Zoo = zoo;
+                InitLUC();
             }
-            
+
         }
 
-        private void btnDelZoo_Click(object sender, RoutedEventArgs e)
+        private async void BtnDel_Click(object sender, RoutedEventArgs e)
         {
-            MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
             this.zooAdmin.UCZooList.Obs.Remove(zooAdmin.ucZoo.Zoo);
-            Task<Int32> tRes = zooManager.Delete(zooAdmin.ucZoo.Zoo);
-            Int32 res = (Int32)tRes.AsyncState;
+            await zooManager.Delete(zooAdmin.ucZoo.Zoo);
+            currentZoo = new Zoo();
+            this.zooAdmin.ucZoo.Zoo = currentZoo;
+        }
 
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
+        {
+            InitUC();
         }
     }
 }
