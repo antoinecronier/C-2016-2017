@@ -43,7 +43,7 @@ namespace wpfzoo.views.usercontrols
 
 
         // Zoo zoo = new Zoo();
-        //zoo.Name = "Zoo Tycoon";
+        //zoo.Name = "Zoo Bida";
         //zoo.Birth = DateTime.Now;
 
         //this.label.Content = "Name";

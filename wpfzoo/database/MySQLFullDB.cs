@@ -40,7 +40,7 @@ namespace wpfzoo.database
                 }
 
                 EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
                 }
@@ -63,7 +63,7 @@ namespace wpfzoo.database
                 {
                     JobTable.Add(generatorJob.GenerateItem());
                 }
-                
+
                 EntityGenerator<Schedule> generatorSchedule = new EntityGenerator<Schedule>();
                 for (int i = 0; i < 10; i++)
                 {
