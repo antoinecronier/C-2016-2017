@@ -9,6 +9,18 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="EmployeeAdmin">
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem 
+                    x:Name="menuDuplicate" 
+                    Header="Duplicate"
+                />
+                <MenuItem  
+                    x:Name="menuDelete" 
+                    Header="Delete"
+                />
+            </ContextMenu>
+        </Grid.ContextMenu>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="2*"/>
@@ -38,3 +50,4 @@
         <Button x:Name="btnUpdateEmployee" Content="Update" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" Width="75" Height="21"/>
     </Grid>
 </Page>
+    

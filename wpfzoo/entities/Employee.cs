@@ -149,5 +149,17 @@ namespace wpfzoo.entities
             this.planning = new Dictionary<Schedule, Structure>();
             this.jobs = new List<Job>();
         }
+        public Employee(Employee other)
+        {
+            this.birth = other.Birth;
+            this.hiring = other.Hiring;
+            this.lastname = other.Lastname;
+            this.firstname = other.Firstname;
+            this.address = other.Address;
+            this.jobs = other.Jobs;
+            this.gender = other.Gender;
+            this.manager = other.Manager;
+            this.planning = other.Planning;
+        }
     }
 }
