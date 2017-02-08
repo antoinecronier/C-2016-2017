@@ -19,14 +19,17 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Logique d'interaction pour StructureUserControl.xaml
     /// </summary>
-    public partial class StructureUserControl : UserControl
+    public partial class StructureUserControl : UserControlBase
     {
         private Structure structure;
 
         public Structure Structure
         {
             get { return structure; }
-            set { structure = value; }
+            set {
+                structure = value;
+                base.OnPropertyChanged("Structure");
+            }
         }
 
         public StructureUserControl()

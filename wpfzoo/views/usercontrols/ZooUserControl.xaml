@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="wpfzoo.views.usercontrols.ZooUserControl"
+﻿<local:UserControlBase 
+             x:Class="wpfzoo.views.usercontrols.ZooUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -37,4 +38,4 @@
         <Label x:Name="lblBirht" Content="Birth" Grid.Column="0" Grid.Row="4" />
         <TextBox x:Name="txtBBirth" Text="{Binding Zoo.Birth, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="4"/>
     </Grid>
-</UserControl>
+</local:UserControlBase>
