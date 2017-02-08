@@ -91,8 +91,8 @@
     <Compile Include="entities\generator\TypeEnum.cs" />
     <Compile Include="entities\reflection\Reflectionner.cs" />
     <Compile Include="json\JsonManager.cs" />
-    <Compile Include="views\administration\JobAdministration.xaml.cs">
-      <DependentUpon>JobAdministration.xaml</DependentUpon>
+    <Compile Include="views\administration\JobAdmin.xaml.cs">
+      <DependentUpon>JobAdmin.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\administration\Example.xaml.cs">
       <DependentUpon>Example.xaml</DependentUpon>
@@ -163,7 +163,7 @@
       <DependentUpon>Application.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="views\administration\JobAdministration.xaml">
+    <Page Include="views\administration\JobAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
