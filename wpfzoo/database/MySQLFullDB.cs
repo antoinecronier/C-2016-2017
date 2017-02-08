@@ -25,7 +25,6 @@ namespace wpfzoo.database
 
         public MySQLFullDB()
         : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\GEF\Documents\Visual Studio 2015\Projects\C-2016-2017\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
-
         {
             InitLocalMySQL();
         }
@@ -39,7 +38,6 @@ namespace wpfzoo.database
                 {
                     AddressTable.Add(generatorAddress.GenerateItem());
                 }
-
 
                 EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
                 for (int i = 0; i < 20; i++)
@@ -83,13 +81,10 @@ namespace wpfzoo.database
                 {
                     ZooTable.Add(generatorZoo.GenerateItem());
                 }
-
                 this.SaveChangesAsync();
 
 
                 AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
-
-                this.SaveChangesAsync();
             }
         }
 
