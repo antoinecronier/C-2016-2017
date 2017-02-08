@@ -24,7 +24,7 @@ namespace wpfzoo.database
         public DbSet<Zoo> ZooTable { get; set; }
 
         public MySQLFullDB()
-            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\tactfactory\Documents\Visual Studio 2015\Projects\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
         {
             InitLocalMySQL();
         }
@@ -40,21 +40,22 @@ namespace wpfzoo.database
                 }
 
                 EntityGenerator<StreetNumber> generatorStreetNumber = new EntityGenerator<StreetNumber>();
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     StreetNumberTable.Add(generatorStreetNumber.GenerateItem());
-                }
-
-                EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
-                for (int i = 0; i < 10; i++)
-                {
-                    AnimalTable.Add(generatorAnimal.GenerateItem());
                 }
 
                 EntityGenerator<Employee> generatorEmployee = new EntityGenerator<Employee>();
                 for (int i = 0; i < 10; i++)
                 {
                     EmployeeTable.Add(generatorEmployee.GenerateItem());
+
+                }
+
+                EntityGenerator<Animal> generatorAnimal = new EntityGenerator<Animal>();
+                for (int i = 0; i < 10; i++)
+                {
+                    AnimalTable.Add(generatorAnimal.GenerateItem());
                 }
 
                 EntityGenerator<Job> generatorJob = new EntityGenerator<Job>();
@@ -69,6 +70,7 @@ namespace wpfzoo.database
                     ScheduleTable.Add(generatorSchedule.GenerateItem());
                 }
 
+
                 EntityGenerator<Structure> generatorStructure = new EntityGenerator<Structure>();
                 for (int i = 0; i < 10; i++)
                 {
@@ -77,15 +79,15 @@ namespace wpfzoo.database
 
                 EntityGenerator<Zoo> generatorZoo = new EntityGenerator<Zoo>();
                 for (int i = 0; i < 10; i++)
+
                 {
                     ZooTable.Add(generatorZoo.GenerateItem());
                 }
 
                 this.SaveChangesAsync();
 
-                AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
 
-                this.SaveChangesAsync();
+                AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
             }
         }
 

@@ -12,6 +12,7 @@ namespace wpfzoo.database
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class MySQLManager<TEntity> : DbContext where TEntity : class
     {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
         public MySQLManager() 
             : base(JsonManager.Instance.ReadFile<ConnectionString>(@"C:\Users\tactfactory\Documents\Visual Studio 2015\Projects\wpfzoo\jsonconfig\", @"MysqlConfig.json").ToString())
@@ -19,34 +20,59 @@ namespace wpfzoo.database
         public MySQLManager()
         : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
 >>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+        public MySQLManager()
+           : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
+=======
+
+        public MySQLManager() 
+            : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
+>>>>>>> 08354390412fe1ce8853681aa2af91b9e442c7d4
+>>>>>>> master
         {
             MySQLFullDB initDBIfNotExist = new MySQLFullDB();
         }
 
-        public DbSet<TEntity> DbSetT { get; set; }
+    public DbSet<TEntity> DbSetT { get; set; }
 
-        public async Task<TEntity> Insert(TEntity item)
+    public async Task<TEntity> Insert(TEntity item)
+    {
+        this.DbSetT.Add(item);
+        await this.SaveChangesAsync();
+        return item;
+    }
+
+    public async Task<IEnumerable<TEntity>> Insert(IEnumerable<TEntity> items)
+    {
+        foreach (var item in items)
         {
             this.DbSetT.Add(item);
-            await this.SaveChangesAsync();
-            return item;
         }
+        await this.SaveChangesAsync();
+        return items;
+    }
 
+<<<<<<< HEAD
         public async Task<IEnumerable<TEntity>> Insert(IEnumerable<TEntity> items)
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 =======
 =======
 >>>>>>> Stashed changes
+=======
+    public async Task<TEntity> Update(TEntity item)
+    {
+        await Task.Factory.StartNew(() =>
+>>>>>>> master
         {
-            foreach (var item in items)
-            {
-                this.DbSetT.Add(item);
-            }
-            await this.SaveChangesAsync();
-            return items;
-        }
+            this.Entry<TEntity>(item).State = EntityState.Modified;
+        });
+        await this.SaveChangesAsync();
+        return item;
+    }
 
+<<<<<<< HEAD
         public async Task<TEntity> Update(TEntity item)
 <<<<<<< Updated upstream
 >>>>>>> Stashed changes
@@ -61,57 +87,43 @@ namespace wpfzoo.database
         }
 
         public async Task<TEntity> Update(TEntity item)
+=======
+    public async Task<IEnumerable<TEntity>> Update(IEnumerable<TEntity> items)
+    {
+        await Task.Factory.StartNew(() =>
+>>>>>>> master
         {
-            await Task.Factory.StartNew(() =>
+            foreach (var item in items)
             {
                 this.Entry<TEntity>(item).State = EntityState.Modified;
-            });
-            await this.SaveChangesAsync();
-            return item;
-        }
+            }
+        });
+        await this.SaveChangesAsync();
+        return items;
+    }
 
-        public async Task<IEnumerable<TEntity>> Update(IEnumerable<TEntity> items)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                foreach (var item in items)
-                {
-                    this.Entry<TEntity>(item).State = EntityState.Modified;
-                }
-            });
-            await this.SaveChangesAsync();
-            return items;
-        }
+    public async Task<TEntity> Get(Int32 id)
+    {
+        return await this.DbSetT.FindAsync(id) as TEntity;
+    }
 
-        public async Task<TEntity> Get(Int32 id)
+    public async Task<IEnumerable<TEntity>> Get()
+    {
+        DbSet<TEntity> temp = default(DbSet<TEntity>);
+        List<TEntity> result = new List<TEntity>();
+        await Task.Factory.StartNew(() =>
         {
-            return await this.DbSetT.FindAsync(id) as TEntity;
-        }
+            temp = base.Set<TEntity>();
+        });
+        result.AddRange(temp);
+        return result;
+    }
 
-        public async Task<IEnumerable<TEntity>> Get()
+    public async Task<Int32> Delete(TEntity item)
+    {
+        await Task.Factory.StartNew(() =>
         {
-            DbSet<TEntity> temp = default(DbSet<TEntity>);
-            List<TEntity> result = new List<TEntity>();
-            await Task.Factory.StartNew(() =>
-            {
-                temp = base.Set<TEntity>();
-            });
-            result.AddRange(temp);
-            return result;
-        }
-
-        public async Task<Int32> Delete(TEntity item)
-        {
-            await Task.Factory.StartNew(() =>
-            {
-                this.DbSetT.Attach(item);
-                this.DbSetT.Remove(item);
-            });
-            return await this.SaveChangesAsync();
-        }
-
-        public async Task<Int32> Delete(IEnumerable<TEntity> items)
-        {
+<<<<<<< HEAD
             await Task.Factory.StartNew(() =>
             {
                 this.DbSetT.Attach((items as List<TEntity>)[0]);
@@ -238,10 +250,29 @@ namespace wpfzoo.database
     return await this.DbSetT.SqlQuery(criteria.MySQLCompute()).ToListAsync();
 }*/
 >>>>>>> Stashed changes
-
-        /*public async Task<IEnumerable<TEntity>> CustomQuery(Criteria criteria)
-        {
-            return await this.DbSetT.SqlQuery(criteria.MySQLCompute()).ToListAsync();
-        }*/
+=======
+            this.DbSetT.Attach(item);
+            this.DbSetT.Remove(item);
+        });
+        return await this.SaveChangesAsync();
     }
+>>>>>>> master
+
+    public async Task<Int32> Delete(IEnumerable<TEntity> items)
+    {
+        await Task.Factory.StartNew(() =>
+        {
+            this.DbSetT.Attach((items as List<TEntity>)[0]);
+            this.DbSetT.RemoveRange(items);
+        });
+        var res = await this.SaveChangesAsync();
+        return res;
+    }
+
 }
+
+/*public async Task<IEnumerable<TEntity>> CustomQuery(Criteria criteria)
+{
+    return await this.DbSetT.SqlQuery(criteria.MySQLCompute()).ToListAsync();
+}*/
+

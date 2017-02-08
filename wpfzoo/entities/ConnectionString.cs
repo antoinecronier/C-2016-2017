@@ -8,6 +8,7 @@ namespace wpfzoo.entities
 {
     public class ConnectionString
     {
+
         private String server = "";
         private String port = "";
         private String database = "";
@@ -15,6 +16,7 @@ namespace wpfzoo.entities
         private String pwd = "";
 
         public String Server
+
         {
             get
             {
@@ -27,7 +29,9 @@ namespace wpfzoo.entities
             }
         }
 
+
         public String Port
+
         {
             get
             {
@@ -40,7 +44,9 @@ namespace wpfzoo.entities
             }
         }
 
+
         public String Database
+
         {
             get
             {
@@ -53,7 +59,9 @@ namespace wpfzoo.entities
             }
         }
 
+
         public String Uuid
+
         {
             get
             {
@@ -66,7 +74,9 @@ namespace wpfzoo.entities
             }
         }
 
+
         public String Pwd
+
         {
             get
             {
@@ -83,10 +93,10 @@ namespace wpfzoo.entities
         {
         }
 
-        public override String ToString()
+        public override string ToString()
         {
-            String connectionString = "Server="+this.server+";Port="+this.port+";Database="+this.database+";Uid="+this.uuid+";Pwd=" +this.pwd;
-            return connectionString;
+            return "Server=" + server + ";Port=" + port + ";Database=" + database + ";Uid=" + uuid + ";Pwd=" + pwd;
         }
+
     }
 }

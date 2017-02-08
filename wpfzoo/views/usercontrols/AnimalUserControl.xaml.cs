@@ -17,23 +17,24 @@ using wpfzoo.entities.enums;
 
 namespace wpfzoo.views.usercontrols
 {
-    /// <summary>
-    /// Logique d'interaction pour AnimalUserControl.xaml
-    /// </summary>
-    public partial class AnimalUserControl : UserControl
+    public partial class AnimalUserControl : UserControlBase
     {
+
         private Animal animal;
 
         public Animal Animal
         {
             get { return animal; }
-            set { animal = value; }
+            set {
+                animal = value;
+                base.OnPropertyChanged("Animal");
+            }
         }
 
         public AnimalUserControl()
         {
             InitializeComponent();
-            this.DataContext = this;
+            base.DataContext = this;
         }
     }
 }

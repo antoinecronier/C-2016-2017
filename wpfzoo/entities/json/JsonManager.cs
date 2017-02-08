@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+<<<<<<< HEAD:wpfzoo/json/JsonManager.cs
 namespace wpfzoo.entities.json
+=======
+
+namespace wpfzoo.json
+>>>>>>> master:wpfzoo/entities/json/JsonManager.cs
 {
     public class JsonManager
     {
@@ -33,8 +38,10 @@ namespace wpfzoo.entities.json
             }
         }
 
+
         public T ReadFile<T>(String path, String file)
         {
+
             T toReturn = default(T);
             using (StreamReader fileItem = File.OpenText(path + file))
             using (JsonTextReader reader = new JsonTextReader(fileItem))
@@ -42,7 +49,9 @@ namespace wpfzoo.entities.json
                 JObject jObject = (JObject)JToken.ReadFrom(reader);
                 toReturn = jObject.ToObject<T>();
             }
+
             return toReturn;
         }
     }
+
 }

@@ -19,20 +19,23 @@ namespace wpfzoo.views.usercontrols
     /// <summary>
     /// Logique d'interaction pour AddressUserControl.xaml
     /// </summary>
-    public partial class AddressUserControl : UserControl
+    public partial class AddressUserControl : UserControlBase
     {
         private Address address;
 
         public Address Address
         {
             get { return address; }
-            set { address = value; }
+            set {
+                address = value;
+                base.OnPropertyChanged("Address");
+            }
         }
 
         public AddressUserControl()
         {
             InitializeComponent();
-            this.DataContext = this;
+            base.DataContext = this;
             if (Address != null)
             {
                 this.ucStreetNumber.StreetNumber = Address.StreetNumber;

@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+<<<<<<< HEAD
 using System.Windows.Controls;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
 using wpfzoo.views.usercontrols;
+=======
+using wpfzoo.database;
+using wpfzoo.entities;
+using wpfzoo.views.administration;
+>>>>>>> master
 
 namespace wpfzoo.viewmodel
 {
@@ -16,6 +22,7 @@ namespace wpfzoo.viewmodel
     {
         private StreetNumber currentStreetNumber;
         private StreetNumberAdmin streetNumberAdmin;
+<<<<<<< HEAD
         private MySQLManager<StreetNumber> streetNumberManager= new MySQLManager<StreetNumber>();
         private ListStreetNumberUserControl ucStreetNumberList;
 
@@ -26,12 +33,26 @@ namespace wpfzoo.viewmodel
             InitUC();
             InitActions();
             InitLists();
+=======
+        private MySQLManager<StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
+
+        public StreetNumberAdminVM(StreetNumberAdmin streetNumberAdmin)
+        {
+            this.streetNumberAdmin= streetNumberAdmin;
+
+            InitUC();
+            InitActions();
+>>>>>>> master
         }
 
         private void InitUC()
         {
             currentStreetNumber = new StreetNumber();
+<<<<<<< HEAD
             this.streetNumberAdmin.ucStreetNumber.StreetNumber = currentStreetNumber;
+=======
+            this.streetNumberAdmin.UCStreetNumber.StreetNumber = currentStreetNumber;
+>>>>>>> master
         }
 
         private void InitActions()
@@ -39,6 +60,7 @@ namespace wpfzoo.viewmodel
             this.streetNumberAdmin.New.Click += BtnValidate_Click;
             this.streetNumberAdmin.Delete.Click += BtnDelete_Click;
             this.streetNumberAdmin.ok.Click += BtnOk_Click;
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             this.ucStreetNumberList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
 =======
@@ -70,10 +92,13 @@ namespace wpfzoo.viewmodel
         private async void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             await streetNumberManager.Delete(this.streetNumberAdmin.ucStreetNumber.StreetNumber);
+=======
+>>>>>>> master
         }
 
         private async void BtnOk_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             MySQLManager<StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
             await streetNumberManager.Update(this.streetNumberAdmin.ucStreetNumber.StreetNumber);
@@ -114,3 +139,20 @@ namespace wpfzoo.viewmodel
         }
     }
 }
+=======
+            await streetNumberManager.Update(this.streetNumberAdmin.UCStreetNumber.StreetNumber);
+        }
+
+        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            await streetNumberManager.Delete(this.streetNumberAdmin.UCStreetNumber.StreetNumber);
+        }
+
+        private async void BtnValidate_Click(object sender, RoutedEventArgs e)
+        {
+            await streetNumberManager.Insert(this.streetNumberAdmin.UCStreetNumber.StreetNumber);
+        }
+    }
+}
+}
+>>>>>>> master
