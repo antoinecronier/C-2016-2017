@@ -32,18 +32,11 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
-        <Label x:Name="nameLabel" Content="Name:" Grid.Row="1" Grid.Column="0"/>
-        <TextBox x:Name="nameText" Text="{Binding job.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
+        <UC:JobUserControl x:Name="UCJob"/>
 
-        <Label x:Name="salaryLabel" Content="Salary:" Grid.Row="2" Grid.Column="0"/>
-        <TextBox x:Name="salarytext" Text="{Binding Job.Salary, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="2"/>
-
-        <Label x:Name="scheduleLabel" Content="Schedule:" Grid.Row="3" Grid.Column="0"/>
-        <Label x:Name="scheduleText" Content="{Binding ScheduleToString, Mode=OneWay}" Grid.Column="1" Grid.Row="3"/>
-        
         <UC:ListJobUserControl x:Name="UCJobList" Grid.Row="0" Grid.RowSpan="7" Grid.Column="2"/>
-        <Button x:Name="newButton" Content="Nouveau" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="75"/>
-        <Button x:Name="modifyButton" Content="Modifier" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Width="75"/>
-        <Button x:Name="deleteButton" Content="Supprimer" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Width="75"/>
+        <Button x:Name="btnAddJob" Content="Nouveau" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="75"/>
+        <Button x:Name="btnUpdateJob" Content="Modifier" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Width="75"/>
+        <Button x:Name="btnDelJob" Content="Supprimer" HorizontalAlignment="Center" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Width="75"/>
     </Grid>
 </Page>
