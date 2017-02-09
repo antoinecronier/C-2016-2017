@@ -44,12 +44,12 @@ namespace wpfzoo.views.usercontrols
         #endregion
 
         #region methods
-        private void RemoveAnimalContextMenu_OnClick(object sender, RoutedEventArgs e)
+        private void ClickMenuDel(object sender, RoutedEventArgs e)
         {
             Obs.Remove(ItemsList.SelectedItem as Animal);
         }
 
-        private void EditAnimalContextMenu_OnClick(object sender, RoutedEventArgs e)
+        private void ClickMenuDupli(object sender, RoutedEventArgs e)
         {
             if (ItemsList.SelectedIndex > -1)
             {
