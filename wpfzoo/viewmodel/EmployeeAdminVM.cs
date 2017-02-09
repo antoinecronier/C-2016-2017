@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using wpfzoo.entities.enums;
 using System.Windows.Media;
+using wpfzoo.database.entitieslinks;
 using wpfzoo.views.usercontrols;
 
 namespace wpfzoo.viewmodel
@@ -41,6 +42,8 @@ namespace wpfzoo.viewmodel
             {
                 currentEmployee = (e.AddedItems[0] as Employee);
                 this.employeeAdmin.ucEmployee.Employee = currentEmployee;
+                MySQLEmployeeManager mySqlEmployeeManager = new MySQLEmployeeManager();
+                mySqlEmployeeManager.GetAddress(currentEmployee);
             }
         }
 
@@ -113,12 +116,19 @@ namespace wpfzoo.viewmodel
 
         private void BtnAddress_Click(object sender, RoutedEventArgs e)
         {
-            AddressAdmin addressAdmin = new AddressAdmin();
-            Window window = new Window();
-            window.Content = addressAdmin;
-            window.Show();
-            addressAdmin.UCAddress.Address = currentEmployee.Address;
-            Console.WriteLine(currentEmployee.Lastname);
+            if (currentEmployee.Address != null)
+            {
+                AddressAdmin addressAdmin = new AddressAdmin();
+                Window window = new Window();
+                window.Content = addressAdmin;
+                window.Show();
+                addressAdmin.UCAddress.Address = currentEmployee.Address;
+            }
+            else
+            {
+                MessageBox.Show("Can't open because address is null");
+            }
+
         }
 
         private async void MenuDuplicate_OnClick(object sender, RoutedEventArgs e)
