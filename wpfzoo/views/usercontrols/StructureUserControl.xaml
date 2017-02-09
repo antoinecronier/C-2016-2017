@@ -22,14 +22,21 @@
         </Grid.RowDefinitions>
 
         <Label x:Name="lblName" Content="Name" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,221,0" />
-        <TextBlock x:Name="txtBName" Text="{Binding Structure.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Margin="1,0"/>
+        <TextBox x:Name="txtBName" Text="{Binding Structure.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Margin="1,0"/>
 
+            
         <Label x:Name="lblSurface" Content="Surface" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,221,0"/>
         <TextBox x:Name="txtBSurface" Text="{Binding Structure.Surface, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Margin="1,0"/>
 
-        <LUC:EmployeeUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Visibility="Collapsed"/>
 
-        <LUC:AnimalUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Visibility="Collapsed" />
+        <Label x:Name="lblEmployee" Content="Employés" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,221,0"/>
+        <Button x:Name="buttonEmploye" Grid.Column="1" Grid.Row="2" Height="30" Width="110">Voir les Employés</Button>
+
+        <Label x:Name="lblAnimaux" Content="Animaux" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,221,0"/>
+        <Button x:Name="buttonAnimaux" Grid.Column="1" Grid.Row="3" Height="30" Width="110">Voir les Animaux</Button>
+
+        <Label x:Name="lblSchedule" Content="Schedule" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,221,0"/>
+        <Button x:Name="buttonSchedule" Grid.Column="1" Grid.Row="4" Height="30" Width="110">Voir le Schedule</Button>
 
         <UC:ScheduleUserControl Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Visibility="Collapsed" />
     </Grid>
