@@ -45,6 +45,7 @@ namespace wpfzoo.viewmodel
                 this.employeeAdmin.ucEmployee.Employee = currentEmployee;
                 MySQLEmployeeManager mySqlEmployeeManager = new MySQLEmployeeManager();
                 mySqlEmployeeManager.GetAddress(currentEmployee);
+                mySqlEmployeeManager.GetJobs(currentEmployee);
             }
         }
 
@@ -112,7 +113,18 @@ namespace wpfzoo.viewmodel
 
         private void BtnJobs_Click()
         {
-            
+            if (currentEmployee.Jobs != null)
+            {
+                JobAdmin jobAdmin = new JobAdmin();
+                Window window = new Window();
+                window.Content = jobAdmin;
+                window.Show();
+                jobAdmin.UCJobList.LoadItem(currentEmployee.Jobs);
+            }
+            else
+            {
+                MessageBox.Show("Can't open because address is null");
+            }
         }
 
         public void LoadAddressPage(AddressAdmin addressAdmin)
@@ -136,7 +148,6 @@ namespace wpfzoo.viewmodel
             {
                 MessageBox.Show("Can't open because address is null");
             }
-
         }
 
         private async void MenuDuplicate_OnClick(object sender, RoutedEventArgs e)
