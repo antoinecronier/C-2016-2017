@@ -9,6 +9,11 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="StreetNumberAdmin">
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem x:Name="menuDuplicateStreetNumber" Header="Duplicate" />
+            </ContextMenu>
+        </Grid.ContextMenu>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="1*"/>
@@ -17,7 +22,7 @@
             <RowDefinition Height="6*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
-        <UC:ListStreetNumberUserControl x:Name="UCStreetNumberList" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+        <UC:ListStreetNumberUserControl x:Name="ucStreetNumberList" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -31,10 +36,10 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Button Name="New" Content="New" Grid.Column="1" Grid.Row="0" Click="New_Click"/>
-            <UC:StreetNumberUserControl  x:Name="UCStreetNumber" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0,27,0,5" />
-            <Button Name="Delete" Content="Delete" Grid.Column="1" Grid.Row="3" Click="Delete_Click"/>
-            <Button Name="ok" Content="ok" Grid.Column="1" Grid.Row="5" Click="ok_Click"/>
+            <Button Name="New" Content="New" Grid.Column="1" Grid.Row="0"/>
+            <UC:StreetNumberUserControl x:Name="ucStreetNumber" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0,27,0,5" />
+            <Button Name="Delete" Content="Delete" Grid.Column="1" Grid.Row="3"/>
+            <Button Name="ok" Content="ok" Grid.Column="1" Grid.Row="5" />
         </Grid>
     </Grid>
 </Page>

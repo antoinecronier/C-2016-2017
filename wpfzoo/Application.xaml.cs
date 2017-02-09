@@ -65,7 +65,7 @@ namespace wpfzoo
         private void btnStreetNumber_Click(object sender, RoutedEventArgs e)
         {
             Window window = new Window();
-//            window.Content = new StreetNumberAdmin();
+            window.Content = new StreetNumberAdmin();
             window.Show();
         }
 

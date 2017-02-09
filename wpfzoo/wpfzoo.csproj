@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="database\entitieslinks\MySQLEmployeeManager.cs" />
     <Compile Include="database\MySQLFullDB.cs" />
     <Compile Include="database\MySQLManager.cs" />
     <Compile Include="entities\base\BaseDBEntity.cs" />
@@ -95,11 +96,11 @@
       <DependentUpon>ScheduleAdmin.xaml</DependentUpon>
     </Compile>
     <Compile Include="entities\json\JsonManager.cs" />
+    <Compile Include="viewmodel\StreetNumberAdminVM.cs" />
     <Compile Include="viewmodel\AnimalAdminVM.cs" />
     <Compile Include="viewmodel\AddressAdminVM.cs" />
     <Compile Include="viewmodel\EmployeeAdminVM.cs" />
     <Compile Include="viewmodel\JobAdminVM.cs" />
-    <Compile Include="viewmodel\StreetNumberAdminVM.cs" />
     <Compile Include="viewmodel\StructureAdminVM.cs" />
     <Compile Include="viewmodel\ZooAdminVM.cs" />
     <Compile Include="views\administration\AddressAdmin.xaml.cs">
@@ -222,6 +223,7 @@
     </Page>
     <Page Include="views\administration\JobAdmin.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="views\administration\Example.xaml">
       <SubType>Designer</SubType>
