@@ -54,7 +54,7 @@ namespace wpfzoo.viewmodel
         {
             bool test = true;
             var value = this.streetNumberAdmin.ucStreetNumber.txtBNumber.Text;
-            Regex rx = new Regex(@"([0-9])\w", RegexOptions.IgnoreCase);
+            Regex rx = new Regex(@"(?:\d)+", RegexOptions.IgnoreCase);
 
             if (rx.IsMatch(value))
             {
