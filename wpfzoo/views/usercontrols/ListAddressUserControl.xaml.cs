@@ -52,14 +52,15 @@ namespace wpfzoo.views.usercontrols
             Obs.Remove(itemToDelete);  // remove the selected Item 
         }
 
-        private void EditNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
+        private async void EditNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
             if (ItemsList.SelectedIndex > -1)
             {
                 var address = new Address();
                 address = (Address)ItemsList.SelectedItem; // casting the list view 
-                MessageBox.Show("You are in edit for Name:" + address.City, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                address.Id = 0;
+                addressManager.Insert(address);
+                LoadItems((await addressManager.Get()).ToList());
             }
 
         }
