@@ -19,6 +19,7 @@ namespace wpfzoo.viewmodel
         private Zoo currentZoo;
         private ZooAdmin zooAdmin;
         private MySQLZooManager zooManager = new MySQLZooManager();
+        private AddressAdmin addressAdmin;
 
         public object UCZooList { get; private set; }
 
@@ -35,6 +36,8 @@ namespace wpfzoo.viewmodel
         {
             this.zooAdmin.UCZooList.LoadItem((await zooManager.Get()).ToList());
         }
+
+        
 
         private void InitUC()
         {
@@ -86,25 +89,44 @@ namespace wpfzoo.viewmodel
             }
         }
 
+#region address
+
+        
+
         private void BtnAddress_Click(object sender, RoutedEventArgs e)
         {
-            if (currentZoo.Address != null)
-            {
-                AddressAdmin addressAdmin = new AddressAdmin();
-                Window window = new Window();
-                window.Content = addressAdmin;
-                window.Show();
-                addressAdmin.UCAddress.Address = currentZoo.Address;
-            }
-            else
-            {
-                AddressAdmin addressAdmin = new AddressAdmin();
-                Window window = new Window();
-                window.Content = addressAdmin;
-                window.Show();
-            }
-
+                this.zooAdmin.NavigationService.Navigate(new AddressAdmin(this));
         }
+
+
+
+        public void LoadAddressPage(AddressAdmin addressAdmin)
+        {
+            this.addressAdmin = addressAdmin;
+            InitAddressLists();
+            InitAddressUC();
+            InitAddressActions();
+        }
+
+        private void InitAddressActions()
+        {
+            this.addressAdmin.btnValidate.Click += BtnAddressValidate_Click;
+            this.addressAdmin.btnNew.Click += BtnAddressNew_Click;
+            this.addressAdmin.btnDelete.Click += BtnAddressDelete_Click;
+            this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+        }
+
+        private void InitAddressUC()
+        {
+            this.addressAdmin.UCAddress.Address = this.currentZoo.Address;
+        }
+
+        private void InitAddressLists()
+        {
+            this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
+        }
+
+        #endregion //address
 
         private void BtnStructures_Click(object sender, RoutedEventArgs e)
         {
