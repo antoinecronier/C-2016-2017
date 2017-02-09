@@ -30,6 +30,8 @@ namespace wpfzoo.viewmodel
         private EmployeeAdmin employeeAdmin;
         private MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
         private MySQLManager<Address> addressManager = new MySQLManager<Address>();
+        MySQLAddressManager mySqlAddressManager = new MySQLAddressManager();
+
 
         private AddressAdmin addressAdmin;
 
@@ -82,11 +84,13 @@ namespace wpfzoo.viewmodel
             datePHiring.Background = Brushes.White;
             datePBirth.Background = Brushes.White;
 
-            int hiring = int.Parse(datePHiring.DisplayDate.ToString("yyyyMMdd"));
-            int birth = int.Parse(datePBirth.DisplayDate.ToString("yyyyMMdd"));
-            int age = (hiring - birth) / 10000;
-
-            if (datePHiring.DisplayDate < datePBirth.DisplayDate && age >= 18)
+            int hiring = datePHiring.DisplayDate.Year;
+            int birth = datePBirth.DisplayDate.Year;
+            Console.WriteLine(hiring);
+            Console.WriteLine(birth);
+            int age = (hiring - birth);
+            Console.WriteLine(age);
+            if (datePHiring.DisplayDate > datePBirth.DisplayDate && age >= 18)
             {
                 return true;
             }
@@ -185,16 +189,6 @@ namespace wpfzoo.viewmodel
             listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerFirstname);
         }
 
-        public void disableTypingDatePHiring(object sender, KeyEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        public void disableTypingDatePBirth(object sender, KeyEventArgs e)
-        {
-            e.Handled = true;
-        }
-
         private bool checkRegex(TextBox valueTested, String regex)
         {
             Match match = Regex.Match(valueTested.Text, regex);
@@ -224,8 +218,6 @@ namespace wpfzoo.viewmodel
             this.employeeAdmin.menuDuplicate.Click += MenuDuplicate_OnClick;
             this.employeeAdmin.menuDelete.Click += MenuDelete_OnClick;
             this.employeeAdmin.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-            this.employeeAdmin.ucEmployee.DatePHiring.KeyDown += disableTypingDatePHiring;
-            this.employeeAdmin.ucEmployee.DatePBirth.KeyDown += disableTypingDatePBirth;
         }
 
         public void LoadAddressPage(AddressAdmin addressAdmin)
@@ -237,7 +229,10 @@ namespace wpfzoo.viewmodel
             if (currentEmployee.Address != null)
             {
                 currentAddress = currentEmployee.Address;
+                mySqlAddressManager.GetStreetNumber(currentAddress);
                 this.addressAdmin.UCAddress.Address = currentEmployee.Address;
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentEmployee.Address.StreetNumber;
+
             }
         }
         #endregion
@@ -345,8 +340,8 @@ namespace wpfzoo.viewmodel
                 Address item = (e.AddedItems[0] as Address);
                 currentAddress = item;
                 this.addressAdmin.UCAddress.Address = currentAddress;
-                //Nested entity, cannot load for now
-                //this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
+                mySqlAddressManager.GetStreetNumber(currentAddress);
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
             }
         }
 
