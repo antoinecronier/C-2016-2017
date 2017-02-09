@@ -10,6 +10,16 @@ namespace wpfzoo.entities
         private String street;
         private String postalCode;
 
+        public Address()
+        {
+
+        }
+
+        public Address(StreetNumber streetNumber)
+        {
+            StreetNumber = streetNumber;
+        }
+
         public String PostalCode
         {
             get { return postalCode; }

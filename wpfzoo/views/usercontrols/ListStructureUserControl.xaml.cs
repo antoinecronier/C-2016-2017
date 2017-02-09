@@ -64,9 +64,23 @@ namespace wpfzoo.views.usercontrols
         }
         #endregion
 
-        private void itemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CMDuplicate_Click(object sender, RoutedEventArgs e)
         {
+            Structure duplicatedStructure = new Structure();
+            Structure structureToDuplicate = new Structure();
+            structureToDuplicate = ItemsList.SelectedItem as Structure;
+            duplicatedStructure.Id = 0;
+            duplicatedStructure.Name = structureToDuplicate.Name;
+            duplicatedStructure.Schedule = structureToDuplicate.Schedule;
+            duplicatedStructure.Surface = structureToDuplicate.Surface;
+            Obs.Add(duplicatedStructure);
+            mySQLManager.Insert(duplicatedStructure);
+        }
 
+        private void CMRemove_Click(object sender, RoutedEventArgs e)
+        {
+            mySQLManager.Delete(ItemsList.SelectedItem as Structure);
+            Obs.Remove(ItemsList.SelectedItem as Structure);
         }
     }
 

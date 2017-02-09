@@ -26,18 +26,11 @@ namespace wpfzoo.views.administration
     /// </summary>
     public partial class StructureAdmin : Page
     {
-        StructureAdminVM vm;
          public StructureAdmin()
         {
             InitializeComponent();
             this.DataContext = new StructureAdminVM(this);
-            vm = new StructureAdminVM(this);
             InitLists();
-        }
-
-        private void Ok_Click(object sender, RoutedEventArgs e)
-        {
-            //vm.InitActions();
         }
 
         private async void InitLists()
