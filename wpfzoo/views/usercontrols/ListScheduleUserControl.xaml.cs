@@ -49,7 +49,7 @@ namespace wpfzoo.views.usercontrols
         {
             var schedule = new Schedule();
             schedule = ItemsList.SelectedItem as Schedule;
-            if (schedule.Id > 0)
+            if (schedule.Id > 0 && schedule != null)
             {
                 await scheduleManager.Delete(schedule);
                 Obs.Remove(schedule);  // remove the selected Item 
@@ -63,7 +63,7 @@ namespace wpfzoo.views.usercontrols
             {
                 var schedule = new Schedule();
                 schedule = ItemsList.SelectedItem as Schedule; // casting the list view 
-                if (schedule.Id > 0)
+                if (schedule.Id > 0 && schedule != null)
                 {
                     schedule.Id = 0;
                     await scheduleManager.Insert(schedule);
