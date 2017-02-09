@@ -26,7 +26,6 @@ namespace wpfzoo.views.usercontrols
 
         public ListView ItemsList { get; set; }
         public ObservableCollection<Job> Obs { get; set; }
-        private MySQLManager<Job> jobManager = new MySQLManager<Job>();
 
         public ListJobUserControl()
         {
@@ -49,7 +48,7 @@ namespace wpfzoo.views.usercontrols
             }
         }
 
-        private void RemoveJobContextMenu_OnClick(object sender, RoutedEventArgs e)
+        /*private void RemoveJobContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
             Obs.Remove(ItemsList.SelectedItem as Job);
         }
@@ -66,7 +65,7 @@ namespace wpfzoo.views.usercontrols
                 this.LoadItem((await jobManager.Get()).ToList());
 
             }
-        }
+        }*/
 
     }
 }

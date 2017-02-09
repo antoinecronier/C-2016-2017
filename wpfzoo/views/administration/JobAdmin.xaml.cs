@@ -28,5 +28,12 @@ namespace wpfzoo.views.administration
             InitializeComponent();
             this.DataContext = new JobAdminVM(this);
         }
+
+        public JobAdmin(EmployeeAdminVM empAdminVM)
+        {
+            InitializeComponent();
+            this.DataContext = empAdminVM;
+            empAdminVM.LoadJobAdmin(this);
+        }
     }
 }
