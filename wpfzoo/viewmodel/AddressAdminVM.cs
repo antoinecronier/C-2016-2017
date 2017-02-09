@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using wpfzoo.database;
+using wpfzoo.database.entitieslinks;
 using wpfzoo.entities;
 using wpfzoo.entities.enums;
 using wpfzoo.entities.validator;
@@ -22,7 +23,7 @@ namespace wpfzoo.viewmodel
         #region attributes
         private Address currentAddress;
         private AddressAdmin addressAdmin;
-        private MySQLManager<Address> addressManager = new MySQLManager<Address>();
+        private MySQLAddressManager addressManager = new MySQLAddressManager();
         private Brush defaultColor; 
         #endregion
 
@@ -74,8 +75,8 @@ namespace wpfzoo.viewmodel
             {
                 Address item = (e.AddedItems[0] as Address);
                 currentAddress = item;
+                addressManager.GetStreetNumber(currentAddress);
                 this.addressAdmin.UCAddress.Address = currentAddress;
-                //Nested entity, cannot load for now
                 this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
             }
         }
@@ -221,10 +222,23 @@ namespace wpfzoo.viewmodel
         {
             if (this.addressAdmin.UCAddressList.ItemsList.SelectedIndex > -1)
             {
-                var address = new Address();
-                address = (Address)this.addressAdmin.UCAddressList.ItemsList.SelectedItem; // casting the list view 
+                //var address = new Address(new StreetNumber());
+                //address = (Address)this.addressAdmin.UCAddressList.ItemsList.SelectedItem;
+                //await addressManager.Insert(address);
+                //this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
+
+                
+                var address = new Address(new StreetNumber());
+                address = (Address)this.addressAdmin.UCAddressList.ItemsList.SelectedItem;
+                addressManager.GetStreetNumber(address);
+                var streetNumber = new StreetNumber();
+                streetNumber.Number = address.StreetNumber.Number;
+                streetNumber.Suf = address.StreetNumber.Suf;
+                address.StreetNumber = streetNumber;
                 await addressManager.Insert(address);
                 this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
+
+                
             }
 
         }
@@ -249,8 +263,6 @@ namespace wpfzoo.viewmodel
             currentAddress = new Address(new StreetNumber());
             this.addressAdmin.UCAddress.Address = currentAddress;
             this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
-
-            //this.addressAdmin.UCAddress.UCStreetNumber.txtBSuf.ItemsPanel = currentAddress.StreetNumber.Suf;
         }
 
         private void ValidatePostalCode(object sender, System.Windows.RoutedEventArgs e)
@@ -261,8 +273,7 @@ namespace wpfzoo.viewmodel
             {
                 AddressValidator.Validate(currentAddress);
 
-                if (currentAddress.PostalCode == "" || currentAddress.PostalCode == null || !currentAddress.GetValidationErrors().Any())
-                    this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = defaultColor;
+                this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = defaultColor;
             }
             catch (ValidationException)
             {
