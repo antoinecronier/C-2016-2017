@@ -28,6 +28,11 @@ namespace wpfzoo.viewmodel
             InitUC();
             ClicksGenerator();
         }
+        private void InitUC()
+        {
+            currentStructure = new Structure();
+            this.structureAdmin.ucStructure.Structure = currentStructure;
+        }
 
         private void structureAdmin_ListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -37,13 +42,7 @@ namespace wpfzoo.viewmodel
                 this.structureAdmin.ucStructure.Structure = item;
             }
         }
-
-        private void InitUC()
-        {
-            currentStructure = new Structure();
-            this.structureAdmin.ucStructure.Structure = currentStructure;
-        }
-
+        
         private void ClicksGenerator()
         {
             this.structureAdmin.buttonNew.Click += BtnValidate_Click;
@@ -51,6 +50,8 @@ namespace wpfzoo.viewmodel
             this.structureAdmin.Delete.Click += BtnDelete_Click;
         }
 
+
+        #region Btn
         private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (!this.structureAdmin.ucStructure.txtBSurface.Text.Contains("-"))
@@ -71,14 +72,14 @@ namespace wpfzoo.viewmodel
             if (!this.structureAdmin.ucStructure.txtBSurface.Text.Contains("-"))
             {
                 structureManager.Update(this.structureAdmin.ucStructure.Structure);
-            Structure item = structureAdmin.UCstructureList.Obs.FirstOrDefault(i => i.Id == this.structureAdmin.ucStructure.Structure.Id);
-            item = this.structureAdmin.ucStructure.Structure;
-        }
+                Structure item = structureAdmin.UCstructureList.Obs.FirstOrDefault(i => i.Id == this.structureAdmin.ucStructure.Structure.Id);
+                item = this.structureAdmin.ucStructure.Structure;
+            }
             else
             {
                 System.Windows.MessageBox.Show("Erreur surface négative wsh");
             }
-}
+        }
 
         private void BtnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -87,6 +88,8 @@ namespace wpfzoo.viewmodel
             this.structureAdmin.ucStructure.txtBSurface.Text = "";
             this.structureAdmin.ucStructure.txtBName.Text = "";
         }
+        #endregion
+
 
     }
 }
