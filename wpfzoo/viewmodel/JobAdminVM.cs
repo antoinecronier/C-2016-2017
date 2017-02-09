@@ -18,6 +18,7 @@ namespace wpfzoo.viewmodel
         private Job currentJob;
         private JobAdmin jobAdmin;
         private MySQLManager<Job> jobManager = new MySQLManager<Job>();
+        private MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
 
         public JobAdminVM(JobAdmin jobAdmin)
         {
@@ -33,6 +34,10 @@ namespace wpfzoo.viewmodel
             if (e.AddedItems.Count > 0)
             {
                 Job item = (e.AddedItems[0] as Job);
+                if (item.Schedule == null)
+                {
+                    item.Schedule = new Schedule();
+                }
                 this.jobAdmin.UCJob.Job = item;
             }
         }
@@ -41,6 +46,7 @@ namespace wpfzoo.viewmodel
         {
             currentJob = new Job();
             this.jobAdmin.UCJob.Job = currentJob;
+            this.jobAdmin.UCJob.ucSchedule.Schedule = new Schedule();
         }
 
         private async void InitLUC()
@@ -74,13 +80,15 @@ namespace wpfzoo.viewmodel
 
         private Boolean checkValidity(Job job)
         {
-            var regexName = new Regex(@"^[A-Z][-a-zA-Z]+$");
-            var regexSalary = new Regex(@"[0-9]+(\.[0-9][0-9]?)?");
+            var regexName = new Regex(@"[a-zA-Z ]{3,30}");
+            var regexSalary = new Regex(@"\d+(,\d{1,2})?");
 
-            if (regexName.Match(job.Name).Success && regexSalary.Match(job.Salary.ToString()).Success) {
+            if (regexName.IsMatch(job.Name) && regexSalary.IsMatch(job.Salary.ToString())) {
                 return true;
             } else
             {
+                Boolean matchName = regexName.IsMatch(job.Name);
+                Boolean matchSalary = regexSalary.IsMatch(job.Salary.ToString());
                 System.Windows.MessageBox.Show("Please check fields");
                 return false;
             }
@@ -90,11 +98,9 @@ namespace wpfzoo.viewmodel
         {
             if (this.checkValidity(this.jobAdmin.UCJob.Job))
             {
+                this.jobAdmin.UCJob.Job.Schedule = this.jobAdmin.UCJob.ucSchedule.Schedule;
                 await jobManager.Insert(this.jobAdmin.UCJob.Job);
                 InitLUC();
-            } else
-            {
-
             }
         }
     }

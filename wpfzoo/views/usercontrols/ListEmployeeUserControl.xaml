@@ -32,10 +32,10 @@
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
                         <Label x:Name="lblLastname" Content="Lastname" Grid.Column="0" Grid.Row="0"/>
-                        <TextBox x:Name="txtBLastname" Text="{Binding Lastname, Mode=TwoWay}"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
+                        <TextBox x:Name="txtBLastname" IsReadOnly="True" Text="{Binding Lastname, Mode=TwoWay}"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
 
                         <Label x:Name="lblFirstname" Content="Firstname" Grid.Column="0" Grid.Row="1"/>
-                        <TextBox x:Name="txtBFirstname" Text="{Binding Firstname, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
+                        <TextBox x:Name="txtBFirstname" IsReadOnly="True" Text="{Binding Firstname, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

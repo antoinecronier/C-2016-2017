@@ -53,7 +53,7 @@ namespace wpfzoo.views.usercontrols
             {
                 await scheduleManager.Delete(schedule);
                 Obs.Remove(schedule);  // remove the selected Item 
-                MessageBox.Show("You are in remove schedule for:\nStart : " + schedule.Start + "\nEnd : " + schedule.End, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("You are in remove schedule for:\nStart : " + schedule.Start + "\nEnd : " + schedule.End, "Delete", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -62,13 +62,17 @@ namespace wpfzoo.views.usercontrols
             if (ItemsList.SelectedIndex > -1)
             {
                 var schedule = new Schedule();
+                var scheduleTmp = new Schedule();
+
                 schedule = ItemsList.SelectedItem as Schedule; // casting the list view 
                 if (schedule.Id > 0 && schedule != null)
                 {
-                    schedule.Id = 0;
-                    await scheduleManager.Insert(schedule);
-                    Obs.Add(schedule);
-                    MessageBox.Show("You are in duplicate schedule for:\nStart : " + schedule.Start + "\nEnd : " + schedule.End, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
+                    scheduleTmp.Start = schedule.Start;
+                    scheduleTmp.End = schedule.End;
+                    scheduleTmp.Id = 0;
+                    await scheduleManager.Insert(scheduleTmp);
+                    Obs.Add(scheduleTmp);
+                    MessageBox.Show("You are in duplicate schedule for:\nStart : " + scheduleTmp.Start + "\nEnd : " + scheduleTmp.End, "Duplicate", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
 

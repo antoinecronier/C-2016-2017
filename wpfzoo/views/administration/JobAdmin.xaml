@@ -32,7 +32,7 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
 
-        <UC:JobUserControl x:Name="UCJob"/>
+        <UC:JobUserControl x:Name="UCJob" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2"/>
 
         <UC:ListJobUserControl x:Name="UCJobList" Grid.Row="0" Grid.RowSpan="7" Grid.Column="2"/>
         <Button x:Name="btnAddJob" Content="Nouveau" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Width="75"/>
