@@ -82,7 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="database\entitieslinks\MySQLAddressManager.cs" />
     <Compile Include="database\entitieslinks\MySQLEmployeeManager.cs" />
+    <Compile Include="database\entitieslinks\MySQLJobManager.cs" />
+    <Compile Include="database\entitieslinks\MySQLStructureManager.cs" />
     <Compile Include="database\MySQLFullDB.cs" />
     <Compile Include="database\MySQLManager.cs" />
     <Compile Include="entities\base\BaseDBEntity.cs" />

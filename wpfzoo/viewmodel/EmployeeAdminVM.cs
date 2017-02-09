@@ -41,9 +41,9 @@ namespace wpfzoo.viewmodel
             if (e.AddedItems.Count > 0)
             {
                 currentEmployee = (e.AddedItems[0] as Employee);
-                this.employeeAdmin.ucEmployee.Employee = currentEmployee;
                 MySQLEmployeeManager mySqlEmployeeManager = new MySQLEmployeeManager();
                 mySqlEmployeeManager.GetAddress(currentEmployee);
+                this.employeeAdmin.ucEmployee.Employee = currentEmployee;
             }
         }
 
