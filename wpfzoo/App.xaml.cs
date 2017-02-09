@@ -19,6 +19,7 @@ namespace wpfzoo
     {
         public App()
         {
+
         }
 
         #region Testing
