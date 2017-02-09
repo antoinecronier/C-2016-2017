@@ -37,23 +37,6 @@ namespace wpfzoo.views.usercontrols
             this.ItemsList.SelectionMode = SelectionMode.Single;
         }
 
-        private void RemoveNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
-        {
-            Obs.Remove(ItemsList.SelectedItem as Job);  // remove the selected Item 
-        }
-
-        private void EditNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (ItemsList.SelectedIndex > -1)
-            {
-                var job = new Job();
-                job = (Job)ItemsList.SelectedItem; // casting the list view 
-                MessageBox.Show("You are in edit for Name:" + job.Name, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            }
-
-        }
-
         /// <summary>
         /// Current list for User items.
         /// </summary>

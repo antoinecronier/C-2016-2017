@@ -26,5 +26,12 @@ namespace wpfzoo.views.administration
             InitializeComponent();
             this.DataContext = new AddressAdminVM(this);
         }
+
+        public AddressAdmin(EmployeeAdminVM empViewModel)
+        {
+            InitializeComponent();
+            this.DataContext = empViewModel;
+            empViewModel.LoadAddressPage(this);
+        }
     }
 }

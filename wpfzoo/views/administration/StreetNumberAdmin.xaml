@@ -37,7 +37,7 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Button Name="New" Content="New" Grid.Column="1" Grid.Row="0"/>
-            <UC:StreetNumberUserControl x:Name="ucStreetNumber" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0,27,0,5" />
+            <UC:StreetNumberUserControl x:Name="ucStreetNumber" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="0,27,0,5" />
             <Button Name="Delete" Content="Delete" Grid.Column="1" Grid.Row="3"/>
             <Button Name="ok" Content="ok" Grid.Column="1" Grid.Row="5" />
         </Grid>
