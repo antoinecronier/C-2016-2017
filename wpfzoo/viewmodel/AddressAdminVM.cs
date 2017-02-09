@@ -43,6 +43,8 @@ namespace wpfzoo.viewmodel
             this.addressAdmin.btnNew.Click += BtnNew_Click;
             this.addressAdmin.btnDelete.Click += BtnDelete_Click;
             this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+            this.addressAdmin.UCAddressList.RemoveAddressContextMenu.Click += RemoveAddressContextMenu_OnClick;
+            this.addressAdmin.UCAddressList.DuplicateAddressContextMenu.Click += DuplicateAddressContextMenu_OnClick;
             //For validation
             //https://msdn.microsoft.com/en-us/library/cc488527.aspx
         }
@@ -78,70 +80,72 @@ namespace wpfzoo.viewmodel
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
-            //Address loadedAddress = addressManager.Get(currentAddress.Id);
-            currentAddress = this.addressAdmin.UCAddress.Address;
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (NotImplementedException n)
+            {
+                MessageBox.Show("Partial implementation. Dev need to sleep. And sleeping is a proof of weakness, I know.");
+            }
 
-            // Check if we have filled props
-            Reflectionner reflec = new Reflectionner();
-            Boolean areFieldsdEmpty = true;
-            var dico = reflec.ReadObject<Address>(currentAddress);
-            //Dictionary<String, Object> dico2 = null;
+            ////Address loadedAddress = addressManager.Get(currentAddress.Id);
+            //currentAddress = this.addressAdmin.UCAddress.Address;
 
-            //if (loadedAddress != null)
+            //// Check if we have filled props
+            //Reflectionner reflec = new Reflectionner();
+            //Boolean areFieldsdEmpty = true;
+            //var dico = reflec.ReadObject<Address>(currentAddress);
+            ////Dictionary<String, Object> dico2 = null;
+
+            ////if (loadedAddress != null)
+            ////{
+            ////    dico2 = reflec.ReadObject<Address>(loadedAddress);
+            ////} 
+
+            //if (dico["Id"].Equals(0))
             //{
-            //    dico2 = reflec.ReadObject<Address>(loadedAddress);
-            //} 
-
-            if (dico["Id"].Equals(0))
-            {
-                dico.Remove("Id");
+            //    dico.Remove("Id");
                     
-                foreach (var item in dico)
-                {
-                    if (item.Value != null)
-                    {
-                        areFieldsdEmpty = false;
-                        break;
-                    }
+            //    foreach (var item in dico)
+            //    {
+            //        if (item.Value != null)
+            //        {
+            //            areFieldsdEmpty = false;
+            //            break;
+            //        }
                     
-                }
-            }
-            else //Fields not empty, but entity loaded from db
-            {
-                try
-                {
-                    throw new NotImplementedException();
-                }
-                catch (NotImplementedException n)
-                {
-                    MessageBox.Show("Partial implementation. Dev need to sleep. And sleeping is a proof of weakness, I know.");
-                }
+            //    }
+            //}
+            //else //Fields not empty, but entity loaded from db
+            //{
+                
 
 
-                //foreach (var item in dico)
-                //{
-                //    if (item.Key != "Id" & item.Value != dico2[item.Key])
-                //    {
-                //        areFielsdEmpty = false;
-                //        break;
-                //    }
-                //}
-            }
+            //    //foreach (var item in dico)
+            //    //{
+            //    //    if (item.Key != "Id" & item.Value != dico2[item.Key])
+            //    //    {
+            //    //        areFielsdEmpty = false;
+            //    //        break;
+            //    //    }
+            //    //}
+            //}
 
 
-            if (!areFieldsdEmpty)
-            {
-                MessageBoxResult mbr = MessageBox.Show("You have filled some data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+            //if (!areFieldsdEmpty)
+            //{
+            //    MessageBoxResult mbr = MessageBox.Show("You have filled some data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
 
-                if (mbr == MessageBoxResult.OK)
-                {
-                    this.ResetAddress();
-                }
-            }
-            else
-            {
-                this.ResetAddress();
-            }
+            //    if (mbr == MessageBoxResult.OK)
+            //    {
+            //        this.ResetAddress();
+            //    }
+            //}
+            //else
+            //{
+            //    this.ResetAddress();
+            //}
             
         }
 
@@ -164,6 +168,26 @@ namespace wpfzoo.viewmodel
                     this.ResetAddress();
                 }          
             }
+        }
+
+        private async void RemoveAddressContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            Address itemToDelete = this.addressAdmin.UCAddressList.ItemsList.SelectedItem as Address;
+            await addressManager.Delete(itemToDelete);
+            this.addressAdmin.UCAddressList.RemoveItem(itemToDelete);  // remove the selected Item 
+            this.ResetAddress();
+        }
+
+        private async void DuplicateAddressContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (this.addressAdmin.UCAddressList.ItemsList.SelectedIndex > -1)
+            {
+                var address = new Address();
+                address = (Address)this.addressAdmin.UCAddressList.ItemsList.SelectedItem; // casting the list view 
+                await addressManager.Insert(address);
+                this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
+            }
+
         }
 
         private void ResetAddress()

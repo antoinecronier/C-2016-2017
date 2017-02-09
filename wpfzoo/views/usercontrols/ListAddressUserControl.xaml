@@ -16,8 +16,8 @@
                     <ContextMenu.BitmapEffect>
                         <BitmapEffectGroup/>
                     </ContextMenu.BitmapEffect>
-                    <MenuItem Header="Duplicate" Name="EditNutritionContextMenu"  Click="EditNutritionContextMenu_OnClick"/>
-                    <MenuItem Header="Remove" Name="RemoveNutritionContextMenu" Click="RemoveNutritionContextMenu_OnClick"/>
+                    <MenuItem Header="Duplicate" x:Name="DuplicateAddressContextMenu" />
+                    <MenuItem Header="Remove" x:Name="RemoveAddressContextMenu" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.ItemsPanel>

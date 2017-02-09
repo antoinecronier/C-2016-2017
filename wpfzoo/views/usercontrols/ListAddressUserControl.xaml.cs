@@ -24,7 +24,6 @@ namespace wpfzoo.views.usercontrols
     public partial class ListAddressUserControl : UserControl
     {
         #region attributs
-        private MySQLManager<Address> addressManager = new MySQLManager<Address>();
         #endregion
 
         #region properties
@@ -45,25 +44,7 @@ namespace wpfzoo.views.usercontrols
         #endregion
 
         #region methods
-        private void RemoveNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
-        {
-            Address itemToDelete = ItemsList.SelectedItem as Address;
-            addressManager.Delete(itemToDelete);
-            Obs.Remove(itemToDelete);  // remove the selected Item 
-        }
-
-        private async void EditNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (ItemsList.SelectedIndex > -1)
-            {
-                var address = new Address();
-                address = (Address)ItemsList.SelectedItem; // casting the list view 
-                address.Id = 0;
-                addressManager.Insert(address);
-                LoadItems((await addressManager.Get()).ToList());
-            }
-
-        }
+        
 
         /// <summary>
         /// Current list for User items.
