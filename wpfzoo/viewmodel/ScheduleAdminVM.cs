@@ -26,9 +26,7 @@ namespace wpfzoo.viewmodel
 
             InitUC();
             InitActions();
-            this.scheduleAdmin.scheduleUC.Schedule = new Schedule();
             InitScheduleNow();
-            this.scheduleAdmin.listScheduleUC.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             InitLists();
         }
 
@@ -64,6 +62,7 @@ namespace wpfzoo.viewmodel
             this.scheduleAdmin.btnDelete.Click += btnDelete_Click;
             this.scheduleAdmin.btnOk.Click += btnOk_Click;
             this.scheduleAdmin.btnNew.Click += btnNew_Click;
+            this.scheduleAdmin.listScheduleUC.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
         }
 
         private async void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -77,14 +76,24 @@ namespace wpfzoo.viewmodel
 
         private async void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            if (this.scheduleAdmin.scheduleUC.Schedule.Id != 0)
+            int difDate = 0;
+
+            if (this.scheduleAdmin.scheduleUC.Schedule != null)
             {
-                await scheduleManager.Update(this.scheduleAdmin.scheduleUC.Schedule);
-            }
-            else
-            {
-                await scheduleManager.Insert(this.scheduleAdmin.scheduleUC.Schedule);
-                AddInList();
+                difDate = DateTime.Compare(this.scheduleAdmin.scheduleUC.Schedule.Start, this.scheduleAdmin.scheduleUC.Schedule.End);
+                if (difDate > 0)
+                {
+                    MessageBox.Show("Date of Start > Date of End", "Warning", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (this.scheduleAdmin.scheduleUC.Schedule.Id > 0)
+                {
+                    await scheduleManager.Update(this.scheduleAdmin.scheduleUC.Schedule);
+                }
+                else
+                {
+                    await scheduleManager.Insert(this.scheduleAdmin.scheduleUC.Schedule);
+                    AddInList();
+                }
             }
         }
 
