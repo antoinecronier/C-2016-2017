@@ -21,6 +21,18 @@ namespace ClassLibrary2.Entities.Reflection
             return result;
         }
 
+        public Dictionary<String, Object> ReadObject<T>(T item)
+        {
+            Dictionary<String, Object> result = new Dictionary<string, object>();
+            var props = typeof(T).GetProperties();
+            foreach (var prop in props)
+            {
+                result.Add(prop.Name, prop.GetValue(item, null));
+            }
+
+            return result;
+        }
+
         public Dictionary<String, Object> ReadList<T>(List<T> list)
         {
             Dictionary<String, Object> result = new Dictionary<string, object>();

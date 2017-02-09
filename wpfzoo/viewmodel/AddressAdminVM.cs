@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary2.Entities.Reflection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,8 @@ namespace wpfzoo.viewmodel
             this.addressAdmin.btnNew.Click += BtnNew_Click;
             this.addressAdmin.btnDelete.Click += BtnDelete_Click;
             this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+            //For validation
+            //https://msdn.microsoft.com/en-us/library/cc488527.aspx
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -51,12 +54,15 @@ namespace wpfzoo.viewmodel
                 Address item = (e.AddedItems[0] as Address);
                 currentAddress = item;
                 this.addressAdmin.UCAddress.Address = currentAddress;
+                //Nested entity, cannot load for now
+                //this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
             }
         }
 
         private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
+            //MySQLManager<StreetNumber> snManager = new MySQLManager<StreetNumber>();
 
             if (currentAddress.Id != 0)
             {
@@ -65,18 +71,65 @@ namespace wpfzoo.viewmodel
             else
             {
                 await addressManager.Insert(currentAddress);
+                //await snManager.Insert(currentAddress.StreetNumber);
                 this.addressAdmin.UCAddressList.AddItem(currentAddress);
             }
         }
 
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-
+            //Address loadedAddress = addressManager.Get(currentAddress.Id);
             currentAddress = this.addressAdmin.UCAddress.Address;
 
             // Check if we have filled props
-            if (currentAddress.GetType().GetProperties().Any(value => value != null ))
+            Reflectionner reflec = new Reflectionner();
+            Boolean areFieldsdEmpty = true;
+            var dico = reflec.ReadObject<Address>(currentAddress);
+            //Dictionary<String, Object> dico2 = null;
+
+            //if (loadedAddress != null)
+            //{
+            //    dico2 = reflec.ReadObject<Address>(loadedAddress);
+            //} 
+
+            if (dico["Id"].Equals(0))
+            {
+                dico.Remove("Id");
+                    
+                foreach (var item in dico)
+                {
+                    if (item.Value != null)
+                    {
+                        areFieldsdEmpty = false;
+                        break;
+                    }
+                    
+                }
+            }
+            else //Fields not empty, but entity loaded from db
+            {
+                try
+                {
+                    throw new NotImplementedException();
+                }
+                catch (NotImplementedException n)
+                {
+                    MessageBox.Show("Partial implementation. Dev need to sleep. And sleeping is a proof of weakness, I know.");
+                }
+
+
+                //foreach (var item in dico)
+                //{
+                //    if (item.Key != "Id" & item.Value != dico2[item.Key])
+                //    {
+                //        areFielsdEmpty = false;
+                //        break;
+                //    }
+                //}
+            }
+
+
+            if (!areFieldsdEmpty)
             {
                 MessageBoxResult mbr = MessageBox.Show("You have filled some data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
 

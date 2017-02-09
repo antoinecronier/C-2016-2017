@@ -38,7 +38,7 @@ namespace wpfzoo.views.usercontrols
             base.DataContext = this;
             if (Address != null)
             {
-                this.ucStreetNumber.StreetNumber = Address.StreetNumber;
+                this.UCStreetNumber.StreetNumber = Address.StreetNumber;
             }
             
         }
