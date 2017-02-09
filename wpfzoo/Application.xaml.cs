@@ -74,11 +74,12 @@ namespace wpfzoo
             Window window = new Window();
             window.Content = new StructureAdmin();
             window.Show();
+
         }
 
         private void btnZoo_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new Window();
+            NavigationWindow window = new NavigationWindow();
             window.Content = new ZooAdmin();
             window.Show();
         }

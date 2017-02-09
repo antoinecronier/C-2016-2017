@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
@@ -26,6 +27,7 @@ namespace wpfzoo.entities
             }
         }
 
+        [RegularExpression(@"^[0-9]*(?:\.[0-9]*)?$")]
         public float Surface
         {
             get
@@ -83,6 +85,7 @@ namespace wpfzoo.entities
         {
             this.assignAnimals = new List<Animal>();
             this.assignEmployees = new List<Employee>();
+
 
         }
     }
