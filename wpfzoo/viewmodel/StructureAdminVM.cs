@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
@@ -50,18 +53,39 @@ namespace wpfzoo.viewmodel
 
         private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            structureManager.Insert(this.structureAdmin.ucStructure.Structure);
-            //structureAdmin.UCstructureList.Obs.Add(this.structureAdmin.ucStructure.Structure);
+            if (!this.structureAdmin.ucStructure.txtBSurface.Text.Contains("-"))
+            {
+                structureManager.Insert(this.structureAdmin.ucStructure.Structure);
+                structureAdmin.UCstructureList.Obs.Add(this.structureAdmin.ucStructure.Structure);
+                this.structureAdmin.ucStructure.txtBSurface.Text = "";
+                this.structureAdmin.ucStructure.txtBName.Text = "";
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Erreur surface négative wsh");
+            }
         }
 
         private void BtnUpdate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            structureManager.Update(this.structureAdmin.ucStructure.Structure);
+            if (!this.structureAdmin.ucStructure.txtBSurface.Text.Contains("-"))
+            {
+                structureManager.Update(this.structureAdmin.ucStructure.Structure);
+            Structure item = structureAdmin.UCstructureList.Obs.FirstOrDefault(i => i.Id == this.structureAdmin.ucStructure.Structure.Id);
+            item = this.structureAdmin.ucStructure.Structure;
         }
+            else
+            {
+                System.Windows.MessageBox.Show("Erreur surface négative wsh");
+            }
+}
 
         private void BtnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             structureManager.Delete(this.structureAdmin.ucStructure.Structure);
+            structureAdmin.UCstructureList.Obs.Remove(this.structureAdmin.ucStructure.Structure);
+            this.structureAdmin.ucStructure.txtBSurface.Text = "";
+            this.structureAdmin.ucStructure.txtBName.Text = "";
         }
 
     }
