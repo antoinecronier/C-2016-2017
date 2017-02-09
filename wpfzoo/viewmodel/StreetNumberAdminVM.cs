@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using wpfzoo.database;
 using wpfzoo.entities;
+using wpfzoo.entities.enums;
 using wpfzoo.views.administration;
 using wpfzoo.views.usercontrols;
 
@@ -32,6 +35,10 @@ namespace wpfzoo.viewmodel
         {
             currentStreetNumber = new StreetNumber();
             this.streetNumberAdmin.ucStreetNumber.StreetNumber = currentStreetNumber;
+            foreach (StreetAvaibleItems suf in Enum.GetValues(typeof(StreetAvaibleItems)))
+            {
+                this.streetNumberAdmin.ucStreetNumber.cbSuff.Items.Add(suf);
+            }
         }
 
         private void InitActions()
@@ -40,37 +47,42 @@ namespace wpfzoo.viewmodel
             this.streetNumberAdmin.Delete.Click += BtnDelete_Click;
             this.streetNumberAdmin.ok.Click += BtnOk_Click;
             this.streetNumberAdmin.ucStreetNumberList.itemList.SelectionChanged += ItemsList_SelectionChanged;
-            this.streetNumberAdmin.ucStreetNumber.txtBNumber.DataContextChanged += TestValue;
             this.streetNumberAdmin.menuDuplicateStreetNumber.Click += DuplicateStreetNumberContextMenu_OnClick;
+        }
+
+        private bool TestValue()
+        {
+            bool test = true;
+            var value = this.streetNumberAdmin.ucStreetNumber.txtBNumber.Text;
+            Regex rx = new Regex(@"([0-9])\w", RegexOptions.IgnoreCase);
+
+            if (rx.IsMatch(value))
+            {
+                streetNumberAdmin.ucStreetNumber.txtBNumber.BorderBrush = Brushes.Red;
+                MessageBox.Show("Erreur La valeur saisie n'est pas numeric");
+                test = false;
+            }
+            return test;
         }
 
         private async void DuplicateStreetNumberContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
-            if (this.streetNumberAdmin.ucStreetNumberList.ItemsList.SelectedIndex> -1)
+            if (this.streetNumberAdmin.ucStreetNumberList.ItemsList.SelectedIndex > -1)
             {
                 var streeNumber = new StreetNumber();
                 streeNumber = (StreetNumber)this.streetNumberAdmin.ucStreetNumberList.ItemsList.SelectedItem;
                 await streetNumberManager.Insert(streeNumber);
-                this.streetNumberAdmin.ucStreetNumberList.LoadItem((await streetNumberManager.Get()).ToList());
-            }
-        }
-
-        private void TestValue(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            var value = this.streetNumberAdmin.ucStreetNumber.txtBNumber.Text;
-            if (value is string)
-            {
-                //streetNumberAdmin.ucStreetNumber.txtBNumber
-            }
-            else
-            {
-                    
+                InitLists();
             }
         }
 
         private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            await streetNumberManager.Insert(this.streetNumberAdmin.ucStreetNumber.StreetNumber);
+            if (TestValue())
+            {
+                await streetNumberManager.Insert(this.streetNumberAdmin.ucStreetNumber.StreetNumber);
+            }
+
         }
 
         private async void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -80,8 +92,11 @@ namespace wpfzoo.viewmodel
 
         private async void BtnOk_Click(object sender, RoutedEventArgs e)
         {
-            MySQLManager<StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
-            await streetNumberManager.Update(this.streetNumberAdmin.ucStreetNumber.StreetNumber);
+            if (TestValue())
+            {
+                MySQLManager<StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
+                await streetNumberManager.Update(this.streetNumberAdmin.ucStreetNumber.StreetNumber);
+            }
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -94,7 +109,6 @@ namespace wpfzoo.viewmodel
 
         private async void InitLists()
         {
-            MySQLManager<StreetNumber> streetNumberManager = new MySQLManager<StreetNumber>();
             this.streetNumberAdmin.ucStreetNumberList.LoadItem((await streetNumberManager.Get()).ToList());
         }
     }

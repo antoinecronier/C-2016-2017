@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <Label x:Name="lblName" Content="Name" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,221,0" />
-        <TextBox x:Name="txtBName" Text="{Binding Structure.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Margin="1,0"/>
+        <TextBlock x:Name="txtBName" Text="{Binding Structure.Name, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="0" Margin="1,0"/>
 
         <Label x:Name="lblSurface" Content="Surface" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,221,0"/>
         <TextBox x:Name="txtBSurface" Text="{Binding Structure.Surface, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Margin="1,0"/>
