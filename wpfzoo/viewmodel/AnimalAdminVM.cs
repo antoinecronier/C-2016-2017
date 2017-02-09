@@ -1,10 +1,4 @@
-﻿using ClassLibrary2.Entities.Reflection;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using wpfzoo.database;
@@ -69,6 +63,7 @@ namespace wpfzoo.viewmodel
                 await animalManager.Delete(this.animalAdmin.UCAnimal.Animal);
                 this.animalAdmin.UCAnimal.Animal = new Animal();
                 InitLists();
+                MessageBox.Show("You have deleted an animal");
             }
         }
 
@@ -76,14 +71,59 @@ namespace wpfzoo.viewmodel
         {
             if (this.animalAdmin.UCAnimal.Animal.Id != 0)
             {
-                await animalManager.Update(this.animalAdmin.UCAnimal.Animal);
-
+                if (this.animalAdmin.UCAnimal.Animal.Weight > 0)
+                {
+                    if (animalAdmin.UCAnimal.Animal.IsDead == true || animalAdmin.UCAnimal.Animal.IsDead == false)
+                    {
+                        await animalManager.Update(this.animalAdmin.UCAnimal.Animal);
+                        MessageBox.Show("You have update a animal");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Enter isDead : False or True");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Enter weight > 0");
+                }
             }
             else
             {
-                await animalManager.Insert(this.animalAdmin.UCAnimal.Animal);
-
+                if (this.animalAdmin.UCAnimal.Animal.Weight > 0)
+                {
+                    if (animalAdmin.UCAnimal.Animal.IsDead == true || animalAdmin.UCAnimal.Animal.IsDead == false)
+                    {
+                        await animalManager.Insert(this.animalAdmin.UCAnimal.Animal);
+                        MessageBox.Show("You have create a new animal");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Enter isDead : False or True");
+                    }
+                }
+                else
+                {
+                   MessageBox.Show("Enter weight > 0");
+                }
             }
+            InitLists();
+        }
+
+        private async void ClickMenuDupli(object sender, RoutedEventArgs e)
+        {
+            if (this.animalAdmin.UCAnimal.Animal.Id != 0)
+            {
+                this.animalAdmin.UCAnimal.Animal.Id = 0;
+                await animalManager.Insert(this.animalAdmin.UCAnimal.Animal);
+                InitLists();
+            }
+        }
+
+        private async void ClickMenuDel(object sender, RoutedEventArgs e)
+        {
+            await animalManager.Delete(this.animalAdmin.UCAnimal.Animal);
+            this.animalAdmin.UCAnimal.Animal = new Animal();
             InitLists();
         }
     }

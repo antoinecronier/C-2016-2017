@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.database;
 using wpfzoo.entities;
 
 namespace wpfzoo.views.usercontrols
@@ -43,22 +44,7 @@ namespace wpfzoo.views.usercontrols
         #endregion
 
         #region methods
-        private void RemoveNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
-        {
-            Obs.Remove(ItemsList.SelectedItem as Address);  // remove the selected Item 
-        }
-
-        private void EditNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (ItemsList.SelectedIndex > -1)
-            {
-                var address = new Address();
-                address = (Address)ItemsList.SelectedItem; // casting the list view 
-                MessageBox.Show("You are in edit for Name:" + address.City, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            }
-
-        }
+        
 
         /// <summary>
         /// Current list for User items.

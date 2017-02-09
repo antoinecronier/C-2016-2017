@@ -12,6 +12,15 @@
             x:Name="itemList"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ContextMenu>
+                <ContextMenu Name="ZoneIformationList" StaysOpen="true" Background="WhiteSmoke">
+                    <ContextMenu.BitmapEffect>
+                        <BitmapEffectGroup/>
+                    </ContextMenu.BitmapEffect>
+                    <MenuItem Header="Duplicate" Name="DuplicateJobContextMenu"  Click="DuplicateJobContextMenu_OnClick"/>
+                    <MenuItem Header="Remove" Name="RemoveJobContextMenu" Click="RemoveJobContextMenu_OnClick"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
