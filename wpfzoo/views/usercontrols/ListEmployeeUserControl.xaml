@@ -11,7 +11,8 @@
     <Grid>
         <ListView x:Name="itemList" 
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-            ScrollViewer.VerticalScrollBarVisibility="Auto">
+            ScrollViewer.VerticalScrollBarVisibility="Auto"  
+            >
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>

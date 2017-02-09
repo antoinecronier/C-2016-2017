@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
@@ -63,14 +65,37 @@ namespace wpfzoo.viewmodel
 
         private async void btnUpdateJob_Click(object sender, RoutedEventArgs e)
         {
-            await jobManager.Update(this.jobAdmin.UCJob.Job);
-            InitLUC();
+            if (this.checkValidity(this.jobAdmin.UCJob.Job))
+            {
+                await jobManager.Update(this.jobAdmin.UCJob.Job);
+                InitLUC();
+            }
+        }
+
+        private Boolean checkValidity(Job job)
+        {
+            var regexName = new Regex(@"^[A-Z][-a-zA-Z]+$");
+            var regexSalary = new Regex(@"[0-9]+(\.[0-9][0-9]?)?");
+
+            if (regexName.Match(job.Name).Success && regexSalary.Match(job.Salary.ToString()).Success) {
+                return true;
+            } else
+            {
+                System.Windows.MessageBox.Show("Please check fields");
+                return false;
+            }
         }
 
         private async void btnAddJob_Click(object sender, RoutedEventArgs e)
         {
-            await jobManager.Insert(this.jobAdmin.UCJob.Job);
-            InitLUC();
+            if (this.checkValidity(this.jobAdmin.UCJob.Job))
+            {
+                await jobManager.Insert(this.jobAdmin.UCJob.Job);
+                InitLUC();
+            } else
+            {
+
+            }
         }
     }
 }
