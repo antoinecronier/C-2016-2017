@@ -21,8 +21,12 @@ namespace wpfzoo.viewmodel
         private MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
         private MySQLZooManager zooLinkManager = new MySQLZooManager();
         private StructureAdmin structureAdmin;
+        private ScheduleAdmin scheduleAdmin;
+        private AnimalAdmin animalAdmin;
+        private EmployeeAdmin employeeAdmin;
 
 
+        #region GestionZoo
         public object UCZooList { get; private set; }
 
         public ZooAdminVM(ZooAdmin zooAdmin)
@@ -57,93 +61,7 @@ namespace wpfzoo.viewmodel
             this.zooAdmin.btnStructure.Click += BtnStructure_Click;
         }
 
-
-        #region GestionStructure
-
-        private void BtnStructure_Click(object sender, RoutedEventArgs e)
-        {
-            if (currentZoo.Structures != null)
-            {
-                this.zooAdmin.NavigationService.Navigate(new StructureAdmin(this));
-            }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show("Can't open because structure is null", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        public void LoadStructurePage(StructureAdmin structureAdmin)
-        {
-            this.structureAdmin = structureAdmin;
-            InitLUCStructure();
-            InitUC();
-            ClicksGenerator();
-        }
-
-        private void InitLUCStructure()
-        {
-            zooLinkManager.GetStructures(currentZoo);
-        }
-
-        private void ClicksGenerator()
-        {
-            this.structureAdmin.buttonNew.Click += BtnValidateStructure_Click;
-            this.structureAdmin.Ok.Click += BtnUpdateStructure_Click;
-            this.structureAdmin.Delete.Click += BtnDeleteStructure_Click;
-        }
-
-        private void BtnDeleteStructure_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void BtnUpdateStructure_Click(object sender, RoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void BtnValidateStructure_Click(object sender, RoutedEventArgs e)
-        {
-            if (!this.structureAdmin.ucStructure.txtBSurface.Text.Contains("-"))
-            {
-                //zooManager.Insert(this.structureAdmin.ucStructure.Structure); Le manager en questio n'existe pas pour le moment
-                this.structureAdmin.ucStructure.txtBSurface.Text = "";
-                this.structureAdmin.ucStructure.txtBName.Text = "";
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("Erreur surface négative wsh");
-            }
-        }
-
-        #endregion
-
-
-
-
-        private void DuplicateZoo_Click(object sender, RoutedEventArgs e)
-        {
-            Zoo zoo = new entities.Zoo();
-            zoo.Birth = this.zooAdmin.ucZoo.Zoo.Birth;
-            zoo.Address = this.zooAdmin.ucZoo.Zoo.Address;
-            zoo.Name = this.zooAdmin.ucZoo.Zoo.Name;
-            zoo.Staff = this.zooAdmin.ucZoo.Zoo.Staff;
-            zoo.Structures = this.zooAdmin.ucZoo.Zoo.Structures;
-
-            Task <Zoo> tZoo = zooManager.Insert(zoo);
-            Zoo zooRes = (Zoo)tZoo.Result;
-            this.zooAdmin.ucZoo.Zoo = zooRes;
-            InitLUC();
-        }
-
-        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                Zoo item = (e.AddedItems[0] as Zoo);
-                this.zooAdmin.ucZoo.Zoo = item;
-            }
-        }
+        #region GestionZooBtn
 
         private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -168,7 +86,7 @@ namespace wpfzoo.viewmodel
 
                 currentZoo.Birth = DateTime.Now;
             }
-            
+
         }
 
         private async void BtnDel_Click(object sender, RoutedEventArgs e)
@@ -189,7 +107,7 @@ namespace wpfzoo.viewmodel
             {
                 System.Windows.Forms.MessageBox.Show("You must select an object to delete it... ", "Delete Zoo",
                  MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                 
+
             }
         }
 
@@ -197,6 +115,161 @@ namespace wpfzoo.viewmodel
         {
             InitUC();
         }
+
+        private void DuplicateZoo_Click(object sender, RoutedEventArgs e)
+        {
+            Zoo zoo = new entities.Zoo();
+            zoo.Birth = this.zooAdmin.ucZoo.Zoo.Birth;
+            zoo.Address = this.zooAdmin.ucZoo.Zoo.Address;
+            zoo.Name = this.zooAdmin.ucZoo.Zoo.Name;
+            zoo.Staff = this.zooAdmin.ucZoo.Zoo.Staff;
+            zoo.Structures = this.zooAdmin.ucZoo.Zoo.Structures;
+
+            Task<Zoo> tZoo = zooManager.Insert(zoo);
+            Zoo zooRes = (Zoo)tZoo.Result;
+            this.zooAdmin.ucZoo.Zoo = zooRes;
+            InitLUC();
+        }
+
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Zoo item = (e.AddedItems[0] as Zoo);
+                this.zooAdmin.ucZoo.Zoo = item;
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+        #region GestionStructure
+
+        private void BtnStructure_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentZoo.Structures != null)
+            {
+                this.zooAdmin.NavigationService.Navigate(new StructureAdmin(this));
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Can't open because structure is null", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #region GestionLoadStructure
+
+        public void LoadStructurePage(StructureAdmin structureAdmin)
+        {
+            this.structureAdmin = structureAdmin;
+            InitLUCStructure();
+            InitUC();
+            ClicksGenerator();
+        }
+        public void LoadSchedulePage(ScheduleAdmin scheduleAdmin)
+        {
+            this.scheduleAdmin = scheduleAdmin;
+            InitLUCSchedule();
+            InitUC();
+            ClicksGenerator();
+        }
+
+
+        public void LoadEmployeePage(ScheduleAdmin scheduleAdmin)
+        {
+            this.scheduleAdmin = scheduleAdmin;
+            //InitLUCSchedule();
+            InitUC();
+            ClicksGenerator();
+        }
+        public void LoadAnimalPage(ScheduleAdmin scheduleAdmin)
+        {
+            this.scheduleAdmin = scheduleAdmin;
+            //InitLUCSchedule();
+            InitUC();
+            ClicksGenerator();
+        }
+        #endregion
+        
+        #region GestionStructureInitialisation
+
+        private void InitLUCStructure()
+        {
+            zooLinkManager.GetStructures(currentZoo);
+        }
+
+        private void InitLUCSchedule()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        #endregion
+
+        #region GestionStructureEvenement
+        private void ClicksGenerator()
+        {
+            this.structureAdmin.buttonNew.Click += BtnValidateStructure_Click;
+            this.structureAdmin.Ok.Click += BtnUpdateStructure_Click;
+            this.structureAdmin.Delete.Click += BtnDeleteStructure_Click;
+            this.structureAdmin.ucStructure.buttonEmploye.Click += ButtonEmploye_Click;
+            this.structureAdmin.ucStructure.buttonAnimaux.Click += ButtonAnimaux_Click;
+            this.structureAdmin.ucStructure.buttonSchedule.Click += ButtonSchedule_Click;
+        } 
+        #endregion
+
+        #region GestionStructure Btn
+
+        private async void BtnDeleteStructure_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private async void BtnUpdateStructure_Click(object sender, RoutedEventArgs e)
+        {
+            this.structureAdmin.ucStructure.txtBSurface.Text.Contains("-");
+            {
+                await zooManager.Update(this.zooAdmin.ucZoo.Zoo);
+                InitLUCStructure();
+            }
+        }
+        private async void BtnValidateStructure_Click(object sender, RoutedEventArgs e)
+        {
+            if (!this.structureAdmin.ucStructure.txtBSurface.Text.Contains("-"))
+            {
+                await zooManager.Insert(this.zooAdmin.ucZoo.Zoo);
+                this.structureAdmin.ucStructure.txtBSurface.Text = "";
+                this.structureAdmin.ucStructure.txtBName.Text = "";
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Erreur surface négative wsh");
+            }
+        }
+        private async void ButtonAnimaux_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private async void ButtonEmploye_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        private void ButtonSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentZoo.Structures != null)
+            {
+                this.zooAdmin.NavigationService.Navigate(new ScheduleAdmin(this));
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Can't open because structure is null", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        
+        #endregion
+
+        #endregion   
+
     }
 }
 
