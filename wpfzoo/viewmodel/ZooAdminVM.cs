@@ -52,6 +52,12 @@ namespace wpfzoo.viewmodel
             this.zooAdmin.UCZooList.DuplicateZooContextMenu.Click += DuplicateZoo_Click;
             this.zooAdmin.UCZooList.RemoveZooContextMenu.Click += BtnDel_Click;
             this.zooAdmin.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+            this.zooAdmin.btnStructure.Click += BtnStructure_Click; 
+        }
+
+        private void BtnStructure_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         public void LoadStructurePage(StructureAdmin structureAdmin)
