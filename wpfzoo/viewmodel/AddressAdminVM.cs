@@ -125,29 +125,12 @@ namespace wpfzoo.viewmodel
         #region new
         private async void BtnNew_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    throw new NotImplementedException();
-            //}
-            //catch (NotImplementedException n)
-            //{
-            //    MessageBox.Show("Partial implementation. Dev need to sleep. And sleeping is a proof of weakness, I know.");
-            //}
-
-            addressManager.DbSetT.Attach(currentAddress);
-            Address loadedAddress = await addressManager.Get(currentAddress.Id);
             currentAddress = this.addressAdmin.UCAddress.Address;
 
             // Check if we have filled props
             Reflectionner reflec = new Reflectionner();
             Boolean areFieldsdEmpty = true;
             var dico = reflec.ReadObject<Address>(currentAddress);
-            Dictionary<String, Object> dico2 = null;
-
-            if (loadedAddress != null)
-            {
-                dico2 = reflec.ReadObject<Address>(loadedAddress);
-            }
 
             if (dico["Id"].Equals(0))
             {
@@ -155,7 +138,7 @@ namespace wpfzoo.viewmodel
 
                 foreach (var item in dico)
                 {
-                    if (item.Value != null)
+                    if (item.Key != "StreetNumber" && item.Value != null)
                     {
                         areFieldsdEmpty = false;
                         break;
@@ -165,14 +148,9 @@ namespace wpfzoo.viewmodel
             }
             else //Fields not empty, but entity loaded from db
             {
-
-                foreach (var item in dico)
+                if (addressManager.ChangeTracker.HasChanges())
                 {
-                    if (item.Key != "Id" & item.Value != dico2[item.Key])
-                    {
-                        areFieldsdEmpty = false;
-                        break;
-                    }
+                    areFieldsdEmpty = false;
                 }
             }
 
@@ -183,7 +161,9 @@ namespace wpfzoo.viewmodel
 
                 if (mbr == MessageBoxResult.OK)
                 {
+                    addressManager.DbSetT.Attach(currentAddress);
                     this.ResetAddress();
+                    this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
                 }
             }
             else

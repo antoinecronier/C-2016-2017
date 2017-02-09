@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
@@ -32,6 +33,7 @@ namespace wpfzoo.entities
             }
         }
 
+        [StringLength(255, ErrorMessage = "Street")]
         public String Street
         {
             get { return street; }
@@ -54,7 +56,7 @@ namespace wpfzoo.entities
             
         }
 
-
+        [StringLength(255, ErrorMessage = "City")]
         public String City
         {
             get { return this.city; }
