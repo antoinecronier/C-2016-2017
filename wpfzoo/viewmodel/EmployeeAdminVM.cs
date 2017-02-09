@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using wpfzoo.entities.enums;
 using System.Windows.Media;
+using wpfzoo.views.usercontrols;
 
 namespace wpfzoo.viewmodel
 {
@@ -38,8 +39,8 @@ namespace wpfzoo.viewmodel
         {
             if (e.AddedItems.Count > 0)
             {
-                Employee item = (e.AddedItems[0] as Employee);
-                this.employeeAdmin.ucEmployee.Employee = item;
+                currentEmployee = (e.AddedItems[0] as Employee);
+                this.employeeAdmin.ucEmployee.Employee = currentEmployee;
             }
         }
 
@@ -94,14 +95,30 @@ namespace wpfzoo.viewmodel
 
         private void InitActions()
         {
+            this.employeeAdmin.ucEmployee.btnAddress.Click += BtnAddress_Click;
             this.employeeAdmin.btnAddEmployee.Click += btnAddEmployee_Click;
             this.employeeAdmin.btnUpdateEmployee.Click += btnUpdateEmployee_Click;
             this.employeeAdmin.btnDelEmployee.Click += btnDelEmployee_Click;
             this.employeeAdmin.menuDuplicate.Click += MenuDuplicate_OnClick;
             this.employeeAdmin.menuDelete.Click += MenuDelete_OnClick;
             this.employeeAdmin.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-            this.employeeAdmin.ucEmployee.datePHiring.KeyDown += disableTypingDatePHiring;
+            this.employeeAdmin.ucEmployee.DatePHiring.KeyDown += disableTypingDatePHiring;
             this.employeeAdmin.ucEmployee.DatePBirth.KeyDown += disableTypingDatePBirth;
+        }
+
+        private void BtnJobs_Click()
+        {
+            
+        }
+
+        private void BtnAddress_Click(object sender, RoutedEventArgs e)
+        {
+            AddressAdmin addressAdmin = new AddressAdmin();
+            Window window = new Window();
+            window.Content = addressAdmin;
+            window.Show();
+            addressAdmin.UCAddress.Address = currentEmployee.Address;
+            Console.WriteLine(currentEmployee.Lastname);
         }
 
         private async void MenuDuplicate_OnClick(object sender, RoutedEventArgs e)
@@ -134,6 +151,32 @@ namespace wpfzoo.viewmodel
             }
         }
 
+        public bool checkDateP()
+        {
+            DatePicker datePHiring = this.employeeAdmin.ucEmployee.DatePHiring;
+            DatePicker datePBirth = this.employeeAdmin.ucEmployee.DatePBirth;
+
+            datePHiring.Background = Brushes.White;
+            datePBirth.Background = Brushes.White;
+
+            int hiring = int.Parse(datePHiring.DisplayDate.ToString("yyyyMMdd"));
+            int birth = int.Parse(datePBirth.DisplayDate.ToString("yyyyMMdd"));
+            int age = (hiring - birth) / 10000;
+
+            if (datePHiring.DisplayDate < datePBirth.DisplayDate && age >= 18)
+            {
+                return true;
+            }
+            else
+            {
+                datePHiring.Background = Brushes.Red;
+                datePBirth.Background = Brushes.Red;
+                MessageBox.Show("Birth > Hiring or (Hiring - Birth) < 18");
+                return false;
+            }
+            
+        }
+
         public bool checkRegexTxtBName()
         {
             bool output = true;
@@ -144,9 +187,12 @@ namespace wpfzoo.viewmodel
             {
                 if (!checkRegex(listTxtB.ElementAt(index), RegexName))
                 {
-                    listTxtB.ElementAt(index).Background = Brushes.Red;
-                    MessageBox.Show(ListName[index] + " is not valid.");
-                    output = false;
+                    if (index > 1 && !listTxtB.ElementAt(index).Text.Equals(""))
+                    {
+                        listTxtB.ElementAt(index).Background = Brushes.Red;
+                        MessageBox.Show(ListName[index] + " is not valid.");
+                        output = false;
+                    }
                 }
             }
 
@@ -163,7 +209,7 @@ namespace wpfzoo.viewmodel
 
         private async void btnUpdateEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if (checkRegexTxtBName())
+            if (checkRegexTxtBName() && checkDateP())
             {
                 await employeeManager.Update(this.employeeAdmin.ucEmployee.Employee);
                 InitLUC();
@@ -172,7 +218,7 @@ namespace wpfzoo.viewmodel
 
         private async void btnAddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if (checkRegexTxtBName())
+            if (checkRegexTxtBName() && checkDateP())
             {
                 await employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
                 InitLUC();
