@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.database;
 using wpfzoo.entities;
 
 namespace wpfzoo.views.usercontrols
@@ -28,6 +29,8 @@ namespace wpfzoo.views.usercontrols
         #region properties
         public ListView ItemsList { get; set; }
         public ObservableCollection<Schedule> Obs { get; set; }
+        MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
+
         #endregion
 
         #region constructor
@@ -42,19 +45,31 @@ namespace wpfzoo.views.usercontrols
         #endregion
 
         #region methods
-        private void RemoveNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
+        private async void RemoveNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
-            Obs.Remove(ItemsList.SelectedItem as Schedule);  // remove the selected Item 
+            var schedule = new Schedule();
+            schedule = ItemsList.SelectedItem as Schedule;
+            if (schedule.Id > 0)
+            {
+                await scheduleManager.Delete(schedule);
+                Obs.Remove(schedule);  // remove the selected Item 
+                MessageBox.Show("You are in remove^schedule for:\nStart : " + schedule.Start + "\nEnd : " + schedule.End, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
-        private void EditNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
+        private async void DuplicateNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
             if (ItemsList.SelectedIndex > -1)
             {
                 var schedule = new Schedule();
-                schedule = (Schedule)ItemsList.SelectedItem; // casting the list view 
-                MessageBox.Show("You are in edit for Name:" + schedule.Start, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                schedule = ItemsList.SelectedItem as Schedule; // casting the list view 
+                if (schedule.Id > 0)
+                {
+                    schedule.Id = 0;
+                    await scheduleManager.Insert(schedule);
+                    Obs.Add(schedule);
+                    MessageBox.Show("You are in duplicate schedule for:\nStart : " + schedule.Start + "\nEnd : " + schedule.End, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
 
         }

@@ -27,6 +27,7 @@ namespace wpfzoo.viewmodel
             InitUC();
             InitActions();
             this.scheduleAdmin.scheduleUC.Schedule = new Schedule();
+            InitScheduleNow();
             this.scheduleAdmin.listScheduleUC.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             InitLists();
         }
@@ -35,6 +36,12 @@ namespace wpfzoo.viewmodel
         {
             currentSchedule = new Schedule();
             this.scheduleAdmin.scheduleUC.Schedule = currentSchedule;
+        }
+
+        private void InitScheduleNow()
+        {
+            this.scheduleAdmin.scheduleUC.Schedule.Start = DateTime.Now;
+            this.scheduleAdmin.scheduleUC.Schedule.End = DateTime.Now;
         }
 
         private async void InitLists()
@@ -84,6 +91,7 @@ namespace wpfzoo.viewmodel
         private void btnNew_Click(object sender, RoutedEventArgs e)
         {
             this.scheduleAdmin.scheduleUC.Schedule = new Schedule();
+            InitScheduleNow();
         }
 
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
