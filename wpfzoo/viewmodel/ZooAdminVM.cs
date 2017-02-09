@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using wpfzoo.database;
+using wpfzoo.database.entitieslinks;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
 
@@ -18,6 +19,7 @@ namespace wpfzoo.viewmodel
         private Zoo currentZoo;
         private ZooAdmin zooAdmin;
         private MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
+        private MySQLZooManager zooLinkManager = new MySQLZooManager();
         private StructureAdmin structureAdmin;
 
 
@@ -52,18 +54,72 @@ namespace wpfzoo.viewmodel
             this.zooAdmin.UCZooList.DuplicateZooContextMenu.Click += DuplicateZoo_Click;
             this.zooAdmin.UCZooList.RemoveZooContextMenu.Click += BtnDel_Click;
             this.zooAdmin.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-            this.zooAdmin.btnStructure.Click += BtnStructure_Click; 
+            this.zooAdmin.btnStructure.Click += BtnStructure_Click;
         }
+
+
+        #region GestionStructure
 
         private void BtnStructure_Click(object sender, RoutedEventArgs e)
         {
-
+            if (currentZoo.Structures != null)
+            {
+                this.zooAdmin.NavigationService.Navigate(new StructureAdmin(this));
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Can't open because structure is null", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public void LoadStructurePage(StructureAdmin structureAdmin)
         {
             this.structureAdmin = structureAdmin;
+            InitLUCStructure();
+            InitUC();
+            ClicksGenerator();
         }
+
+        private void InitLUCStructure()
+        {
+            zooLinkManager.GetStructures(currentZoo);
+        }
+
+        private void ClicksGenerator()
+        {
+            this.structureAdmin.buttonNew.Click += BtnValidateStructure_Click;
+            this.structureAdmin.Ok.Click += BtnUpdateStructure_Click;
+            this.structureAdmin.Delete.Click += BtnDeleteStructure_Click;
+        }
+
+        private void BtnDeleteStructure_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BtnUpdateStructure_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void BtnValidateStructure_Click(object sender, RoutedEventArgs e)
+        {
+            if (!this.structureAdmin.ucStructure.txtBSurface.Text.Contains("-"))
+            {
+                //zooManager.Insert(this.structureAdmin.ucStructure.Structure); Le manager en questio n'existe pas pour le moment
+                this.structureAdmin.ucStructure.txtBSurface.Text = "";
+                this.structureAdmin.ucStructure.txtBName.Text = "";
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Erreur surface négative wsh");
+            }
+        }
+
+        #endregion
+
+
+
 
         private void DuplicateZoo_Click(object sender, RoutedEventArgs e)
         {

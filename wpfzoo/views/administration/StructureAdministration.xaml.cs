@@ -44,6 +44,7 @@ namespace wpfzoo.views.administration
             InitializeComponent();
             this.DataContext = zooViewModel;
             zooViewModel.LoadStructurePage(this);
+            InitLists();
         }
     }
 }
