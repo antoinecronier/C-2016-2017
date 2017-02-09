@@ -42,6 +42,7 @@ namespace wpfzoo.entities
             }
         }
 
+        [Required(ErrorMessage="StreetNumber")]
         public StreetNumber StreetNumber
         {
             get { return streetNumber; }
