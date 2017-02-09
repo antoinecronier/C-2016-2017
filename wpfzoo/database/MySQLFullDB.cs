@@ -88,6 +88,7 @@ namespace wpfzoo.database
 
 
                 AddressTable.Find(1).StreetNumber = StreetNumberTable.Find(1);
+                this.SaveChangesAsync();
             }
         }
 

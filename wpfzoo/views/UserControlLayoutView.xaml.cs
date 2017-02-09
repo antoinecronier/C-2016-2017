@@ -76,7 +76,7 @@ namespace wpfzoo.views
             employee.Hiring = DateTime.Now;
             employee.Jobs.Add(job);
             employee.Lastname = "Del Santos";
-            employee.Planning.Add(schedule, structure);
+            //employee.Planning.Add(schedule, structure);
             this.employeeUC.Employee = employee;
 
             Zoo zoo = new Zoo();

@@ -16,7 +16,7 @@ namespace wpfzoo.entities
         private Address address;
         private Gender gender;
         private Employee manager;
-        private Dictionary<Schedule,Structure> planning;
+        //private Dictionary<Schedule,Structure> planning;
 
         public String Lastname
         {
@@ -129,7 +129,7 @@ namespace wpfzoo.entities
                 OnPropertyChanged("Manager");
             }
         }
-
+        /*
         public Dictionary<Schedule, Structure> Planning
         {
             get
@@ -143,10 +143,10 @@ namespace wpfzoo.entities
                 OnPropertyChanged("Planning");
             }
         }
-
+        */
         public Employee()
         {
-            this.planning = new Dictionary<Schedule, Structure>();
+            //this.planning = new Dictionary<Schedule, Structure>();
             this.jobs = new List<Job>();
         }
         public Employee(Employee other)
@@ -159,7 +159,7 @@ namespace wpfzoo.entities
             this.jobs = other.Jobs;
             this.gender = other.Gender;
             this.manager = other.Manager;
-            this.planning = other.Planning;
+//            this.planning = other.Planning;
         }
     }
 }

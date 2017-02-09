@@ -37,5 +37,10 @@ namespace wpfzoo.views.usercontrols
             InitializeComponent();
             this.DataContext = this;
         }
+
+        private void dp_DateValidationError(object sender, DatePickerDateValidationErrorEventArgs e)
+        {
+            MessageBox.Show("Insert valide values", "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }

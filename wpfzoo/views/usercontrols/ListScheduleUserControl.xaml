@@ -7,9 +7,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <ListView Name="itemList"
+        <ListView x:Name="itemList"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ContextMenu>
+                <ContextMenu Name="ZoneIformationList" StaysOpen="true" Background="WhiteSmoke">
+                    <ContextMenu.BitmapEffect>
+                        <BitmapEffectGroup/>
+                    </ContextMenu.BitmapEffect>
+                    <MenuItem Header="Duplicate" Name="DuplicateNutritionContextMenu"  Click="DuplicateNutritionContextMenu_OnClick"/>
+                    <MenuItem Header="Remove" Name="RemoveNutritionContextMenu" Click="RemoveNutritionContextMenu_OnClick"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>
@@ -18,7 +27,6 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*" />
                             <ColumnDefinition Width="1*" />
@@ -27,13 +35,10 @@
                             <RowDefinition Height="1*" />
                             <RowDefinition Height="1*" />
                         </Grid.RowDefinitions>
-
                         <Label x:Name="lblStart" Content="Start" Grid.Column="0" Grid.Row="0" />
                         <TextBlock x:Name="txtBStart" TextWrapping="Wrap" Text="{Binding Start, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" />
-
                         <Label x:Name="lblEnd" Content="End" Grid.Column="0" Grid.Row="1" />
                         <TextBlock x:Name="txtBEnd" TextWrapping="Wrap" Text="{Binding End, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" />
-
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

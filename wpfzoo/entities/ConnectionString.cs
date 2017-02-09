@@ -91,6 +91,7 @@ namespace wpfzoo.entities
 
         public ConnectionString()
         {
+
         }
 
         public override string ToString()

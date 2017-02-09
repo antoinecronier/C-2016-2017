@@ -59,6 +59,7 @@ namespace wpfzoo.views.administration
 
             }
         }
+
         private async void InitLists()
         {
             MySQLManager<Address> addressManager = new MySQLManager<Address>();

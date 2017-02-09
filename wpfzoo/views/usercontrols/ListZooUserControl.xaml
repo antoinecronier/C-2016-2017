@@ -12,6 +12,17 @@
         <ListView x:Name="itemList"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+            <ListView.ContextMenu>
+                <ContextMenu Name="ZoneIformationList" StaysOpen="true" Background="WhiteSmoke">
+                    <ContextMenu.BitmapEffect>
+                        <BitmapEffectGroup/>
+                    </ContextMenu.BitmapEffect>
+                    <MenuItem Header="Duplicate" Name="DuplicateZooContextMenu"/>
+                    <MenuItem Header="Remove" Name="RemoveZooContextMenu"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Vertical"/>

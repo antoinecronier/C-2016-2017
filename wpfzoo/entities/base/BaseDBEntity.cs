@@ -15,6 +15,5 @@ namespace wpfzoo.entities.bases
             get { return id; }
             set { id = value; OnPropertyChanged("Id"); }
         }
-
     }
 }

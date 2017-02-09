@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:wpfzoo"
              StartupUri="Application.xaml">
     <Application.Resources>
-
     </Application.Resources>
 </Application>
