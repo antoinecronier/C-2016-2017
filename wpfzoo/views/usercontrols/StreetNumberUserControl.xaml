@@ -20,7 +20,7 @@
         <TextBox x:Name="txtBNumber" Text="{Binding Number, Mode=TwoWay}"  TextWrapping="Wrap" Grid.Column="1" Grid.Row="0"/>
 
         <Label x:Name="lblSuf" Content="Suf" Grid.Column="0" Grid.Row="1" />
-        <TextBox x:Name="txtBSuf" Text="{Binding Suf, Mode=TwoWay}" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1"/>
+        <ComboBox x:Name="txtBSuf" Text="{Binding Suf, Mode=TwoWay}" Grid.Column="1" Grid.Row="1"/>
 
     </Grid>
 </local:UserControlBase>
