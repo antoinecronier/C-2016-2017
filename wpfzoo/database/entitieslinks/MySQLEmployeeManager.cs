@@ -11,11 +11,13 @@ namespace wpfzoo.database.entitieslinks
     {
         public void GetJobs(Employee employee)
         {
+            this.DbSetT.Attach(employee);
             this.Entry(employee).Collection(x => x.Jobs).Load();
         }
 
         public void GetAddress(Employee employee)
         {
+            this.DbSetT.Attach(employee);
             this.Entry(employee).Reference(x => x.Address).Load();
         }
     }
