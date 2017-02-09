@@ -15,8 +15,8 @@
                     <ContextMenu.BitmapEffect>
                         <BitmapEffectGroup/>
                     </ContextMenu.BitmapEffect>
-                    <MenuItem Header="Edit" Name="EditAnimalContextMenu"  Click="EditAnimalContextMenu_OnClick"/>
-                    <MenuItem Header="Remove" Name="RemoveAnimalContextMenu" Click="RemoveAnimalContextMenu_OnClick"/>
+                    <MenuItem Header="Duplicate" Name="DuplicateAnimalContextMenu"  Click="ClickMenuDupli"/>
+                    <MenuItem Header="Remove" Name="RemoveAnimalContextMenu" Click="ClickMenuDel"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.ItemsPanel>
