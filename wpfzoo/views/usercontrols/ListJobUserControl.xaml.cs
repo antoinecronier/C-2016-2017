@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.database;
 using wpfzoo.entities;
 
 namespace wpfzoo.views.usercontrols
@@ -25,6 +26,7 @@ namespace wpfzoo.views.usercontrols
 
         public ListView ItemsList { get; set; }
         public ObservableCollection<Job> Obs { get; set; }
+        private MySQLManager<Job> jobManager = new MySQLManager<Job>();
 
         public ListJobUserControl()
         {
@@ -61,6 +63,25 @@ namespace wpfzoo.views.usercontrols
             foreach (var item in items)
             {
                 Obs.Add(item);
+            }
+        }
+
+        private void RemoveJobContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            Obs.Remove(ItemsList.SelectedItem as Job);
+        }
+
+        private async void DuplicateJobContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (ItemsList.SelectedIndex > -1)
+            {
+                var duplicateJob = new Job();
+                duplicateJob = (Job)ItemsList.SelectedItem;
+                duplicateJob.Id = 0;
+                await jobManager.Insert(duplicateJob);
+
+                this.LoadItem((await jobManager.Get()).ToList());
+
             }
         }
 
