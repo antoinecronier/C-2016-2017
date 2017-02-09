@@ -38,5 +38,13 @@ namespace wpfzoo.views.administration
             MySQLManager<Structure> structureManager = new MySQLManager<Structure>();
             this.UCstructureList.LoadItem((await structureManager.Get()).ToList());
         }
+
+        public StructureAdmin(ZooAdminVM zooViewModel)
+        {
+            InitializeComponent();
+            this.DataContext = zooViewModel;
+            zooViewModel.LoadStructurePage(this);
+            InitLists();
+        }
     }
 }
