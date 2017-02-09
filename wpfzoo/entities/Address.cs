@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using wpfzoo.entities.bases;
 
 namespace wpfzoo.entities
@@ -17,9 +18,10 @@ namespace wpfzoo.entities
 
         public Address(StreetNumber streetNumber)
         {
-            StreetNumber = streetNumber;
+            this.StreetNumber = streetNumber;
         }
 
+        [RegularExpression("[1-9]{1}[0-7]{1}[0-9]{3}", ErrorMessage ="PostalCode")]
         public String PostalCode
         {
             get { return postalCode; }

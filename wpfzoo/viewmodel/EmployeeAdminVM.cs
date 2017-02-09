@@ -26,6 +26,7 @@ namespace wpfzoo.viewmodel
         private Employee currentEmployee;
         private EmployeeAdmin employeeAdmin;
         private MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
+        private AddressAdmin addressAdmin;
 
         public EmployeeAdminVM(EmployeeAdmin employeeAdmin)
         {
@@ -41,9 +42,9 @@ namespace wpfzoo.viewmodel
             if (e.AddedItems.Count > 0)
             {
                 currentEmployee = (e.AddedItems[0] as Employee);
-                this.employeeAdmin.ucEmployee.Employee = currentEmployee;
                 MySQLEmployeeManager mySqlEmployeeManager = new MySQLEmployeeManager();
                 mySqlEmployeeManager.GetAddress(currentEmployee);
+                this.employeeAdmin.ucEmployee.Employee = currentEmployee;
             }
         }
 
@@ -114,15 +115,22 @@ namespace wpfzoo.viewmodel
             
         }
 
+        public void LoadAddressPage(AddressAdmin addressAdmin)
+        {
+            this.addressAdmin = addressAdmin;
+        }
+
         private void BtnAddress_Click(object sender, RoutedEventArgs e)
         {
             if (currentEmployee.Address != null)
             {
-                AddressAdmin addressAdmin = new AddressAdmin();
+                this.employeeAdmin.NavigationService.Navigate(new AddressAdmin(this));
+
+                /*AddressAdmin addressAdmin = new AddressAdmin();
                 Window window = new Window();
                 window.Content = addressAdmin;
                 window.Show();
-                addressAdmin.UCAddress.Address = currentEmployee.Address;
+                addressAdmin.UCAddress.Address = currentEmployee.Address;*/
             }
             else
             {

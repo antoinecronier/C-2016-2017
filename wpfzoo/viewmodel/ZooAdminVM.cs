@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using wpfzoo.database;
+using wpfzoo.database.entitieslinks;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
 
@@ -17,7 +18,7 @@ namespace wpfzoo.viewmodel
     {
         private Zoo currentZoo;
         private ZooAdmin zooAdmin;
-        private MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
+        private MySQLZooManager zooManager = new MySQLZooManager();
 
         public object UCZooList { get; private set; }
 
@@ -47,11 +48,15 @@ namespace wpfzoo.viewmodel
             this.zooAdmin.btnValidateZoo.Click += BtnValidate_Click;
             this.zooAdmin.btnDelZoo.Click += BtnDel_Click;
             this.zooAdmin.btnNewZoo.Click += BtnNew_Click;
+            this.zooAdmin.btnAddress.Click += BtnAddress_Click;
+            this.zooAdmin.btnEmployee.Click += BtnEmployees_Click;
+            this.zooAdmin.btnStructure.Click += BtnStructures_Click;
             this.zooAdmin.UCZooList.DuplicateZooContextMenu.Click += DuplicateZoo_Click;
             this.zooAdmin.UCZooList.RemoveZooContextMenu.Click += BtnDel_Click;
             this.zooAdmin.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
         }
 
+        
 
         private void DuplicateZoo_Click(object sender, RoutedEventArgs e)
         {
@@ -74,6 +79,68 @@ namespace wpfzoo.viewmodel
             {
                 Zoo item = (e.AddedItems[0] as Zoo);
                 this.zooAdmin.ucZoo.Zoo = item;
+                //MySQLZooManager mySqlZooManager = new MySQLZooManager();
+                zooManager.GetAddress(currentZoo);
+                zooManager.GetEmployees(currentZoo);
+                zooManager.GetStructures(currentZoo);
+            }
+        }
+
+        private void BtnAddress_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentZoo.Address != null)
+            {
+                AddressAdmin addressAdmin = new AddressAdmin();
+                Window window = new Window();
+                window.Content = addressAdmin;
+                window.Show();
+                addressAdmin.UCAddress.Address = currentZoo.Address;
+            }
+            else
+            {
+                AddressAdmin addressAdmin = new AddressAdmin();
+                Window window = new Window();
+                window.Content = addressAdmin;
+                window.Show();
+            }
+
+        }
+
+        private void BtnStructures_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentZoo.Structures.Count > 0)
+            {
+                StructureAdmin structureAdmin = new StructureAdmin();
+                Window window = new Window();
+                window.Content = structureAdmin;
+                window.Show();
+                structureAdmin.UCstructureList.LoadItem(currentZoo.Structures);
+            }
+            else
+            {
+                StructureAdmin structureAdmin = new StructureAdmin();
+                Window window = new Window();
+                window.Content = structureAdmin;
+                window.Show();
+            }
+        }
+
+        private void BtnEmployees_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentZoo.Staff.Count > 0)
+            {
+                EmployeeAdmin employeeAdmin = new EmployeeAdmin();
+                Window window = new Window();
+                window.Content = employeeAdmin;
+                window.Show();
+                employeeAdmin.ucEmployeeList.LoadItem(currentZoo.Staff);
+            }
+            else
+            {
+                EmployeeAdmin employeeAdmin = new EmployeeAdmin();
+                Window window = new Window();
+                window.Content = employeeAdmin;
+                window.Show();
             }
         }
 
