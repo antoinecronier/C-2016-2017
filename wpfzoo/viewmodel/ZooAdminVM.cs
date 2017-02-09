@@ -18,6 +18,8 @@ namespace wpfzoo.viewmodel
         private Zoo currentZoo;
         private ZooAdmin zooAdmin;
         private MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
+        private StructureAdmin structureAdmin;
+
 
         public object UCZooList { get; private set; }
 
@@ -52,6 +54,10 @@ namespace wpfzoo.viewmodel
             this.zooAdmin.UCZooList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
         }
 
+        public void LoadStructurePage(StructureAdmin structureAdmin)
+        {
+            this.structureAdmin = structureAdmin;
+        }
 
         private void DuplicateZoo_Click(object sender, RoutedEventArgs e)
         {
