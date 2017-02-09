@@ -84,6 +84,8 @@
     </ApplicationDefinition>
     <Compile Include="database\entitieslinks\MySQLAddressManager.cs" />
     <Compile Include="database\entitieslinks\MySQLEmployeeManager.cs" />
+    <Compile Include="database\entitieslinks\MySQLJobManager.cs" />
+    <Compile Include="database\entitieslinks\MySQLStructureManager.cs" />
     <Compile Include="database\entitieslinks\MySQLZooManager.cs" />
     <Compile Include="database\MySQLFullDB.cs" />
     <Compile Include="database\MySQLManager.cs" />
