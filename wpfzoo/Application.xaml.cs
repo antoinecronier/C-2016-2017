@@ -51,7 +51,7 @@ namespace wpfzoo
         }
         private void btnJob_Click(object sender, RoutedEventArgs e)
         {
-            Window window = new Window();
+            NavigationWindow window = new NavigationWindow();
             window.Content = new JobAdmin();
             window.Show();
         }

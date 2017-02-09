@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using wpfzoo.database;
+using wpfzoo.database.entitieslinks;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
 
@@ -17,7 +18,8 @@ namespace wpfzoo.viewmodel
     {
         private Job currentJob;
         private JobAdmin jobAdmin;
-        private MySQLManager<Job> jobManager = new MySQLManager<Job>();
+        private MySQLJobManager jobManager = new MySQLJobManager();
+//        private MySQLManager<Job> jobManager = new MySQLManager<Job>();
         private MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
 
         public JobAdminVM(JobAdmin jobAdmin)
@@ -37,6 +39,10 @@ namespace wpfzoo.viewmodel
                 if (item.Schedule == null)
                 {
                     item.Schedule = new Schedule();
+                }
+                else
+                {
+                    jobManager.GetSchedule(item);
                 }
                 this.jobAdmin.UCJob.Job = item;
             }
