@@ -9,6 +9,11 @@
       d:DesignHeight="300" d:DesignWidth="300"
       Title="StreetNumberAdmin">
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu>
+                <MenuItem x:Name="menuDuplicateStreetNumber" Header="Duplicate" />
+            </ContextMenu>
+        </Grid.ContextMenu>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="1*"/>

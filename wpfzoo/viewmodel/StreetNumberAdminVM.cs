@@ -40,6 +40,32 @@ namespace wpfzoo.viewmodel
             this.streetNumberAdmin.Delete.Click += BtnDelete_Click;
             this.streetNumberAdmin.ok.Click += BtnOk_Click;
             this.streetNumberAdmin.ucStreetNumberList.itemList.SelectionChanged += ItemsList_SelectionChanged;
+            this.streetNumberAdmin.ucStreetNumber.txtBNumber.DataContextChanged += TestValue;
+            this.streetNumberAdmin.menuDuplicateStreetNumber.Click += DuplicateStreetNumberContextMenu_OnClick;
+        }
+
+        private async void DuplicateStreetNumberContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (this.streetNumberAdmin.ucStreetNumberList.ItemsList.SelectedIndex> -1)
+            {
+                var streeNumber = new StreetNumber();
+                streeNumber = (StreetNumber)this.streetNumberAdmin.ucStreetNumberList.ItemsList.SelectedItem;
+                await streetNumberManager.Insert(streeNumber);
+                this.streetNumberAdmin.ucStreetNumberList.LoadItem((await streetNumberManager.Get()).ToList());
+            }
+        }
+
+        private void TestValue(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var value = this.streetNumberAdmin.ucStreetNumber.txtBNumber.Text;
+            if (value is string)
+            {
+                //streetNumberAdmin.ucStreetNumber.txtBNumber
+            }
+            else
+            {
+                    
+            }
         }
 
         private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)

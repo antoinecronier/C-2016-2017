@@ -37,7 +37,7 @@ namespace wpfzoo.views.usercontrols
             InitializeComponent();
             this.DataContext = this;
         }
-           
+
     }
 }
 
