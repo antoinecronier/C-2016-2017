@@ -36,7 +36,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="buttonNew" Grid.Column="0">New</Button>
-            <Button x:Name="Ok" Grid.Column="2">Update</Button>
+            <Button x:Name="Ok" Grid.Column="2">Validate</Button>
             <Button x:Name="Delete" Grid.Column="4">Delete</Button>
         </Grid>
         <Grid x:Name="allInfos"  Grid.Column="0" Grid.Row="3">
