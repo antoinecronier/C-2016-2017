@@ -29,5 +29,13 @@ namespace wpfzoo.views.administration
             InitializeComponent();
             this.DataContext = new ScheduleAdminVM(this);
         }
+
+        public ScheduleAdmin(ZooAdminVM zooViewModel)
+        {
+            InitializeComponent();
+            this.DataContext = zooViewModel;
+            zooViewModel.LoadSchedulePage(this);
+            //Todo Faire le Init
+        }
     }
 }
