@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using wpfzoo.database;
 using wpfzoo.entities;
 
 namespace wpfzoo.views.usercontrols
@@ -23,6 +24,7 @@ namespace wpfzoo.views.usercontrols
     public partial class ListAddressUserControl : UserControl
     {
         #region attributs
+        private MySQLManager<Address> addressManager = new MySQLManager<Address>();
         #endregion
 
         #region properties
@@ -45,7 +47,9 @@ namespace wpfzoo.views.usercontrols
         #region methods
         private void RemoveNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
-            Obs.Remove(ItemsList.SelectedItem as Address);  // remove the selected Item 
+            Address itemToDelete = ItemsList.SelectedItem as Address;
+            addressManager.Delete(itemToDelete);
+            Obs.Remove(itemToDelete);  // remove the selected Item 
         }
 
         private void EditNutritionContextMenu_OnClick(object sender, RoutedEventArgs e)
