@@ -53,7 +53,7 @@ namespace wpfzoo.views.usercontrols
             {
                 await scheduleManager.Delete(schedule);
                 Obs.Remove(schedule);  // remove the selected Item 
-                MessageBox.Show("You are in remove^schedule for:\nStart : " + schedule.Start + "\nEnd : " + schedule.End, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("You are in remove schedule for:\nStart : " + schedule.Start + "\nEnd : " + schedule.End, "Nutrition", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

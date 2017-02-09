@@ -159,7 +159,7 @@ namespace wpfzoo.entities
             this.jobs = other.Jobs;
             this.gender = other.Gender;
             this.manager = other.Manager;
-            this.planning = other.Planning;
+//            this.planning = other.Planning;
         }
     }
 }
