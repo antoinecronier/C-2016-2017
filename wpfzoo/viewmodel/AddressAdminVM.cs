@@ -241,9 +241,11 @@ namespace wpfzoo.viewmodel
             confirmDelete();
         }
 
-        /**
-         * Callback on "Duplicate" item in Context menu
-         */
+        /// <summary>
+        /// Callback on "Duplicate" item in Context menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void DuplicateAddressContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
             if (this.addressAdmin.UCAddressList.ItemsList.SelectedIndex > -1)
