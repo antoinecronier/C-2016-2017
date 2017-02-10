@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using wpfzoo.database;
 using wpfzoo.database.entitieslinks;
 using wpfzoo.entities;
+using wpfzoo.entities.enums;
 using wpfzoo.views.administration;
 
 namespace wpfzoo.viewmodel
@@ -80,53 +81,130 @@ namespace wpfzoo.viewmodel
         {
             if (e.AddedItems.Count > 0)
             {
-                Zoo item = (e.AddedItems[0] as Zoo);
-                this.zooAdmin.ucZoo.Zoo = item;
-                //MySQLZooManager mySqlZooManager = new MySQLZooManager();
+                currentZoo = (e.AddedItems[0] as Zoo);
+                this.zooAdmin.ucZoo.Zoo = currentZoo;
                 zooManager.GetAddress(currentZoo);
                 zooManager.GetEmployees(currentZoo);
                 zooManager.GetStructures(currentZoo);
             }
         }
 
-#region address
-
-        
 
         private void BtnAddress_Click(object sender, RoutedEventArgs e)
         {
+            if (currentZoo.Id !=0)
+            {
                 this.zooAdmin.NavigationService.Navigate(new AddressAdmin(this));
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("You must select a zoo to go to its address page... ", "No zoo selected",
+                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            
         }
 
+
+#region address
 
 
         public void LoadAddressPage(AddressAdmin addressAdmin)
         {
             this.addressAdmin = addressAdmin;
+            InitAddressPage();
             InitAddressLists();
             InitAddressUC();
+            if (currentZoo.Address != null)
+            {
+                GetCurrentZooAddressFull();
+                FillAddressUC();
+            }
+            
             InitAddressActions();
+        }
+
+        private void GetCurrentZooAddressFull()
+        {
+            if (currentZoo.Address.StreetNumber !=null)
+            {
+                MySQLAddressManager addressManager = new MySQLAddressManager();
+                addressManager.GetStreetNumber(currentZoo.Address);
+            }
+        }
+
+        private void FillAddressUC()
+        {
+            if (currentZoo.Address.Id != 0)
+            {
+                this.addressAdmin.UCAddress.Address = currentZoo.Address;
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentZoo.Address.StreetNumber;
+            }
+        }
+
+        private void InitAddressPage()
+        {
+            this.addressAdmin.btnNew.Visibility = Visibility.Hidden;
         }
 
         private void InitAddressActions()
         {
             this.addressAdmin.btnValidate.Click += BtnAddressValidate_Click;
-            this.addressAdmin.btnNew.Click += BtnAddressNew_Click;
             this.addressAdmin.btnDelete.Click += BtnAddressDelete_Click;
-            this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+            this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += AddressList_SelectionChanged;
+        }
+
+        private void AddressList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Address item = (e.AddedItems[0] as Address);
+
+                MySQLAddressManager addressManager = new MySQLAddressManager();
+                addressManager.GetStreetNumber(item);
+
+                this.addressAdmin.UCAddress.Address = item;
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = item.StreetNumber;
+            }
+        }
+
+        private async void BtnAddressDelete_Click(object sender, RoutedEventArgs e)
+        {
+            currentZoo.Address = this.addressAdmin.UCAddress.Address;
+
+            if (currentZoo.Address.Id == 0)
+            {
+                System.Windows.MessageBox.Show("Cannot delete new element in database");
+            }
+            else
+            {
+                currentZoo.Address = null;
+                InitAddressUC();
+            }
+        }
+
+        private void BtnAddressValidate_Click(object sender, RoutedEventArgs e)
+        {
+            currentZoo.Address = this.addressAdmin.UCAddress.Address;
+            this.addressAdmin.NavigationService.GoBack();
         }
 
         private void InitAddressUC()
         {
-            this.addressAdmin.UCAddress.Address = this.currentZoo.Address;
+            this.addressAdmin.UCAddress.Address = new Address();
+            this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = new StreetNumber();
+            foreach (StreetAvaibleItems streetAvaibleItem in Enum.GetValues(typeof(StreetAvaibleItems)))
+            {
+                this.addressAdmin.UCAddress.UCStreetNumber.cbSuff.Items.Add(streetAvaibleItem);
+            }
         }
 
-        private void InitAddressLists()
+        private async void InitAddressLists()
         {
+            MySQLAddressManager addressManager = new MySQLAddressManager();
             this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
         }
 
-        #endregion //address
+#endregion //address
 
         private void BtnStructures_Click(object sender, RoutedEventArgs e)
         {
@@ -176,9 +254,7 @@ namespace wpfzoo.viewmodel
                 }
                 else
                 {
-                    Task<Zoo> tZoo = zooManager.Insert(this.zooAdmin.ucZoo.Zoo);
-                    Zoo zoo = (Zoo)tZoo.Result;
-                    this.zooAdmin.ucZoo.Zoo = zoo;
+                    this.zooAdmin.ucZoo.Zoo = await zooManager.Insert(this.zooAdmin.ucZoo.Zoo);
                     InitLUC();
                 }
             }
