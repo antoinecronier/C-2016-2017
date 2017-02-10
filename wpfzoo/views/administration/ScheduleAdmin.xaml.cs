@@ -30,12 +30,18 @@ namespace wpfzoo.views.administration
             this.DataContext = new ScheduleAdminVM(this);
         }
 
+        private async void InitLists()
+        {
+            MySQLManager<Schedule> scheduleManager = new MySQLManager<Schedule>();
+            this.listScheduleUC.LoadItem((await scheduleManager.Get()).ToList());
+        }
+
         public ScheduleAdmin(ZooAdminVM zooViewModel)
         {
             InitializeComponent();
             this.DataContext = zooViewModel;
             zooViewModel.LoadSchedulePage(this);
-            //Todo Faire le Init
+            InitLists();
         }
     }
 }
