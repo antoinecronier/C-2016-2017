@@ -57,7 +57,7 @@ namespace wpfzoo.viewmodel
          */
         private void InitUC()
         {
-            this.ResetAddress();
+            this.resetAddress();
             defaultColor = this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush;
             foreach (var item in Enum.GetValues(typeof(StreetAvaibleItems)))
             {
@@ -101,7 +101,8 @@ namespace wpfzoo.viewmodel
                         addressManager.GetStreetNumber(currentAddress);
                         this.addressAdmin.UCAddress.Address = currentAddress;
                         this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
-                        this.ReloadList();
+                        this.reloadList();
+                        this.resetFieldsColors();
                     }
                 }
                 else
@@ -111,6 +112,7 @@ namespace wpfzoo.viewmodel
                     addressManager.GetStreetNumber(currentAddress);
                     this.addressAdmin.UCAddress.Address = currentAddress;
                     this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
+                    this.resetFieldsColors();
                 }
                 
             }
@@ -135,7 +137,7 @@ namespace wpfzoo.viewmodel
                 }
                 catch (DbEntityValidationException dbe)
                 {
-                    Validate();
+                    validate();
                     MessageBox.Show("One or more fields are not valid.");
                     Console.WriteLine(dbe);
                     
@@ -152,7 +154,7 @@ namespace wpfzoo.viewmodel
                 }
                 catch (DbEntityValidationException dbe)
                 {
-                    Validate();
+                    validate();
                     MessageBox.Show("One or more fields are not valid.");
                     Console.WriteLine(dbe);
                 }
@@ -177,14 +179,14 @@ namespace wpfzoo.viewmodel
                 {
                     if (currentAddress.Id != 0)
                     {
-                        this.ReloadList();
+                        this.reloadList();
                     }
-                    this.ResetAddress();
+                    this.resetAddress();
                 }
             }
             else
             {
-                this.ResetAddress();
+                this.resetAddress();
             }
 
         }
@@ -217,7 +219,7 @@ namespace wpfzoo.viewmodel
          */
         private void BtnVerify_Click(object sender, RoutedEventArgs e)
         {
-            if (!Validate())
+            if (!validate())
             {
                 MessageBox.Show("There is one ore more error(s) in your fields. Please check them before saving");
             }
@@ -274,7 +276,7 @@ namespace wpfzoo.viewmodel
             {
                 await addressManager.Delete(currentAddress);
                 this.addressAdmin.UCAddressList.RemoveItem(currentAddress);
-                this.ResetAddress();
+                this.resetAddress();
             }
         }
 
@@ -282,7 +284,7 @@ namespace wpfzoo.viewmodel
          * Instantiate new Address entity with nested StreetNumber with default values
          * then reset the current address value
          */
-        private void ResetAddress()
+        private void resetAddress()
         {
             currentAddress = new Address(new StreetNumber());
             this.addressAdmin.UCAddress.Address = currentAddress;
@@ -294,7 +296,7 @@ namespace wpfzoo.viewmodel
          * 
          * Return false if any error occured 
          */
-        private Boolean Validate()
+        private Boolean validate()
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
 
@@ -302,10 +304,7 @@ namespace wpfzoo.viewmodel
 
             try
             {
-                //TODO : reset colors when context change
-                this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = defaultColor;
-                this.addressAdmin.UCAddress.txtBCity.BorderBrush = defaultColor;
-                this.addressAdmin.UCAddress.txtBStreet.BorderBrush = defaultColor;
+                this.resetFieldsColors();
 
                 EntityValidator.Validate<Address>(currentAddress);
 
@@ -365,7 +364,7 @@ namespace wpfzoo.viewmodel
         /**
          * Force reloading list items from database
          */
-        private void ReloadList()
+        private void reloadList()
         {
             foreach (var entity in addressManager.ChangeTracker.Entries())
             {
@@ -374,6 +373,16 @@ namespace wpfzoo.viewmodel
 
             InitLists();
 
+        }
+
+        /**
+         * Reset border color of fields with default one
+         */
+        private void resetFieldsColors()
+        {
+            this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = defaultColor;
+            this.addressAdmin.UCAddress.txtBCity.BorderBrush = defaultColor;
+            this.addressAdmin.UCAddress.txtBStreet.BorderBrush = defaultColor;
         }
         #endregion
     }
