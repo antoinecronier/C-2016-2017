@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
-using wpfzoo.views.adminstration;
 
 namespace wpfzoo.viewmodel
 {

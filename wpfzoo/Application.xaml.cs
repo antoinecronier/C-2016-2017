@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using wpfzoo.entities;
 using wpfzoo.views;
 using wpfzoo.views.administration;
-using wpfzoo.views.adminstration;
 
 namespace wpfzoo
 {

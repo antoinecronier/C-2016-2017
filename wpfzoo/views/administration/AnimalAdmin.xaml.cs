@@ -19,7 +19,7 @@ using wpfzoo.entities;
 using wpfzoo.viewmodel;
 using wpfzoo.views.usercontrols;
 
-namespace wpfzoo.views.adminstration
+namespace wpfzoo.views.administration
 {
 
     /// <summary>

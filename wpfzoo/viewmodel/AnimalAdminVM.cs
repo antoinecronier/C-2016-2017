@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using wpfzoo.database;
 using wpfzoo.entities;
-using wpfzoo.views.adminstration;
+using wpfzoo.views.administration;
 
 namespace wpfzoo.viewmodel
 {
