@@ -7,6 +7,7 @@ using System.Windows;
 using wpfzoo.database;
 using wpfzoo.database.entitieslinks;
 using wpfzoo.entities;
+using wpfzoo.entities.enums;
 using wpfzoo.views.administration;
 using wpfzoo.entities.enums;
 using System.Text.RegularExpressions;
@@ -19,8 +20,8 @@ namespace wpfzoo.viewmodel
     {
         private Zoo currentZoo;
         private ZooAdmin zooAdmin;
-        private MySQLManager<Zoo> zooManager = new MySQLManager<Zoo>();
-        private MySQLZooManager zooLinkManager = new MySQLZooManager();
+        private MySQLZooManager zooManager = new MySQLZooManager();
+        private AddressAdmin addressAdmin;
         private StructureAdmin structureAdmin;
         private ScheduleAdmin scheduleAdmin;
         private AnimalAdmin animalAdmin;
@@ -30,9 +31,9 @@ namespace wpfzoo.viewmodel
         List<System.Windows.Controls.TextBox> listTxtB = new List<System.Windows.Controls.TextBox>();
         private Employee currentEmployee;
         private MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
-        private AddressAdmin addressAdmin;
+        
 
-        #region GestionZoo
+#region Zoo
         public object UCZooList { get; private set; }
 
         public ZooAdminVM(ZooAdmin zooAdmin)
@@ -48,6 +49,8 @@ namespace wpfzoo.viewmodel
         {
             this.zooAdmin.UCZooList.LoadItem((await zooManager.Get()).ToList());
         }
+
+        
 
         private void InitUC()
         {
@@ -69,26 +72,7 @@ namespace wpfzoo.viewmodel
             this.zooAdmin.btnEmployee.Click += BtnEmployees_Click;
         }
 
-        #region GestionZooBtn
-        private void BtnAddress_Click(object sender, RoutedEventArgs e)
-        {
-            if (currentZoo.Address != null)
-            {
-                AddressAdmin addressAdmin = new AddressAdmin();
-                Window window = new Window();
-                window.Content = addressAdmin;
-                window.Show();
-                addressAdmin.UCAddress.Address = currentZoo.Address;
-            }
-            else
-            {
-                AddressAdmin addressAdmin = new AddressAdmin();
-                Window window = new Window();
-                window.Content = addressAdmin;
-                window.Show();
-            }
-
-        }
+#region GestionZooBtn
 
     private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -162,16 +146,134 @@ namespace wpfzoo.viewmodel
         {
             if (e.AddedItems.Count > 0)
             {
-                Zoo item = (e.AddedItems[0] as Zoo);
-                this.zooAdmin.ucZoo.Zoo = item;
+                currentZoo = (e.AddedItems[0] as Zoo);
+                this.zooAdmin.ucZoo.Zoo = currentZoo;
+                zooManager.GetAddress(currentZoo);
+                zooManager.GetEmployees(currentZoo);
+                zooManager.GetStructures(currentZoo);
             }
         }
 
-        #endregion
 
-        #endregion
+        private void BtnAddress_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentZoo.Id !=0)
+            {
+                this.zooAdmin.NavigationService.Navigate(new AddressAdmin(this));
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("You must select a zoo to go to its address page... ", "No zoo selected",
+                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            
+        }
 
-        #region GestionStructure
+#endregion //GestionZooBtn
+
+#endregion //zoo
+
+        #region address
+
+
+        public void LoadAddressPage(AddressAdmin addressAdmin)
+        {
+            this.addressAdmin = addressAdmin;
+            InitAddressPage();
+            InitAddressLists();
+            InitAddressUC();
+            if (currentZoo.Address != null)
+            {
+                GetCurrentZooAddressFull();
+                FillAddressUC();
+            }
+            
+            InitAddressActions();
+        }
+
+        private void GetCurrentZooAddressFull()
+        {
+                MySQLAddressManager addressManager = new MySQLAddressManager();
+                addressManager.GetStreetNumber(currentZoo.Address);
+        }
+
+        private void FillAddressUC()
+        {
+            if (currentZoo.Address.Id != 0)
+            {
+                this.addressAdmin.UCAddress.Address = currentZoo.Address;
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentZoo.Address.StreetNumber;
+            }
+        }
+
+        private void InitAddressPage()
+        {
+            this.addressAdmin.btnNew.Visibility = Visibility.Hidden;
+        }
+
+        private void InitAddressActions()
+        {
+            this.addressAdmin.btnValidate.Click += BtnAddressValidate_Click;
+            this.addressAdmin.btnDelete.Click += BtnAddressDelete_Click;
+            this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += AddressList_SelectionChanged;
+        }
+
+        private void AddressList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Address item = (e.AddedItems[0] as Address);
+
+                MySQLAddressManager addressManager = new MySQLAddressManager();
+                addressManager.GetStreetNumber(item);
+
+                this.addressAdmin.UCAddress.Address = item;
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = item.StreetNumber;
+            }
+        }
+
+        private async void BtnAddressDelete_Click(object sender, RoutedEventArgs e)
+        {
+            currentZoo.Address = this.addressAdmin.UCAddress.Address;
+
+            if (currentZoo.Address.Id == 0)
+            {
+                System.Windows.MessageBox.Show("Cannot delete new element in database");
+            }
+            else
+            {
+                currentZoo.Address = null;
+                InitAddressUC();
+            }
+        }
+
+        private void BtnAddressValidate_Click(object sender, RoutedEventArgs e)
+        {
+            currentZoo.Address = this.addressAdmin.UCAddress.Address;
+            this.addressAdmin.NavigationService.GoBack();
+        }
+
+        private void InitAddressUC()
+        {
+            this.addressAdmin.UCAddress.Address = new Address();
+            this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = new StreetNumber();
+            foreach (StreetAvaibleItems streetAvaibleItem in Enum.GetValues(typeof(StreetAvaibleItems)))
+            {
+                this.addressAdmin.UCAddress.UCStreetNumber.cbSuff.Items.Add(streetAvaibleItem);
+            }
+        }
+
+        private async void InitAddressLists()
+        {
+            MySQLAddressManager addressManager = new MySQLAddressManager();
+            this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
+        }
+
+#endregion //address
+
+
+
+#region GestionStructure
 
         private void BtnStructure_Click(object sender, RoutedEventArgs e)
         {
@@ -225,7 +327,7 @@ namespace wpfzoo.viewmodel
 
         private void InitLUCStructure()
         {
-            zooLinkManager.GetStructures(currentZoo);
+            zooManager.GetStructures(currentZoo);
         }
 
         #region GestionStructureInitialisationSousPage
@@ -425,11 +527,6 @@ namespace wpfzoo.viewmodel
         private void BtnJobs_Click()
         {
 
-        }
-
-        public void LoadAddressPage(AddressAdmin addressAdmin)
-        {
-            this.addressAdmin = addressAdmin;
         }
 
         private void BtnAddressEmployee_Click(object sender, RoutedEventArgs e)

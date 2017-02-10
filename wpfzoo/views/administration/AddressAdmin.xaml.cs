@@ -21,10 +21,18 @@ namespace wpfzoo.views.administration
     /// </summary>
     public partial class AddressAdmin : Page
     {
+
         public AddressAdmin()
         {
             InitializeComponent();
             this.DataContext = new AddressAdminVM(this);
+        }
+
+        public AddressAdmin(ZooAdminVM zooAdminVM)
+        {
+            InitializeComponent();
+            this.DataContext = zooAdminVM;
+            zooAdminVM.LoadAddressPage(this);
         }
 
         public AddressAdmin(EmployeeAdminVM empViewModel)
