@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using wpfzoo.entities;
 using wpfzoo.json;
+using wpfzoo.logger;
 
 namespace wpfzoo.database
 {
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class MySQLManager<TEntity> : DbContext where TEntity : class
     {
+        Logger logger = new Logger("MySQLManagerLogger",LogMode.CURRENT_FOLDER,AlertMode.MESSAGE_BOX);
         public MySQLManager()
             : base(JsonManager.Instance.ReadFile<ConnectionString>(@"..\..\..\jsonconfig\", @"MysqlConfig.json").ToString())
 
@@ -30,6 +32,7 @@ namespace wpfzoo.database
                 this.DbSetT.Attach(item);
             this.DbSetT.Add(item);
             await this.SaveChangesAsync();
+            logger.Log(item);
             return item;
         }
 
@@ -56,6 +59,7 @@ namespace wpfzoo.database
                 this.Entry<TEntity>(item).State = EntityState.Modified;
             });
             await this.SaveChangesAsync();
+            logger.Log(item);
             return item;
         }
 
@@ -81,6 +85,7 @@ namespace wpfzoo.database
             bool isDetached = this.Entry(item).State == EntityState.Detached;
             if (isDetached)
                 this.DbSetT.Attach(item);
+            logger.Log(item);
             return item;
         }
 
@@ -105,6 +110,7 @@ namespace wpfzoo.database
                     this.DbSetT.Attach(item);
                 this.DbSetT.Remove(item);
             });
+            logger.Log(item);
             return await this.SaveChangesAsync();
         }
 

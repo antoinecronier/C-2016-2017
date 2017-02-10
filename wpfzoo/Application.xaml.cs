@@ -30,7 +30,7 @@ namespace wpfzoo
             Zoo zoo = new Zoo();
             Address add = new Address();
 
-            Logger logger = new Logger("myLogger", LogMode.CONSOLE, AlertMode.OVERLAY);
+            Logger logger = new Logger("myLogger", LogMode.CURRENT_FOLDER, AlertMode.OVERLAY, "coucou", true);
             logger.Log("Hi");
 
             //logger.Log("Hi", LogMode.NONE, AlertMode.TOAST);
