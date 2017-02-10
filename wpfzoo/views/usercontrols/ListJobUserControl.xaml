@@ -17,8 +17,8 @@
                     <ContextMenu.BitmapEffect>
                         <BitmapEffectGroup/>
                     </ContextMenu.BitmapEffect>
-                    <MenuItem Header="Duplicate" Name="DuplicateJobContextMenu"  Click="DuplicateJobContextMenu_OnClick"/>
-                    <MenuItem Header="Remove" Name="RemoveJobContextMenu" Click="RemoveJobContextMenu_OnClick"/>
+                    <MenuItem Header="Duplicate" Name="DuplicateJobContextMenu"/>
+                    <MenuItem Header="Remove" Name="RemoveJobContextMenu"/>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.ItemsPanel>

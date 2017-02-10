@@ -14,7 +14,7 @@ using wpfzoo.views.administration;
 
 namespace wpfzoo.viewmodel
 {
-    class JobAdminVM
+    public class JobAdminVM
     {
         private Job currentJob;
         private JobAdmin jobAdmin;
