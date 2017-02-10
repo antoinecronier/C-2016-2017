@@ -135,6 +135,7 @@ namespace wpfzoo.viewmodel
                 }
                 catch (DbEntityValidationException dbe)
                 {
+                    Validate();
                     MessageBox.Show("One or more fields are not valid.");
                     Console.WriteLine(dbe);
                     
@@ -151,6 +152,7 @@ namespace wpfzoo.viewmodel
                 }
                 catch (DbEntityValidationException dbe)
                 {
+                    Validate();
                     MessageBox.Show("One or more fields are not valid.");
                     Console.WriteLine(dbe);
                 }
@@ -215,7 +217,14 @@ namespace wpfzoo.viewmodel
          */
         private void BtnVerify_Click(object sender, RoutedEventArgs e)
         {
-            Validate();
+            if (!Validate())
+            {
+                MessageBox.Show("There is one ore more error(s) in your fields. Please check them before saving");
+            }
+            else
+            {
+                MessageBox.Show("So far, so good !");
+            }
         }
         #endregion
         #endregion
@@ -281,45 +290,41 @@ namespace wpfzoo.viewmodel
         }
 
         /**
-         * Check fields before insert or update into database
+         * Check fields and border them in red
+         * 
+         * Return false if any error occured 
          */
-        private void Validate()
+        private Boolean Validate()
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
 
+            Boolean hasNoErrors = true;
+
             try
             {
+                //TODO : reset colors when context change
                 this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = defaultColor;
                 this.addressAdmin.UCAddress.txtBCity.BorderBrush = defaultColor;
                 this.addressAdmin.UCAddress.txtBStreet.BorderBrush = defaultColor;
 
                 EntityValidator.Validate<Address>(currentAddress);
 
-                MessageBox.Show("So far, so good !");
             }
             catch (ValidationException)
             {
+                hasNoErrors = false;
 
-                foreach (var item in currentAddress.GetValidationErrors().ToList())
-                {
-                    if (item.ToString() == "PostalCode")
-                    {
-                        this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = Brushes.Red;
-                    }
+                String errorMessages = currentAddress.GetValidationErrorMessages();
 
-                    else if (item.ToString() == "City")
-                    {
-                        this.addressAdmin.UCAddress.txtBCity.BorderBrush = Brushes.Red;
-                    }
-
-                    else if (item.ToString() == "Street")
-                    {
-                        this.addressAdmin.UCAddress.txtBStreet.BorderBrush = Brushes.Red;
-                    }
-                }
-
-                MessageBox.Show("There is one ore more error(s) in your fields. Please check them before saving");
+                if (errorMessages.Contains("PostalCode"))
+                    this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = Brushes.Red;
+                if (errorMessages.Contains("City"))
+                    this.addressAdmin.UCAddress.txtBCity.BorderBrush = Brushes.Red;
+                if (errorMessages.Contains("Street"))
+                    this.addressAdmin.UCAddress.txtBStreet.BorderBrush = Brushes.Red;
             }
+
+            return hasNoErrors;
         }
 
         /**
