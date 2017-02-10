@@ -133,10 +133,10 @@ namespace wpfzoo.viewmodel
                 {
                     await addressManager.Update(currentAddress);
                 }
-                catch (DbEntityValidationException)
+                catch (DbEntityValidationException dbe)
                 {
                     MessageBox.Show("One or more fields are not valid.");
-                    Console.WriteLine(e);
+                    Console.WriteLine(dbe);
                     
                 }              
             }
@@ -144,12 +144,15 @@ namespace wpfzoo.viewmodel
             {
                 try
                 {
+                    MySQLManager<StreetNumber> snManager = new MySQLManager<StreetNumber>();
+                    await snManager.Insert(currentAddress.StreetNumber);
                     await addressManager.Insert(currentAddress);
                     this.addressAdmin.UCAddressList.AddItem(currentAddress);
                 }
-                catch (Exception)
+                catch (DbEntityValidationException dbe)
                 {
                     MessageBox.Show("One or more fields are not valid.");
+                    Console.WriteLine(dbe);
                 }
             }
         }
@@ -170,7 +173,10 @@ namespace wpfzoo.viewmodel
 
                 if (mbr == MessageBoxResult.OK)
                 {
-                    this.ReloadList();
+                    if (currentAddress.Id != 0)
+                    {
+                        this.ReloadList();
+                    }
                     this.ResetAddress();
                 }
             }
@@ -287,7 +293,7 @@ namespace wpfzoo.viewmodel
                 this.addressAdmin.UCAddress.txtBCity.BorderBrush = defaultColor;
                 this.addressAdmin.UCAddress.txtBStreet.BorderBrush = defaultColor;
 
-                AddressValidator.Validate(currentAddress);
+                EntityValidator.Validate<Address>(currentAddress);
 
                 MessageBox.Show("So far, so good !");
             }
