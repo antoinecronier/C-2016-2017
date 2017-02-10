@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Collections.Generic;
-using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -26,14 +25,11 @@ namespace wpfzoo.viewmodel
         private readonly string[] ListName = {"Last name", "First name", "Manager last name", "Manager first name" }; //Work with method checkRegexTxtBName()
         List<TextBox> listTxtB = new List<TextBox>();
         private Employee currentEmployee;
-        private Address currentAddress;
         private EmployeeAdmin employeeAdmin;
         private MySQLEmployeeManager employeeManager = new MySQLEmployeeManager();
-        private MySQLManager<Address> addressManager = new MySQLManager<Address>();
-        MySQLAddressManager mySqlAddressManager = new MySQLAddressManager();
         private AddressAdmin addressAdmin;
 
-        #region employee
+        #region EmployeeAdmin
 
         public EmployeeAdminVM(EmployeeAdmin employeeAdmin)
         {
@@ -231,32 +227,26 @@ namespace wpfzoo.viewmodel
             InitActionsAddress();
             if (currentEmployee.Address != null)
             {
-                currentAddress = currentEmployee.Address;
-                mySqlAddressManager.GetStreetNumber(currentAddress);
+                MySQLAddressManager mySqlAddressManager = new MySQLAddressManager();
                 this.addressAdmin.UCAddress.Address = currentEmployee.Address;
+                mySqlAddressManager.GetStreetNumber(currentEmployee.Address);
                 this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentEmployee.Address.StreetNumber;
 
             }
         }
         #endregion
-        #region address
+
+        #region AddressAdmin
         #region validate
         private async void BtnValidateAddress_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
-            //MySQLManager<StreetNumber> snManager = new MySQLManager<StreetNumber>();
-            if (currentAddress.Id != 0)
+            if (this.addressAdmin.UCAddress.Address.Id == 0)
             {
-                //await addressManager.Update(currentAddress);
-                this.addressAdmin.NavigationService.GoBack();
-            }
-            else
-            {
+                MySQLManager<Address> addressManager = new MySQLManager<Address>();
                 try
                 {
-                    await addressManager.Insert(currentAddress);
-                    this.addressAdmin.UCAddressList.AddItem(currentAddress);
-                    this.addressAdmin.NavigationService.GoBack();
+                    await addressManager.Insert(this.addressAdmin.UCAddress.Address);
+                    this.addressAdmin.UCAddressList.AddItem(this.addressAdmin.UCAddress.Address);
                 }
                 catch (Exception)
                 {
@@ -265,9 +255,11 @@ namespace wpfzoo.viewmodel
                 //await snManager.Insert(currentAddress.StreetNumber);
 
             }
+            currentEmployee.Address = this.addressAdmin.UCAddress.Address;
+            this.addressAdmin.NavigationService.GoBack();
         }
         #endregion
-
+        /*
         #region delete
         private void BtnDeleteAddress_Click(object sender, RoutedEventArgs e)
         {
@@ -281,19 +273,17 @@ namespace wpfzoo.viewmodel
             {
                 confirmDelete();
             }
-        }
+        }*/
     #endregion 
 
         #region utils
         private void ResetAddress()
         {
-            currentAddress = new Address(new StreetNumber());
-            this.addressAdmin.UCAddress.Address = currentAddress;
-            this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
-
-            //this.addressAdmin.UCAddress.UCStreetNumber.txtBSuf.ItemsPanel = currentAddress.StreetNumber.Suf;
+            Address newAddress = new Address(new StreetNumber());
+            this.addressAdmin.UCAddress.Address = newAddress;
+            this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = newAddress.StreetNumber;
         }
-
+        /*
         private async void confirmDelete()
         {
             MessageBoxResult mbr = MessageBox.Show("Do you really want to delete this item ?", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
@@ -323,16 +313,16 @@ namespace wpfzoo.viewmodel
                 this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
             }
 
-        }
+        }*/
 
         private void InitActionsAddress()
         {
             this.addressAdmin.btnValidate.Click += BtnValidateAddress_Click;
             this.addressAdmin.btnNew.Click += BtnNewAddress_Click;
-            this.addressAdmin.btnDelete.Click += BtnDeleteAddress_Click;
+            //this.addressAdmin.btnDelete.Click += BtnDeleteAddress_Click;
             this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsListAddress_SelectionChanged;
-            this.addressAdmin.UCAddressList.RemoveAddressContextMenu.Click += RemoveAddressContextMenu_OnClick;
-            this.addressAdmin.UCAddressList.DuplicateAddressContextMenu.Click += DuplicateAddressContextMenu_OnClick;
+            //this.addressAdmin.UCAddressList.RemoveAddressContextMenu.Click += RemoveAddressContextMenu_OnClick;
+            //this.addressAdmin.UCAddressList.DuplicateAddressContextMenu.Click += DuplicateAddressContextMenu_OnClick;
 
         }
 
@@ -340,78 +330,23 @@ namespace wpfzoo.viewmodel
         {
             if (e.AddedItems.Count > 0)
             {
+                MySQLAddressManager mySqlAddressManager = new MySQLAddressManager();
                 Address item = (e.AddedItems[0] as Address);
-                currentAddress = item;
-                this.addressAdmin.UCAddress.Address = currentAddress;
-                mySqlAddressManager.GetStreetNumber(currentAddress);
-                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
+                this.addressAdmin.UCAddress.Address = item;
+                mySqlAddressManager.GetStreetNumber(item);
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = item.StreetNumber;
             }
         }
 
 
         private async void BtnNewAddress_Click(object sender, RoutedEventArgs e)
         {
-            addressManager.DbSetT.Attach(currentAddress);
-            Address loadedAddress = await addressManager.Get(currentAddress.Id);
-            currentAddress = this.addressAdmin.UCAddress.Address;
-
-            // Check if we have filled props
-            Reflectionner reflec = new Reflectionner();
-            Boolean areFieldsdEmpty = true;
-            var dico = reflec.ReadObject<Address>(currentAddress);
-            Dictionary<String, Object> dico2 = null;
-
-            if (loadedAddress != null)
-            {
-                dico2 = reflec.ReadObject<Address>(loadedAddress);
-            }
-
-            if (dico["Id"].Equals(0))
-            {
-                dico.Remove("Id");
-
-                foreach (var item in dico)
-                {
-                    if (item.Value != null)
-                    {
-                        areFieldsdEmpty = false;
-                        break;
-                    }
-
-                }
-            }
-            else //Fields not empty, but entity loaded from db
-            {
-
-                foreach (var item in dico)
-                {
-                    if (item.Key != "Id" & item.Value != dico2[item.Key])
-                    {
-                        areFieldsdEmpty = false;
-                        break;
-                    }
-                }
-            }
-
-
-            if (!areFieldsdEmpty)
-            {
-                MessageBoxResult mbr = MessageBox.Show("You have filled some data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
-
-                if (mbr == MessageBoxResult.OK)
-                {
-                    this.ResetAddress();
-                }
-            }
-            else
-            {
-                this.ResetAddress();
-            }
-
+            this.addressAdmin.UCAddress.Address = new Address(new StreetNumber());
         }
 
         private async void InitLUCAddress()
         {
+            MySQLManager<Address> addressManager = new MySQLManager<Address>();
             this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
         }
 
