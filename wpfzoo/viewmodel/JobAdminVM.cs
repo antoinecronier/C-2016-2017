@@ -36,11 +36,11 @@ namespace wpfzoo.viewmodel
             if (e.AddedItems.Count > 0)
             {
                 Job item = (e.AddedItems[0] as Job);
+                jobManager.GetSchedule(item);
                 if (item.Schedule == null)
                 {
                     item.Schedule = new Schedule();
                 }
-                jobManager.GetSchedule(item);
                 this.jobAdmin.UCJob.Job = item;
                 this.jobAdmin.UCJob.ucSchedule.Schedule = item.Schedule;
             }
