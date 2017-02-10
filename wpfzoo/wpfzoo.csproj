@@ -95,7 +95,7 @@
     <Compile Include="entities\generator\EntityGenerator.cs" />
     <Compile Include="entities\generator\TypeEnum.cs" />
     <Compile Include="entities\reflection\Reflectionner.cs" />
-    <Compile Include="entities\validator\AddressValidator.cs" />
+    <Compile Include="entities\validator\EntityValidator.cs" />
     <Compile Include="viewmodel\ScheduleAdminVM.cs" />
     <Compile Include="views\administration\ScheduleAdmin.xaml.cs">
       <DependentUpon>ScheduleAdmin.xaml</DependentUpon>
