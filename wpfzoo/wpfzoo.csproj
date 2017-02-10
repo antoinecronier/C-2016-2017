@@ -82,6 +82,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="commandworker\CommandWorker.cs" />
+    <Compile Include="commandworker\ManualResetAction.cs" />
     <Compile Include="database\entitieslinks\MySQLAddressManager.cs" />
     <Compile Include="database\entitieslinks\MySQLEmployeeManager.cs" />
     <Compile Include="database\entitieslinks\MySQLJobManager.cs" />
@@ -96,6 +98,10 @@
     <Compile Include="entities\generator\TypeEnum.cs" />
     <Compile Include="entities\reflection\Reflectionner.cs" />
     <Compile Include="entities\validator\AddressValidator.cs" />
+    <Compile Include="logger\AlertMode.cs" />
+    <Compile Include="logger\Logger.cs" />
+    <Compile Include="logger\Logger2.cs" />
+    <Compile Include="logger\LogMode.cs" />
     <Compile Include="viewmodel\ScheduleAdminVM.cs" />
     <Compile Include="views\administration\ScheduleAdmin.xaml.cs">
       <DependentUpon>ScheduleAdmin.xaml</DependentUpon>
