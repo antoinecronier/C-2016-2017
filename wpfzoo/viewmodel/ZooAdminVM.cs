@@ -167,6 +167,7 @@ namespace wpfzoo.viewmodel
             InitUC();
             ClicksGenerator();
         }
+
         public void LoadSchedulePage(ScheduleAdmin scheduleAdmin)
         {
             this.scheduleAdmin = scheduleAdmin;
@@ -175,23 +176,24 @@ namespace wpfzoo.viewmodel
             ClicksGenerator();
         }
 
-
         public void LoadEmployeePage(ScheduleAdmin scheduleAdmin)
         {
             this.scheduleAdmin = scheduleAdmin;
-            //InitLUCSchedule();
+            InitLUCEmployee();
             InitUC();
             ClicksGenerator();
         }
+
         public void LoadAnimalPage(ScheduleAdmin scheduleAdmin)
         {
             this.scheduleAdmin = scheduleAdmin;
-            //InitLUCSchedule();
+            InitLUCAnimal();
             InitUC();
             ClicksGenerator();
         }
+
         #endregion
-        
+
         #region GestionStructureInitialisation
 
         private void InitLUCStructure()
@@ -199,10 +201,23 @@ namespace wpfzoo.viewmodel
             zooLinkManager.GetStructures(currentZoo);
         }
 
+        #region GestionStructureInitialisationSousPage
         private void InitLUCSchedule()
+        {
+
+        }
+
+        private void InitLUCEmployee()
         {
             throw new NotImplementedException();
         }
+
+        private void InitLUCAnimal()
+        {
+            throw new NotImplementedException();
+        } 
+        #endregion
+
 
 
         #endregion
@@ -265,10 +280,23 @@ namespace wpfzoo.viewmodel
                 System.Windows.Forms.MessageBox.Show("Can't open because structure is null", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
+        private void BtnStructureSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentZoo.Structures!= null)
+            {
+                this.zooAdmin.NavigationService.Navigate(new ScheduleAdmin(this));
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Can't open because schedule is null", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         #endregion
 
-        #endregion   
+        #endregion
 
     }
 }
