@@ -18,7 +18,6 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
         <Button x:Name="btnAddress" Click="btnAddress_Click" Content="Address" Grid.Row="0" Grid.Column="0" />
         <Button x:Name="btnAnimal" Click="btnAnimal_Click" Content="Animal"  Grid.Row="0" Grid.Column="1" />
         <Button x:Name="btnEmployee" Click="btnEmployee_Click" Content="Employee"  Grid.Row="0" Grid.Column="2" />
@@ -27,5 +26,19 @@
         <Button x:Name="btnStreetNumber" Click="btnStreetNumber_Click" Content="StreetNumber"  Grid.Row="1" Grid.Column="2" />
         <Button x:Name="btnStructure" Click="btnStructure_Click" Content="Structure"  Grid.Row="2" Grid.Column="0" />
         <Button x:Name="btnZoo" Click="btnZoo_Click" Content="Zoo"  Grid.Row="2" Grid.Column="2" />
+
+        <DockPanel x:Name="notificationDock" Visibility="Hidden" Height="140" Width="280" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
+                <StackPanel x:Name="notification" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Azure" >
+                    <TextBlock x:Name="title" Text=""/>
+                    <TextBlock x:Name="message" Text="" />
+                    <StackPanel x:Name="buttons" Orientation="Horizontal" Background="Cornsilk">
+                        <Button x:Name="yes" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        <Button x:Name="no" VerticalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+        
     </Grid>
 </Window>
