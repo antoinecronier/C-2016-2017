@@ -283,7 +283,7 @@ namespace wpfzoo.viewmodel
 
         private void BtnStructureSchedule_Click(object sender, RoutedEventArgs e)
         {
-            if (currentZoo.Structures.Schedule != null)
+            if (currentZoo.Structures!= null)
             {
                 this.zooAdmin.NavigationService.Navigate(new ScheduleAdmin(this));
             }
