@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using wpfzoo.entities.enums;
 using System.Windows.Media;
+using ClassLibrary2.Entities.Reflection;
 using wpfzoo.database.entitieslinks;
 using wpfzoo.views.usercontrols;
 
@@ -24,9 +26,14 @@ namespace wpfzoo.viewmodel
         private readonly string[] ListName = {"Last name", "First name", "Manager last name", "Manager first name" }; //Work with method checkRegexTxtBName()
         List<TextBox> listTxtB = new List<TextBox>();
         private Employee currentEmployee;
+        private Address currentAddress;
         private EmployeeAdmin employeeAdmin;
-        private MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
+        private MySQLEmployeeManager employeeManager = new MySQLEmployeeManager();
+        private MySQLManager<Address> addressManager = new MySQLManager<Address>();
+        MySQLAddressManager mySqlAddressManager = new MySQLAddressManager();
         private AddressAdmin addressAdmin;
+
+        #region employee
 
         public EmployeeAdminVM(EmployeeAdmin employeeAdmin)
         {
@@ -36,108 +43,6 @@ namespace wpfzoo.viewmodel
             InitActions();
         }
 
-
-        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                currentEmployee = (e.AddedItems[0] as Employee);
-                MySQLEmployeeManager mySqlEmployeeManager = new MySQLEmployeeManager();
-                mySqlEmployeeManager.GetAddress(currentEmployee);
-                this.employeeAdmin.ucEmployee.Employee = currentEmployee;
-            }
-        }
-
-        private void InitUC()
-        {
-            currentEmployee = new Employee();
-            currentEmployee.Birth = DateTime.Now;
-            currentEmployee.Hiring = DateTime.Now;
-            this.employeeAdmin.ucEmployee.Employee = currentEmployee;
-
-            foreach (Gender gender in Enum.GetValues(typeof(Gender)))
-            {
-                this.employeeAdmin.ucEmployee.cboCGender.Items.Add(gender);
-            }
-
-            listTxtB.Clear();
-            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBLastname);
-            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBFirstname);
-            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerLastname);
-            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerFirstname);
-        }
-
-        public void disableTypingDatePHiring(object sender, KeyEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        public void disableTypingDatePBirth(object sender, KeyEventArgs e)
-        {
-            e.Handled = true;
-        }
-
-        private bool checkRegex(TextBox valueTested, String regex)
-        {
-            Match match = Regex.Match(valueTested.Text, regex);
-
-            if (match.Success)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
-        private async void InitLUC()
-        {
-            this.employeeAdmin.ucEmployeeList.LoadItem((await employeeManager.Get()).ToList());
-        }
-
-        private void InitActions()
-        {
-            this.employeeAdmin.ucEmployee.btnAddress.Click += BtnAddress_Click;
-            this.employeeAdmin.btnAddEmployee.Click += btnAddEmployee_Click;
-            this.employeeAdmin.btnUpdateEmployee.Click += btnUpdateEmployee_Click;
-            this.employeeAdmin.btnDelEmployee.Click += btnDelEmployee_Click;
-            this.employeeAdmin.menuDuplicate.Click += MenuDuplicate_OnClick;
-            this.employeeAdmin.menuDelete.Click += MenuDelete_OnClick;
-            this.employeeAdmin.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
-            this.employeeAdmin.ucEmployee.DatePHiring.KeyDown += disableTypingDatePHiring;
-            this.employeeAdmin.ucEmployee.DatePBirth.KeyDown += disableTypingDatePBirth;
-        }
-
-        private void BtnJobs_Click()
-        {
-            
-        }
-
-        public void LoadAddressPage(AddressAdmin addressAdmin)
-        {
-            this.addressAdmin = addressAdmin;
-        }
-
-        private void BtnAddress_Click(object sender, RoutedEventArgs e)
-        {
-            if (currentEmployee.Address != null)
-            {
-                this.employeeAdmin.NavigationService.Navigate(new AddressAdmin(this));
-
-                /*AddressAdmin addressAdmin = new AddressAdmin();
-                Window window = new Window();
-                window.Content = addressAdmin;
-                window.Show();
-                addressAdmin.UCAddress.Address = currentEmployee.Address;*/
-            }
-            else
-            {
-                MessageBox.Show("Can't open because address is null");
-            }
-
-        }
 
         private async void MenuDuplicate_OnClick(object sender, RoutedEventArgs e)
         {
@@ -177,11 +82,13 @@ namespace wpfzoo.viewmodel
             datePHiring.Background = Brushes.White;
             datePBirth.Background = Brushes.White;
 
-            int hiring = int.Parse(datePHiring.DisplayDate.ToString("yyyyMMdd"));
-            int birth = int.Parse(datePBirth.DisplayDate.ToString("yyyyMMdd"));
-            int age = (hiring - birth) / 10000;
-
-            if (datePHiring.DisplayDate < datePBirth.DisplayDate && age >= 18)
+            int hiring = datePHiring.DisplayDate.Year;
+            int birth = datePBirth.DisplayDate.Year;
+            Console.WriteLine(hiring);
+            Console.WriteLine(birth);
+            int age = (hiring - birth);
+            Console.WriteLine(age);
+            if (datePHiring.DisplayDate > datePBirth.DisplayDate && age >= 18)
             {
                 return true;
             }
@@ -192,7 +99,7 @@ namespace wpfzoo.viewmodel
                 MessageBox.Show("Birth > Hiring or (Hiring - Birth) < 18");
                 return false;
             }
-            
+
         }
 
         public bool checkRegexTxtBName()
@@ -225,22 +132,430 @@ namespace wpfzoo.viewmodel
             }
         }
 
-        private async void btnUpdateEmployee_Click(object sender, RoutedEventArgs e)
+        private async void btnSaveEmployee_Click(object sender, RoutedEventArgs e)
         {
-            if (checkRegexTxtBName() && checkDateP())
+            if (currentEmployee.Id != 0)
             {
-                await employeeManager.Update(this.employeeAdmin.ucEmployee.Employee);
-                InitLUC();
+                if (checkRegexTxtBName() && checkDateP())
+                {
+                    await employeeManager.Update(this.employeeAdmin.ucEmployee.Employee);
+                    InitLUC();
+                }
+            }
+            else
+            {
+                if (checkRegexTxtBName() && checkDateP())
+                {
+                    await employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
+                    InitLUC();
+                }
+            }       
+        }
+
+        private void btnNewEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            this.currentEmployee = new Employee();
+        }
+
+        private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                currentEmployee = (e.AddedItems[0] as Employee);
+                MySQLEmployeeManager mySqlEmployeeManager = new MySQLEmployeeManager();
+                mySqlEmployeeManager.GetAddress(currentEmployee);
+                this.employeeAdmin.ucEmployee.Employee = currentEmployee;
             }
         }
 
-        private async void btnAddEmployee_Click(object sender, RoutedEventArgs e)
+        private void InitUC()
         {
-            if (checkRegexTxtBName() && checkDateP())
+            currentEmployee = new Employee();
+            currentEmployee.Birth = DateTime.Now;
+            currentEmployee.Hiring = DateTime.Now;
+            this.employeeAdmin.ucEmployee.Employee = currentEmployee;
+
+            foreach (Gender gender in Enum.GetValues(typeof(Gender)))
             {
-                await employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
-                InitLUC();
-            } 
+                this.employeeAdmin.ucEmployee.cboCGender.Items.Add(gender);
+            }
+
+            listTxtB.Clear();
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBLastname);
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBFirstname);
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerLastname);
+            listTxtB.Add(this.employeeAdmin.ucEmployee.txtBManagerFirstname);
         }
+
+        private bool checkRegex(TextBox valueTested, String regex)
+        {
+            Match match = Regex.Match(valueTested.Text, regex);
+
+            if (match.Success)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        private async void InitLUC()
+        {
+            this.employeeAdmin.ucEmployeeList.LoadItem((await employeeManager.Get()).ToList());
+        }
+
+        private void InitActions()
+        {
+            this.employeeAdmin.btnSaveEmployee.Click += btnSaveEmployee_Click;
+            this.employeeAdmin.ucEmployee.btnAddress.Click += BtnAddress_Click;
+            this.employeeAdmin.ucEmployee.btnJobs.Click += BtnJobs_Click;
+            this.employeeAdmin.btnDelEmployee.Click += btnDelEmployee_Click;
+            this.employeeAdmin.menuDuplicate.Click += MenuDuplicate_OnClick;
+            this.employeeAdmin.menuDelete.Click += MenuDelete_OnClick;
+            this.employeeAdmin.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+        }
+
+        private void BtnJobs_Click(object sender, RoutedEventArgs e)
+        {
+            this.employeeAdmin.NavigationService.Navigate(new JobAdmin(this));
+        }
+
+        public void LoadAddressPage(AddressAdmin addressAdmin)
+        {
+            this.addressAdmin = addressAdmin;
+            InitLUCAddress();
+            ResetAddress();
+            InitActionsAddress();
+            if (currentEmployee.Address != null)
+            {
+                currentAddress = currentEmployee.Address;
+                mySqlAddressManager.GetStreetNumber(currentAddress);
+                this.addressAdmin.UCAddress.Address = currentEmployee.Address;
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentEmployee.Address.StreetNumber;
+
+            }
+        }
+        #endregion
+        #region address
+        #region validate
+        private async void BtnValidateAddress_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+            //MySQLManager<StreetNumber> snManager = new MySQLManager<StreetNumber>();
+            if (currentAddress.Id != 0)
+            {
+                //await addressManager.Update(currentAddress);
+                this.addressAdmin.NavigationService.GoBack();
+            }
+            else
+            {
+                try
+                {
+                    await addressManager.Insert(currentAddress);
+                    this.addressAdmin.UCAddressList.AddItem(currentAddress);
+                    this.addressAdmin.NavigationService.GoBack();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("One or more fields are not valid.");
+                }
+                //await snManager.Insert(currentAddress.StreetNumber);
+
+            }
+        }
+        #endregion
+
+        #region delete
+        private void BtnDeleteAddress_Click(object sender, RoutedEventArgs e)
+        {
+            currentAddress = this.addressAdmin.UCAddress.Address;
+
+            if (currentAddress.Id == 0)
+            {
+                MessageBox.Show("Cannot delete new element in database");
+            }
+            else
+            {
+                confirmDelete();
+            }
+        }
+    #endregion 
+
+        #region utils
+        private void ResetAddress()
+        {
+            currentAddress = new Address(new StreetNumber());
+            this.addressAdmin.UCAddress.Address = currentAddress;
+            this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
+
+            //this.addressAdmin.UCAddress.UCStreetNumber.txtBSuf.ItemsPanel = currentAddress.StreetNumber.Suf;
+        }
+
+        private async void confirmDelete()
+        {
+            MessageBoxResult mbr = MessageBox.Show("Do you really want to delete this item ?", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+
+            if (mbr == MessageBoxResult.OK)
+            {
+                await addressManager.Delete(currentAddress);
+                this.addressAdmin.UCAddressList.RemoveItem(currentAddress);
+                this.ResetAddress();
+            }
+        }
+        #endregion
+
+        private void RemoveAddressContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            //Address itemToDelete = this.addressAdmin.UCAddressList.ItemsList.SelectedItem as Address;
+            confirmDelete();
+        }
+
+        private async void DuplicateAddressContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (this.addressAdmin.UCAddressList.ItemsList.SelectedIndex > -1)
+            {
+                var address = new Address();
+                address = (Address)this.addressAdmin.UCAddressList.ItemsList.SelectedItem; // casting the list view 
+                await addressManager.Insert(address);
+                this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
+            }
+
+        }
+
+        private void InitActionsAddress()
+        {
+            this.addressAdmin.btnValidate.Click += BtnValidateAddress_Click;
+            this.addressAdmin.btnNew.Click += BtnNewAddress_Click;
+            this.addressAdmin.btnDelete.Click += BtnDeleteAddress_Click;
+            this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsListAddress_SelectionChanged;
+            this.addressAdmin.UCAddressList.RemoveAddressContextMenu.Click += RemoveAddressContextMenu_OnClick;
+            this.addressAdmin.UCAddressList.DuplicateAddressContextMenu.Click += DuplicateAddressContextMenu_OnClick;
+
+        }
+
+        private void ItemsListAddress_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                Address item = (e.AddedItems[0] as Address);
+                currentAddress = item;
+                this.addressAdmin.UCAddress.Address = currentAddress;
+                mySqlAddressManager.GetStreetNumber(currentAddress);
+                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
+            }
+        }
+
+
+        private async void BtnNewAddress_Click(object sender, RoutedEventArgs e)
+        {
+            addressManager.DbSetT.Attach(currentAddress);
+            Address loadedAddress = await addressManager.Get(currentAddress.Id);
+            currentAddress = this.addressAdmin.UCAddress.Address;
+
+            // Check if we have filled props
+            Reflectionner reflec = new Reflectionner();
+            Boolean areFieldsdEmpty = true;
+            var dico = reflec.ReadObject<Address>(currentAddress);
+            Dictionary<String, Object> dico2 = null;
+
+            if (loadedAddress != null)
+            {
+                dico2 = reflec.ReadObject<Address>(loadedAddress);
+            }
+
+            if (dico["Id"].Equals(0))
+            {
+                dico.Remove("Id");
+
+                foreach (var item in dico)
+                {
+                    if (item.Value != null)
+                    {
+                        areFieldsdEmpty = false;
+                        break;
+                    }
+
+                }
+            }
+            else //Fields not empty, but entity loaded from db
+            {
+
+                foreach (var item in dico)
+                {
+                    if (item.Key != "Id" & item.Value != dico2[item.Key])
+                    {
+                        areFieldsdEmpty = false;
+                        break;
+                    }
+                }
+            }
+
+
+            if (!areFieldsdEmpty)
+            {
+                MessageBoxResult mbr = MessageBox.Show("You have filled some data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+
+                if (mbr == MessageBoxResult.OK)
+                {
+                    this.ResetAddress();
+                }
+            }
+            else
+            {
+                this.ResetAddress();
+            }
+
+        }
+
+        private async void InitLUCAddress()
+        {
+            this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
+        }
+
+        private void BtnAddress_Click(object sender, RoutedEventArgs e)
+        {
+            this.employeeAdmin.NavigationService.Navigate(new AddressAdmin(this));
+        }
+
+        #endregion
+
+        #region JobAdmin
+
+        private Job currentJob;
+        private JobAdmin jobAdmin;
+        private MySQLManager<Job> jobManager = new MySQLManager<Job>();
+        ListJobUserControl newListControl;
+        List<Job> allJobsInsert = new List<Job>();
+
+        public void LoadJobAdmin(JobAdmin jobAdmin)
+        {
+            this.jobAdmin = jobAdmin;
+            JobAdminAddUI();
+            InitUCJobAdmin();
+            InitLUCJobAdmin();
+            InitActionsJobAdmin();
+        }
+
+        private void JobAdminAddUI()
+        {
+            this.jobAdmin.mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            int oldColumn = Grid.GetColumn(this.jobAdmin.UCJobList);
+            newListControl = new ListJobUserControl();
+            newListControl.Name = "UCJobListDB";
+            Grid.SetColumn(newListControl, oldColumn + 1);
+            int oldRowSpan = Grid.GetRowSpan(this.jobAdmin.UCJobList);
+            Grid.SetRowSpan(newListControl, oldRowSpan);
+            this.jobAdmin.mainGrid.Children.Add(newListControl);
+
+            this.jobAdmin.btnDelJob.Content = "Back";
+            this.jobAdmin.btnUpdateJob.Content = "Validate";
+
+            newListControl.itemList.ContextMenu.Items.Remove(newListControl.RemoveJobContextMenu);
+            this.jobAdmin.UCJobList.itemList.ContextMenu.Items.Remove(this.jobAdmin.UCJobList.RemoveJobContextMenu);
+
+            newListControl.DuplicateJobContextMenu.Header = "Remove Item";
+            newListControl.DuplicateJobContextMenu.Click += DuplicateJobContextMenu_Click;
+            this.jobAdmin.UCJobList.DuplicateJobContextMenu.Header = "Add Item";
+            this.jobAdmin.UCJobList.DuplicateJobContextMenu.Click += DuplicateJobContextMenu_Click;
+        }
+
+        private void DuplicateJobContextMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (allJobsInsert.Contains(this.currentJob))
+            {
+                this.jobAdmin.UCJobList.Obs.Remove(this.currentJob);
+                this.newListControl.Obs.Add(this.currentJob);
+            }
+            else if (this.currentEmployee.Jobs.Contains(currentJob))
+            {
+                this.jobAdmin.UCJobList.Obs.Add(this.currentJob);
+                this.newListControl.Obs.Remove(this.currentJob);
+            }
+        }
+
+        private void InitUCJobAdmin()
+        {
+            currentJob = new Job();
+            this.jobAdmin.UCJob.Job = currentJob;
+        }
+
+        private async void InitLUCJobAdmin()
+        {
+            List<Job> allJobs = (await jobManager.Get()).ToList();
+            employeeManager.GetJobs(this.currentEmployee);
+            Boolean flag = true;
+            
+            foreach (var item in allJobs)
+            {
+                foreach (var item1 in this.currentEmployee.Jobs)
+                {
+                    if (item.Id == item1.Id)
+                    {
+                        flag = false;
+                    }
+                }
+                if (flag)
+                {
+                    allJobsInsert.Add(item);
+                }
+            }
+
+            newListControl.LoadItem(this.currentEmployee.Jobs);
+            this.jobAdmin.UCJobList.LoadItem(allJobsInsert);
+        }
+
+        private void InitActionsJobAdmin()
+        {
+            this.jobAdmin.btnUpdateJob.Click += btnValidateJob_Click;
+            this.jobAdmin.btnDelJob.Click += btnDelJob_Click;
+            this.jobAdmin.UCJobList.itemList.SelectionChanged += ItemList_SelectionChanged;
+            newListControl.itemList.SelectionChanged += ItemList_SelectionChanged;
+        }
+
+        private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                currentJob = (e.AddedItems[0] as Job);
+                this.jobAdmin.UCJob.Job = currentJob;
+            }
+        }
+
+        private async void btnDelJob_Click(object sender, RoutedEventArgs e)
+        {
+            //Back
+
+        }
+
+        private async void btnValidateJob_Click(object sender, RoutedEventArgs e)
+        {
+            this.currentEmployee.Jobs.Clear();
+            foreach (var item in this.newListControl.Obs)
+            {
+                this.currentEmployee.Jobs.Add(item);
+            }
+            this.jobAdmin.NavigationService.GoBack();
+        }
+
+        private Boolean checkValidity(Job job)
+        {
+            var regexName = new Regex(@"^[A-Z][-a-zA-Z]+$");
+            var regexSalary = new Regex(@"[0-9]+(\.[0-9][0-9]?)?");
+
+            if (regexName.Match(job.Name).Success && regexSalary.Match(job.Salary.ToString()).Success)
+            {
+                return true;
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Please check fields");
+                return false;
+            }
+        }
+
+        #endregion
     }
 }

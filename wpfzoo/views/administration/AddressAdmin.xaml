@@ -26,6 +26,7 @@
             <Button x:Name="btnValidate" Content="Save" Height="20"/>
             <Button x:Name="btnNew" Content="New" />
             <Button x:Name="btnDelete" Content="Delete"/>
+            <Button x:Name="btnVerify" Content="Pre-validation"/>
         </StackPanel>
         <uc:ListAddressUserControl x:Name="UCAddressList" Grid.Column="1" Grid.RowSpan="2"/>
     </Grid>

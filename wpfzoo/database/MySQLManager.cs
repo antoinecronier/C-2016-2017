@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Core.Objects.DataClasses;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +25,9 @@ namespace wpfzoo.database
 
         public async Task<TEntity> Insert(TEntity item)
         {
-            //this.DbSetT.Attach(item);
+            bool isDetached = this.Entry(item).State == EntityState.Detached;
+            if (isDetached)
+                this.DbSetT.Attach(item);
             this.DbSetT.Add(item);
             await this.SaveChangesAsync();
             return item;
@@ -33,6 +37,9 @@ namespace wpfzoo.database
         {
             foreach (var item in items)
             {
+                bool isDetached = this.Entry(item).State == EntityState.Detached;
+                if (isDetached)
+                    this.DbSetT.Attach(item);
                 this.DbSetT.Add(item);
             }
             await this.SaveChangesAsync();
@@ -43,7 +50,9 @@ namespace wpfzoo.database
         {
             await Task.Factory.StartNew(() =>
             {
-                this.DbSetT.Attach(item);
+                bool isDetached = this.Entry(item).State == EntityState.Detached;
+                if (isDetached)
+                    this.DbSetT.Attach(item);
                 this.Entry<TEntity>(item).State = EntityState.Modified;
             });
             await this.SaveChangesAsync();
@@ -56,6 +65,9 @@ namespace wpfzoo.database
             {
                 foreach (var item in items)
                 {
+                    bool isDetached = this.Entry(item).State == EntityState.Detached;
+                    if (isDetached)
+                        this.DbSetT.Attach(item);
                     this.Entry<TEntity>(item).State = EntityState.Modified;
                 }
             });
@@ -66,7 +78,9 @@ namespace wpfzoo.database
         public async Task<TEntity> Get(Int32 id)
         {
             TEntity item = await this.DbSetT.FindAsync(id) as TEntity;
-            this.DbSetT.Attach(item);
+            bool isDetached = this.Entry(item).State == EntityState.Detached;
+            if (isDetached)
+                this.DbSetT.Attach(item);
             return item;
         }
 
@@ -86,7 +100,9 @@ namespace wpfzoo.database
         {
             await Task.Factory.StartNew(() =>
             {
-                this.DbSetT.Attach(item);
+                bool isDetached = this.Entry(item).State == EntityState.Detached;
+                if (isDetached)
+                    this.DbSetT.Attach(item);
                 this.DbSetT.Remove(item);
             });
             return await this.SaveChangesAsync();

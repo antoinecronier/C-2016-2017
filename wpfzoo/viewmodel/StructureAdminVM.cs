@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using wpfzoo.database;
 using wpfzoo.entities;
 using wpfzoo.views.administration;
-using wpfzoo.views.adminstration;
 
 namespace wpfzoo.viewmodel
 {
@@ -29,6 +28,11 @@ namespace wpfzoo.viewmodel
             InitUC();
             ClicksGenerator();
         }
+        private void InitUC()
+        {
+            currentStructure = new Structure();
+            this.structureAdmin.ucStructure.Structure = currentStructure;
+        }
 
         private void structureAdmin_ListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -38,13 +42,7 @@ namespace wpfzoo.viewmodel
                 this.structureAdmin.ucStructure.Structure = item;
             }
         }
-
-        private void InitUC()
-        {
-            currentStructure = new Structure();
-            this.structureAdmin.ucStructure.Structure = currentStructure;
-        }
-
+        
         private void ClicksGenerator()
         {
             this.structureAdmin.buttonNew.Click += BtnValidate_Click;
@@ -54,7 +52,6 @@ namespace wpfzoo.viewmodel
             this.structureAdmin.ucStructure.buttonAnimaux.Click += ButtonAnimaux_Click;
             this.structureAdmin.ucStructure.buttonSchedule.Click += ButtonSchedule_Click;
         }
-
         #region Animaux
         private void ButtonAnimaux_Click(object sender, RoutedEventArgs e)
         {
@@ -90,6 +87,7 @@ namespace wpfzoo.viewmodel
         }
         #endregion
 
+        #region Btn
         private void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             this.structureAdmin.ucStructure.Structure = new Structure();
@@ -171,7 +169,6 @@ namespace wpfzoo.viewmodel
             }
             else
                 System.Windows.MessageBox.Show("Veuillez entrer un nom");
-
         }
 
         private void BtnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -181,6 +178,8 @@ namespace wpfzoo.viewmodel
             this.structureAdmin.ucStructure.txtBSurface.Text = "0";
             this.structureAdmin.ucStructure.txtBName.Text = "";
         }
+        #endregion
+
 
     }
 }
