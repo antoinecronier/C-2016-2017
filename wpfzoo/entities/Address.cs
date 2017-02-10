@@ -22,7 +22,7 @@ namespace wpfzoo.entities
             this.StreetNumber = streetNumber;
         }
 
-        [RegularExpression("[1-9]{1}[0-7]{1}[0-9]{3}", ErrorMessage ="PostalCode")]
+        [RegularExpression("([1-9]{1}[0-7]{1}[0-9]{3})", ErrorMessage ="PostalCode")]
         public String PostalCode
         {
             get { return postalCode; }
@@ -33,7 +33,7 @@ namespace wpfzoo.entities
             }
         }
 
-        [StringLength(255, ErrorMessage = "Street")]
+        [MaxLength(255, ErrorMessage = "Street")]
         public String Street
         {
             get { return street; }
@@ -56,7 +56,7 @@ namespace wpfzoo.entities
             
         }
 
-        [StringLength(255, ErrorMessage = "City")]
+        [MaxLength(255, ErrorMessage = "City")]
         public String City
         {
             get { return this.city; }

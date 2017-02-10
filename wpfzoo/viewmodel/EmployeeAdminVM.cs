@@ -28,11 +28,9 @@ namespace wpfzoo.viewmodel
         private Employee currentEmployee;
         private Address currentAddress;
         private EmployeeAdmin employeeAdmin;
-        private MySQLManager<Employee> employeeManager = new MySQLManager<Employee>();
+        private MySQLEmployeeManager employeeManager = new MySQLEmployeeManager();
         private MySQLManager<Address> addressManager = new MySQLManager<Address>();
         MySQLAddressManager mySqlAddressManager = new MySQLAddressManager();
-
-
         private AddressAdmin addressAdmin;
 
         #region employee
@@ -211,13 +209,18 @@ namespace wpfzoo.viewmodel
 
         private void InitActions()
         {
-            this.employeeAdmin.ucEmployee.btnAddress.Click += BtnAddress_Click;
-            this.employeeAdmin.btnNewEmployee.Click += btnNewEmployee_Click;
             this.employeeAdmin.btnSaveEmployee.Click += btnSaveEmployee_Click;
+            this.employeeAdmin.ucEmployee.btnAddress.Click += BtnAddress_Click;
+            this.employeeAdmin.ucEmployee.btnJobs.Click += BtnJobs_Click;
             this.employeeAdmin.btnDelEmployee.Click += btnDelEmployee_Click;
             this.employeeAdmin.menuDuplicate.Click += MenuDuplicate_OnClick;
             this.employeeAdmin.menuDelete.Click += MenuDelete_OnClick;
             this.employeeAdmin.ucEmployeeList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
+        }
+
+        private void BtnJobs_Click(object sender, RoutedEventArgs e)
+        {
+            this.employeeAdmin.NavigationService.Navigate(new JobAdmin(this));
         }
 
         public void LoadAddressPage(AddressAdmin addressAdmin)
@@ -244,7 +247,7 @@ namespace wpfzoo.viewmodel
             //MySQLManager<StreetNumber> snManager = new MySQLManager<StreetNumber>();
             if (currentAddress.Id != 0)
             {
-                await addressManager.Update(currentAddress);
+                //await addressManager.Update(currentAddress);
                 this.addressAdmin.NavigationService.GoBack();
             }
             else
@@ -419,5 +422,140 @@ namespace wpfzoo.viewmodel
 
         #endregion
 
+        #region JobAdmin
+
+        private Job currentJob;
+        private JobAdmin jobAdmin;
+        private MySQLManager<Job> jobManager = new MySQLManager<Job>();
+        ListJobUserControl newListControl;
+        List<Job> allJobsInsert = new List<Job>();
+
+        public void LoadJobAdmin(JobAdmin jobAdmin)
+        {
+            this.jobAdmin = jobAdmin;
+            JobAdminAddUI();
+            InitUCJobAdmin();
+            InitLUCJobAdmin();
+            InitActionsJobAdmin();
+        }
+
+        private void JobAdminAddUI()
+        {
+            this.jobAdmin.mainGrid.ColumnDefinitions.Add(new ColumnDefinition());
+            int oldColumn = Grid.GetColumn(this.jobAdmin.UCJobList);
+            newListControl = new ListJobUserControl();
+            newListControl.Name = "UCJobListDB";
+            Grid.SetColumn(newListControl, oldColumn + 1);
+            int oldRowSpan = Grid.GetRowSpan(this.jobAdmin.UCJobList);
+            Grid.SetRowSpan(newListControl, oldRowSpan);
+            this.jobAdmin.mainGrid.Children.Add(newListControl);
+
+            this.jobAdmin.btnDelJob.Content = "Back";
+            this.jobAdmin.btnUpdateJob.Content = "Validate";
+
+            newListControl.itemList.ContextMenu.Items.Remove(newListControl.RemoveJobContextMenu);
+            this.jobAdmin.UCJobList.itemList.ContextMenu.Items.Remove(this.jobAdmin.UCJobList.RemoveJobContextMenu);
+
+            newListControl.DuplicateJobContextMenu.Header = "Remove Item";
+            newListControl.DuplicateJobContextMenu.Click += DuplicateJobContextMenu_Click;
+            this.jobAdmin.UCJobList.DuplicateJobContextMenu.Header = "Add Item";
+            this.jobAdmin.UCJobList.DuplicateJobContextMenu.Click += DuplicateJobContextMenu_Click;
+        }
+
+        private void DuplicateJobContextMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (allJobsInsert.Contains(this.currentJob))
+            {
+                this.jobAdmin.UCJobList.Obs.Remove(this.currentJob);
+                this.newListControl.Obs.Add(this.currentJob);
+            }
+            else if (this.currentEmployee.Jobs.Contains(currentJob))
+            {
+                this.jobAdmin.UCJobList.Obs.Add(this.currentJob);
+                this.newListControl.Obs.Remove(this.currentJob);
+            }
+        }
+
+        private void InitUCJobAdmin()
+        {
+            currentJob = new Job();
+            this.jobAdmin.UCJob.Job = currentJob;
+        }
+
+        private async void InitLUCJobAdmin()
+        {
+            List<Job> allJobs = (await jobManager.Get()).ToList();
+            employeeManager.GetJobs(this.currentEmployee);
+            Boolean flag = true;
+            
+            foreach (var item in allJobs)
+            {
+                foreach (var item1 in this.currentEmployee.Jobs)
+                {
+                    if (item.Id == item1.Id)
+                    {
+                        flag = false;
+                    }
+                }
+                if (flag)
+                {
+                    allJobsInsert.Add(item);
+                }
+            }
+
+            newListControl.LoadItem(this.currentEmployee.Jobs);
+            this.jobAdmin.UCJobList.LoadItem(allJobsInsert);
+        }
+
+        private void InitActionsJobAdmin()
+        {
+            this.jobAdmin.btnUpdateJob.Click += btnValidateJob_Click;
+            this.jobAdmin.btnDelJob.Click += btnDelJob_Click;
+            this.jobAdmin.UCJobList.itemList.SelectionChanged += ItemList_SelectionChanged;
+            newListControl.itemList.SelectionChanged += ItemList_SelectionChanged;
+        }
+
+        private void ItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                currentJob = (e.AddedItems[0] as Job);
+                this.jobAdmin.UCJob.Job = currentJob;
+            }
+        }
+
+        private async void btnDelJob_Click(object sender, RoutedEventArgs e)
+        {
+            //Back
+
+        }
+
+        private async void btnValidateJob_Click(object sender, RoutedEventArgs e)
+        {
+            this.currentEmployee.Jobs.Clear();
+            foreach (var item in this.newListControl.Obs)
+            {
+                this.currentEmployee.Jobs.Add(item);
+            }
+            this.jobAdmin.NavigationService.GoBack();
+        }
+
+        private Boolean checkValidity(Job job)
+        {
+            var regexName = new Regex(@"^[A-Z][-a-zA-Z]+$");
+            var regexSalary = new Regex(@"[0-9]+(\.[0-9][0-9]?)?");
+
+            if (regexName.Match(job.Name).Success && regexSalary.Match(job.Salary.ToString()).Success)
+            {
+                return true;
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Please check fields");
+                return false;
+            }
+        }
+
+        #endregion
     }
 }
