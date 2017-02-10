@@ -138,7 +138,7 @@ namespace wpfzoo.viewmodel
             {
                 if (checkRegexTxtBName() && checkDateP())
                 {
-                    await employeeManager.Update(this.employeeAdmin.ucEmployee.Employee);
+                    await employeeManager.Update(currentEmployee);
                     InitLUC();
                 }
             }
@@ -146,7 +146,7 @@ namespace wpfzoo.viewmodel
             {
                 if (checkRegexTxtBName() && checkDateP())
                 {
-                    await employeeManager.Insert(this.employeeAdmin.ucEmployee.Employee);
+                    await employeeManager.Insert(currentEmployee);
                     InitLUC();
                 }
             }       
