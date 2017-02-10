@@ -40,11 +40,9 @@ namespace wpfzoo.viewmodel
                 {
                     item.Schedule = new Schedule();
                 }
-                else
-                {
-                    jobManager.GetSchedule(item);
-                }
+                jobManager.GetSchedule(item);
                 this.jobAdmin.UCJob.Job = item;
+                this.jobAdmin.UCJob.ucSchedule.Schedule = item.Schedule;
             }
         }
 
