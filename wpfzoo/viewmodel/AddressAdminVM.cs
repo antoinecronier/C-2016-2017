@@ -25,10 +25,14 @@ namespace wpfzoo.viewmodel
         private Address currentAddress;
         private AddressAdmin addressAdmin;
         private MySQLAddressManager addressManager = new MySQLAddressManager();
-        private Brush defaultColor; 
+        private Brush defaultColor;
         #endregion
 
         #region ctor
+
+        /**
+         * Instantiate new View Model with admin view
+         */
         public AddressAdminVM(AddressAdmin addressAdmin)
         {
             this.addressAdmin = addressAdmin;
@@ -39,11 +43,18 @@ namespace wpfzoo.viewmodel
         #endregion
 
         #region Init methods
+
+        /**
+         * Load entities from database
+         */
         private async void InitLists()
         {
             this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
         }
 
+        /**
+         * Instantiate new Address entity with nested StreetNumber with default values
+         */
         private void InitUC()
         {
             this.ResetAddress();
@@ -54,6 +65,9 @@ namespace wpfzoo.viewmodel
             }
         }
 
+        /**
+         * Bind events
+         */
         private void InitActions()
         {
             this.addressAdmin.btnValidate.Click += BtnValidate_Click;
@@ -68,6 +82,10 @@ namespace wpfzoo.viewmodel
 
         #region events methods
         #region List
+
+        /**
+         * Callback on selected item in list
+         */
         private void ItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
@@ -101,12 +119,13 @@ namespace wpfzoo.viewmodel
 
         #region buttons
         #region save
+
+        /**
+         * Callback on "Save" button
+         */
         private async void BtnValidate_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
-
-            
-            //MySQLManager<StreetNumber> snManager = new MySQLManager<StreetNumber>();
 
             if (currentAddress.Id != 0)
             {
@@ -119,8 +138,7 @@ namespace wpfzoo.viewmodel
                     MessageBox.Show("One or more fields are not valid.");
                     Console.WriteLine(e);
                     
-                }
-                
+                }              
             }
             else
             {
@@ -133,13 +151,15 @@ namespace wpfzoo.viewmodel
                 {
                     MessageBox.Show("One or more fields are not valid.");
                 }
-                //await snManager.Insert(currentAddress.StreetNumber);
-                
             }
         }
         #endregion
 
         #region new
+
+        /**
+         * Callback on "New" button
+         */
         private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
@@ -163,6 +183,10 @@ namespace wpfzoo.viewmodel
         #endregion
 
         #region delete
+
+        /**
+         * Callback on "Delete" button
+         */
         private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
@@ -179,6 +203,10 @@ namespace wpfzoo.viewmodel
         #endregion
 
         #region verify
+
+        /**
+         * Callback on "Verify" button
+         */
         private void BtnVerify_Click(object sender, RoutedEventArgs e)
         {
             Validate();
@@ -187,22 +215,22 @@ namespace wpfzoo.viewmodel
         #endregion
 
         #region context menu
+
+        /**
+         * Callback on "Remove" item in Context menu
+         */
         private void RemoveAddressContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
-            //Address itemToDelete = this.addressAdmin.UCAddressList.ItemsList.SelectedItem as Address;
             confirmDelete();
         }
 
+        /**
+         * Callback on "Duplicate" item in Context menu
+         */
         private async void DuplicateAddressContextMenu_OnClick(object sender, RoutedEventArgs e)
         {
             if (this.addressAdmin.UCAddressList.ItemsList.SelectedIndex > -1)
-            {
-                //var address = new Address(new StreetNumber());
-                //address = (Address)this.addressAdmin.UCAddressList.ItemsList.SelectedItem;
-                //await addressManager.Insert(address);
-                //this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
-
-                
+            {   
                 var address = new Address(new StreetNumber());
                 address = (Address)this.addressAdmin.UCAddressList.ItemsList.SelectedItem;
                 addressManager.GetStreetNumber(address);
@@ -211,9 +239,7 @@ namespace wpfzoo.viewmodel
                 streetNumber.Suf = address.StreetNumber.Suf;
                 address.StreetNumber = streetNumber;
                 await addressManager.Insert(address);
-                this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
-
-                
+                this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());   
             }
 
         }
@@ -221,6 +247,10 @@ namespace wpfzoo.viewmodel
         #endregion
 
         #region utils
+
+        /**
+         * Show a MessageBox for deleting confirmation
+         */
         private async void confirmDelete()
         {
             MessageBoxResult mbr = MessageBox.Show("Do you really want to delete this item ?", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
@@ -233,6 +263,10 @@ namespace wpfzoo.viewmodel
             }
         }
 
+        /**
+         * Instantiate new Address entity with nested StreetNumber with default values
+         * then reset the current address value
+         */
         private void ResetAddress()
         {
             currentAddress = new Address(new StreetNumber());
@@ -240,6 +274,9 @@ namespace wpfzoo.viewmodel
             this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
         }
 
+        /**
+         * Check fields before insert or update into database
+         */
         private void Validate()
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
@@ -279,6 +316,9 @@ namespace wpfzoo.viewmodel
             }
         }
 
+        /**
+         * Check if a field has changed between Edit State (in DB or not) and Save State (in DB)
+         */
         private Boolean hasFieldsChanged()
         {
             Boolean result = false;
@@ -286,7 +326,7 @@ namespace wpfzoo.viewmodel
             Reflectionner reflec = new Reflectionner();
             var dico = reflec.ReadObject<Address>(currentAddress);
 
-            if (dico["Id"].Equals(0))
+            if (dico["Id"].Equals(0)) //Entity is not in database
             {
                 dico.Remove("Id");
 
@@ -311,6 +351,9 @@ namespace wpfzoo.viewmodel
             return result;
         }
 
+        /**
+         * Force reloading list items from database
+         */
         private void ReloadList()
         {
             foreach (var entity in addressManager.ChangeTracker.Entries())
