@@ -125,11 +125,8 @@ namespace wpfzoo.viewmodel
 
         private void GetCurrentZooAddressFull()
         {
-            if (currentZoo.Address.StreetNumber !=null)
-            {
                 MySQLAddressManager addressManager = new MySQLAddressManager();
                 addressManager.GetStreetNumber(currentZoo.Address);
-            }
         }
 
         private void FillAddressUC()
