@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using wpfzoo.entities;
+using wpfzoo.logger;
 using wpfzoo.views;
 using wpfzoo.views.administration;
 
@@ -28,6 +29,14 @@ namespace wpfzoo
             InitializeComponent();
             Zoo zoo = new Zoo();
             Address add = new Address();
+
+            Logger logger = new Logger("myLogger", LogMode.CONSOLE, AlertMode.OVERLAY);
+            logger.Log("Hi");
+
+            //logger.Log("Hi", LogMode.NONE, AlertMode.TOAST);
+            //logger.Log("Hi", LogMode.NONE, AlertMode.MESSAGE_BOX);
+            //logger.Log("Hi", LogMode.NONE, AlertMode.MESSAGE_BOX_CUSTOM);
+            //logger.Log("Hi", LogMode.NONE, AlertMode.CONSOLE);
         }
 
         private void btnAddress_Click(object sender, RoutedEventArgs e)
