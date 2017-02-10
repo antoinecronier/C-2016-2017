@@ -15,6 +15,7 @@ using wpfzoo.entities;
 using wpfzoo.entities.enums;
 using wpfzoo.entities.validator;
 using wpfzoo.views.administration;
+using System.Windows.Input;
 
 namespace wpfzoo.viewmodel
 {
@@ -58,12 +59,10 @@ namespace wpfzoo.viewmodel
             this.addressAdmin.btnValidate.Click += BtnValidate_Click;
             this.addressAdmin.btnNew.Click += BtnNew_Click;
             this.addressAdmin.btnDelete.Click += BtnDelete_Click;
-            this.addressAdmin.UCAddress.txtBPostalCode.TextChanged += ValidatePostalCode;
+            this.addressAdmin.btnVerify.Click += BtnVerify_Click;
             this.addressAdmin.UCAddressList.ItemsList.SelectionChanged += ItemsList_SelectionChanged;
             this.addressAdmin.UCAddressList.RemoveAddressContextMenu.Click += RemoveAddressContextMenu_OnClick;
             this.addressAdmin.UCAddressList.DuplicateAddressContextMenu.Click += DuplicateAddressContextMenu_OnClick;
-            //For validation
-            //https://msdn.microsoft.com/en-us/library/cc488527.aspx
         }
         #endregion
 
@@ -73,11 +72,29 @@ namespace wpfzoo.viewmodel
         {
             if (e.AddedItems.Count > 0)
             {
-                Address item = (e.AddedItems[0] as Address);
-                currentAddress = item;
-                addressManager.GetStreetNumber(currentAddress);
-                this.addressAdmin.UCAddress.Address = currentAddress;
-                this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
+                if (hasFieldsChanged())
+                {
+                    MessageBoxResult mbr = MessageBox.Show("You have some unsaved data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+
+                    if (mbr == MessageBoxResult.OK)
+                    {
+                        Address item = (e.AddedItems[0] as Address);
+                        currentAddress = item;
+                        addressManager.GetStreetNumber(currentAddress);
+                        this.addressAdmin.UCAddress.Address = currentAddress;
+                        this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
+                        this.ReloadList();
+                    }
+                }
+                else
+                {
+                    Address item = (e.AddedItems[0] as Address);
+                    currentAddress = item;
+                    addressManager.GetStreetNumber(currentAddress);
+                    this.addressAdmin.UCAddress.Address = currentAddress;
+                    this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
+                }
+                
             }
         }
         #endregion
@@ -123,47 +140,18 @@ namespace wpfzoo.viewmodel
         #endregion
 
         #region new
-        private async void BtnNew_Click(object sender, RoutedEventArgs e)
+        private void BtnNew_Click(object sender, RoutedEventArgs e)
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
 
-            // Check if we have filled props
-            Reflectionner reflec = new Reflectionner();
-            Boolean areFieldsdEmpty = true;
-            var dico = reflec.ReadObject<Address>(currentAddress);
-
-            if (dico["Id"].Equals(0))
+            if (hasFieldsChanged())
             {
-                dico.Remove("Id");
-
-                foreach (var item in dico)
-                {
-                    if (item.Key != "StreetNumber" && item.Value != null)
-                    {
-                        areFieldsdEmpty = false;
-                        break;
-                    }
-
-                }
-            }
-            else //Fields not empty, but entity loaded from db
-            {
-                if (addressManager.ChangeTracker.HasChanges())
-                {
-                    areFieldsdEmpty = false;
-                }
-            }
-
-
-            if (!areFieldsdEmpty)
-            {
-                MessageBoxResult mbr = MessageBox.Show("You have filled some data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
+                MessageBoxResult mbr = MessageBox.Show("You have some unsaved data. Do you want to wipe them all ? (cannot be undone)", "Confirm", MessageBoxButton.OKCancel, MessageBoxImage.Exclamation);
 
                 if (mbr == MessageBoxResult.OK)
                 {
-                    addressManager.DbSetT.Attach(currentAddress);
+                    this.ReloadList();
                     this.ResetAddress();
-                    this.addressAdmin.UCAddressList.LoadItems((await addressManager.Get()).ToList());
                 }
             }
             else
@@ -187,6 +175,13 @@ namespace wpfzoo.viewmodel
             {
                 confirmDelete();
             }
+        }
+        #endregion
+
+        #region verify
+        private void BtnVerify_Click(object sender, RoutedEventArgs e)
+        {
+            Validate();
         }
         #endregion
         #endregion
@@ -245,15 +240,19 @@ namespace wpfzoo.viewmodel
             this.addressAdmin.UCAddress.UCStreetNumber.StreetNumber = currentAddress.StreetNumber;
         }
 
-        private void ValidatePostalCode(object sender, System.Windows.RoutedEventArgs e)
+        private void Validate()
         {
             currentAddress = this.addressAdmin.UCAddress.Address;
 
             try
             {
+                this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = defaultColor;
+                this.addressAdmin.UCAddress.txtBCity.BorderBrush = defaultColor;
+                this.addressAdmin.UCAddress.txtBStreet.BorderBrush = defaultColor;
+
                 AddressValidator.Validate(currentAddress);
 
-                this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = defaultColor;
+                MessageBox.Show("So far, so good !");
             }
             catch (ValidationException)
             {
@@ -264,8 +263,63 @@ namespace wpfzoo.viewmodel
                     {
                         this.addressAdmin.UCAddress.txtBPostalCode.BorderBrush = Brushes.Red;
                     }
+
+                    else if (item.ToString() == "City")
+                    {
+                        this.addressAdmin.UCAddress.txtBCity.BorderBrush = Brushes.Red;
+                    }
+
+                    else if (item.ToString() == "Street")
+                    {
+                        this.addressAdmin.UCAddress.txtBStreet.BorderBrush = Brushes.Red;
+                    }
+                }
+
+                MessageBox.Show("There is one ore more error(s) in your fields. Please check them before saving");
+            }
+        }
+
+        private Boolean hasFieldsChanged()
+        {
+            Boolean result = false;
+
+            Reflectionner reflec = new Reflectionner();
+            var dico = reflec.ReadObject<Address>(currentAddress);
+
+            if (dico["Id"].Equals(0))
+            {
+                dico.Remove("Id");
+
+                foreach (var item in dico)
+                {
+                    if (item.Key != "StreetNumber" && item.Value != null)
+                    {
+                        result = true;
+                        break;
+                    }
+
                 }
             }
+            else //Fields not empty, but entity loaded from db
+            {
+                if (addressManager.ChangeTracker.HasChanges())
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+        private void ReloadList()
+        {
+            foreach (var entity in addressManager.ChangeTracker.Entries())
+            {
+                entity.Reload();
+            }
+
+            InitLists();
+
         }
         #endregion
     }
