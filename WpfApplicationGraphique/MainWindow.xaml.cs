@@ -73,8 +73,8 @@ namespace WpfApplicationGraphique
                 line.Y1 = currentPoint.Y;
                 line.X2 = e.GetPosition(this).X;
                 line.Y2 = e.GetPosition(this).Y;*/
-                line.Height = 80;
-                line.Width = 80;
+                line.Height = Number.RandomNumber(0, 80);
+                line.Width = Number.RandomNumber(0, 80);
                 var brush = new SolidColorBrush(Color.FromRgb(
                 Byte.Parse(Number.RandomNumber(0, 255).ToString()),
                 Byte.Parse(Number.RandomNumber(0, 255).ToString()),
