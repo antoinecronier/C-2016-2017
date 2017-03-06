@@ -17,54 +17,114 @@ namespace WpfApplicationGraphique
     public partial class MainWindow : Window
     {
         Point currentPoint = new Point();
-
+        Boolean haveToPrint = true;
+        CancellationTokenSource cancelTokenS;
 
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Canvas_MouseDown_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        public void squaring(int delay)
         {
-            if (e.ButtonState == MouseButtonState.Pressed)
-                currentPoint = e.GetPosition(this);
-
-            Rectangle line = new Rectangle();
-
-            line.Stroke = SystemColors.WindowFrameBrush;
-            /*line.X1 = currentPoint.X;
-            line.Y1 = currentPoint.Y;
-            line.X2 = e.GetPosition(this).X;
-            line.Y2 = e.GetPosition(this).Y;*/
-            line.Height = 80;
-            line.Width = 80;
-            var brush = new SolidColorBrush(Color.FromRgb(
-                Byte.Parse(Number.RandomNumber(0, 255).ToString()),
-                Byte.Parse(Number.RandomNumber(0, 255).ToString()),
-                Byte.Parse(Number.RandomNumber(0, 255).ToString())
-                ));
-            line.Fill = brush;
-
-            Canvas.SetLeft(line, currentPoint.X);
-            Canvas.SetTop(line, currentPoint.Y);
-
-            currentPoint = e.GetPosition(this);
-
-            paintSurface.Children.Add(line);
-
             Task.Factory.StartNew(() =>
             {
-                Task.Delay(TimeSpan.FromSeconds(2)).Wait();
-                System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+                while (true)
                 {
-                    paintSurface.Children.Remove(line);
+                    Task.Delay(TimeSpan.FromMilliseconds(delay)).Wait();
+                    printSquare(0, 0, Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString());
+                }
+            }, cancelTokenS.Token);
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    Task.Delay(TimeSpan.FromMilliseconds(delay)).Wait();
+                    printSquare(600 - 95, 0, Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString());
+                }
+            }, cancelTokenS.Token);
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    Task.Delay(TimeSpan.FromMilliseconds(delay)).Wait();
+                    printSquare(0, 500 - 115, Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString());
+                }
+            }, cancelTokenS.Token);
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    Task.Delay(TimeSpan.FromMilliseconds(delay)).Wait();
+                    printSquare(600 - 95, 500 - 115, Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString());
+                }
+            }, cancelTokenS.Token);
+        }
+
+        public void printSquare(int x, int y, String r, String g, String b)
+        {
+            System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
+                {
+                    Rectangle line = new Rectangle();
+
+                    line.Stroke = SystemColors.WindowFrameBrush;
+
+                    line.Height = 80;
+                    line.Width = 80;
+                    var brush = new SolidColorBrush(Color.FromRgb(
+                        Byte.Parse(r),
+                        Byte.Parse(g),
+                        Byte.Parse(b)
+                        ));
+                    line.Fill = brush;
+
+                    Canvas.SetLeft(line, x);
+                    Canvas.SetTop(line, y);
+
+                    paintSurface.Children.Add(line);
                 }));
-            });
+
+        }
+
+
+        private void Canvas_MouseDown_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (haveToPrint)
+            {
+                if (e.ButtonState == MouseButtonState.Pressed)
+                    currentPoint = e.GetPosition(this);
+
+                Rectangle line = new Rectangle();
+
+                line.Stroke = SystemColors.WindowFrameBrush;
+                /*line.X1 = currentPoint.X;
+                line.Y1 = currentPoint.Y;
+                line.X2 = e.GetPosition(this).X;
+                line.Y2 = e.GetPosition(this).Y;*/
+                line.Height = 80;
+                line.Width = 80;
+                var brush = new SolidColorBrush(Color.FromRgb(
+                    Byte.Parse(Number.RandomNumber(0, 255).ToString()),
+                    Byte.Parse(Number.RandomNumber(0, 255).ToString()),
+                    Byte.Parse(Number.RandomNumber(0, 255).ToString())
+                    ));
+                line.Fill = brush;
+
+                Canvas.SetLeft(line, currentPoint.X);
+                Canvas.SetTop(line, currentPoint.Y);
+
+                currentPoint = e.GetPosition(this);
+
+                paintSurface.Children.Add(line);
+                
+                haveToPrint = false;
+            }
         }
 
         private void Canvas_MouseMove_1(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (e.LeftButton == MouseButtonState.Pressed
+                && currentPoint != e.GetPosition(this))
             {
                 Rectangle line = new Rectangle();
 
@@ -87,15 +147,24 @@ namespace WpfApplicationGraphique
 
                 currentPoint = e.GetPosition(this);
                 paintSurface.Children.Add(line);
+            }
+        }
 
-                Task.Factory.StartNew(() =>
-                {
-                    Task.Delay(TimeSpan.FromSeconds(2)).Wait();
-                    System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, new Action(() =>
-                    {
-                        paintSurface.Children.Remove(line);
-                    }));
-                });
+        private void paintSurface_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            haveToPrint = true;
+        }
+
+        private void paintSurface_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.A)
+            {
+                cancelTokenS = new CancellationTokenSource();
+                squaring(150);
+            }
+            else if (e.Key == Key.Z)
+            {
+                cancelTokenS.Cancel();
             }
         }
     }
