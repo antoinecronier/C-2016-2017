@@ -25,7 +25,7 @@ namespace WpfApplicationGraphique
             InitializeComponent();
         }
 
-        public void squaring(int delay)
+        public void squaring(int delay, CancellationToken token)
         {
             Task.Factory.StartNew(() =>
             {
@@ -33,6 +33,10 @@ namespace WpfApplicationGraphique
                 {
                     Task.Delay(TimeSpan.FromMilliseconds(delay)).Wait();
                     printSquare(0, 0, Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString());
+                    if (token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                 }
             }, cancelTokenS.Token);
             Task.Factory.StartNew(() =>
@@ -41,6 +45,10 @@ namespace WpfApplicationGraphique
                 {
                     Task.Delay(TimeSpan.FromMilliseconds(delay)).Wait();
                     printSquare(600 - 95, 0, Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString());
+                    if (token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                 }
             }, cancelTokenS.Token);
             Task.Factory.StartNew(() =>
@@ -49,6 +57,10 @@ namespace WpfApplicationGraphique
                 {
                     Task.Delay(TimeSpan.FromMilliseconds(delay)).Wait();
                     printSquare(0, 500 - 115, Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString());
+                    if (token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                 }
             }, cancelTokenS.Token);
             Task.Factory.StartNew(() =>
@@ -57,6 +69,10 @@ namespace WpfApplicationGraphique
                 {
                     Task.Delay(TimeSpan.FromMilliseconds(delay)).Wait();
                     printSquare(600 - 95, 500 - 115, Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString(), Number.RandomNumber(0, 255).ToString());
+                    if (token.IsCancellationRequested)
+                    {
+                        break;
+                    }
                 }
             }, cancelTokenS.Token);
         }
@@ -160,11 +176,12 @@ namespace WpfApplicationGraphique
             if (e.Key == Key.A)
             {
                 cancelTokenS = new CancellationTokenSource();
-                squaring(150);
+                squaring(150,cancelTokenS.Token);
             }
             else if (e.Key == Key.Z)
             {
                 cancelTokenS.Cancel();
+                cancelTokenS.Dispose();
             }
         }
     }
