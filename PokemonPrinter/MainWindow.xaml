@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <UC:ListPokemonUserControl>
+        <UC:ListPokemonUserControl x:Name="pokedexUC">
             
         </UC:ListPokemonUserControl>
     </Grid>

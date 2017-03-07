@@ -7,6 +7,39 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <ListView x:Name="pokedex" Margin="0"
+            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="order" Text="{Binding order}"/>
+                        <Image x:Name="sprite" Source="{Binding sprites.front_default}"/>
+                        <StackPanel>
+                            <TextBlock x:Name="stats" Text="Stats"/>
+                                <ListView x:Name="statsList" Margin="0"
+                                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                ItemsSource="{Binding stats}">
+                                <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Name="statName" Text="{Binding stat.name}"/>
+                                        <TextBlock Name="statValue" Text="{Binding base_stat}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Name="info" Text="Info"/>
+                            <TextBlock Name="name" Text="{Binding name}"/>
+                            <TextBlock Name="height" Text="{Binding height}"/>
+                            <TextBlock Name="weight" Text="{Binding weight}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

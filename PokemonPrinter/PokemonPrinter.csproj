@@ -59,7 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Entities\Pokemon.cs" />
+    <Compile Include="Manager\PokedexManager.cs" />
     <Compile Include="Views\UserControls\ListPokemonUserControl.xaml.cs">
       <DependentUpon>ListPokemonUserControl.xaml</DependentUpon>
     </Compile>
@@ -116,7 +116,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\PokemonLib\PokemonLib.csproj">
+      <Project>{138fc9f3-f435-485f-8cab-73f1b6434574}</Project>
+      <Name>PokemonLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplicationGraphique", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonPrinter", "PokemonPrinter\PokemonPrinter.csproj", "{1E2F6474-F8E6-4C2D-899E-FF226FE8B0DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokeAPI", "PokeAPI\PokeAPI.csproj", "{5341CD75-2DD3-4AAA-8221-AF0ABF3EBEFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonLib", "PokemonLib\PokemonLib.csproj", "{138FC9F3-F435-485F-8CAB-73F1B6434574}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{1E2F6474-F8E6-4C2D-899E-FF226FE8B0DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E2F6474-F8E6-4C2D-899E-FF226FE8B0DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E2F6474-F8E6-4C2D-899E-FF226FE8B0DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5341CD75-2DD3-4AAA-8221-AF0ABF3EBEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5341CD75-2DD3-4AAA-8221-AF0ABF3EBEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5341CD75-2DD3-4AAA-8221-AF0ABF3EBEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5341CD75-2DD3-4AAA-8221-AF0ABF3EBEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{138FC9F3-F435-485F-8CAB-73F1B6434574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{138FC9F3-F435-485F-8CAB-73F1B6434574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{138FC9F3-F435-485F-8CAB-73F1B6434574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{138FC9F3-F435-485F-8CAB-73F1B6434574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

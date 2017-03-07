@@ -13,7 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PokemonPrinter.WebService;
-using PokemonPrinter.Entities;
+using PokemonLib.Entities;
+using PokemonPrinter.Manager;
 
 namespace PokemonPrinter
 {
@@ -22,10 +23,17 @@ namespace PokemonPrinter
     /// </summary>
     public partial class MainWindow : Window
     {
+        PokedexManager pokedexManager = new PokedexManager();
         public MainWindow()
         {
             InitializeComponent();
-            Test();
+
+            LoadPokedex();
+        }
+
+        public async void LoadPokedex()
+        {
+            this.pokedexUC.LoadItem(await pokedexManager.GetWebBundle(30, true));
         }
 
         public async void Test()
@@ -33,8 +41,6 @@ namespace PokemonPrinter
             WebServiceManager manager = new WebServiceManager();
             Pokemon bulbi = new Pokemon();
             bulbi = await manager.GetData<Pokemon>("pokemon/1/", new Pokemon());
-            int a = 0;
-            a++;
         }
     }
 }
